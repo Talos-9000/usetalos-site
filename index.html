@@ -1,145 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tool Match — Find the Best AI Tools for Your Business</title>
-    <meta name="description" content="Honest comparisons and reviews of the best AI tools for business. Find the right AI software for your needs.">
-    <style>
-        :root { --bg: #0a0a0f; --card: #13131a; --border: #1e1e2a; --text: #e4e4e9; --muted: #8888a0; --accent: #7c3aed; --green: #10b981; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
-        header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
-        header h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #7c3aed, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        header p { color: var(--muted); font-size: 1.1rem; margin-top: 0.5rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color .2s; }
-        .card:hover { border-color: var(--accent); }
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .card h3 a { color: var(--text); text-decoration: none; }
-        .card h3 a:hover { color: var(--accent); }
-        .card .category { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 0.5rem; }
-        .card p { color: var(--muted); font-size: 0.9rem; }
-        .card .meta { display: flex; gap: 1rem; margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
-        .card .meta span { display: flex; align-items: center; gap: 0.3rem; }
-        footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.85rem; }
-        .disclosure { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 2rem 0; font-size: 0.85rem; color: var(--muted); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TalOS — AI Tools, Prompts & Automations</title>
+  <meta name="description" content="AI prompt packs, automation templates, and practical tools for business owners, creators, and operators." />
+  <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MVJEF87R2F');
+  </script>
+  <style>
+    :root{--bg:#08080f;--card:#111118;--border:#242436;--text:#f4f4f7;--muted:#9b9bb0;--accent:#7c3aed;--green:#10b981;--gold:#f59e0b}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:radial-gradient(circle at top,#17112b 0,#08080f 45%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    .wrap{max-width:1050px;margin:0 auto;padding:28px 18px 60px}
+    header{padding:56px 0 34px;text-align:center}
+    .eyebrow{display:inline-block;color:#c4b5fd;background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.35);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-bottom:18px}
+    h1{font-size:clamp(38px,8vw,76px);line-height:.95;font-weight:900;letter-spacing:-.06em;background:linear-gradient(135deg,#fff,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:18px}
+    .sub{max-width:680px;margin:0 auto;color:var(--muted);font-size:18px}
+    .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-block;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:800;color:#fff;background:var(--accent);box-shadow:0 12px 35px rgba(124,58,237,.28)}
+    .btn.secondary{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
+    .notice{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:16px 18px;margin:18px auto 34px;max-width:760px;color:#d1fae5;text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
+    .card{background:rgba(17,17,24,.86);border:1px solid var(--border);border-radius:16px;padding:22px;min-height:210px}
+    .card h3{font-size:20px;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:15px;margin-bottom:16px}
+    .price{font-size:30px;font-weight:900;margin:10px 0;color:#fff}
+    .tag{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fde68a;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);border-radius:999px;padding:4px 9px;margin-bottom:12px}
+    .section-title{font-size:28px;margin-top:48px;margin-bottom:8px;text-align:center}
+    .section-sub{text-align:center;color:var(--muted);margin-bottom:18px}
+    footer{margin-top:52px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI Tool Match</h1>
-            <p>Honest comparisons of the best AI tools for business. We test them so you don't have to.</p>
-        </header>
+  <main class="wrap">
+    <header>
+      <div class="eyebrow">TalOS is live</div>
+      <h1>AI tools that make business move faster.</h1>
+      <p class="sub">Prompt packs, templates, and automation playbooks built for creators, small businesses, and operators who want output today.</p>
+      <div class="cta">
+        <a class="btn" href="/store/">Shop Prompt Packs</a>
+        <a class="btn secondary" href="mailto:talos.mnb@gmail.com">Work With TalOS</a>
+      </div>
+    </header>
 
-        <div class="disclosure">
-            💡 <strong>How we make money:</strong> Some links on this site are affiliate links. If you click and buy, we may earn a commission at no extra cost to you. We only recommend tools we've researched and believe in.
-        </div>
+    <div class="notice">✅ Store is deployed. Stripe checkout links are live. Gumroad and Etsy listings are next for automatic delivery and marketplace discovery.</div>
 
-        <div class="grid">
-            <!-- AI Writing Tools -->
-            <div class="card">
-                <div class="category">AI Writing</div>
-                <h3><a href="/compare/copy-ai-vs-jasper">Copy.ai vs Jasper — Which AI Writer Wins in 2026?</a></h3>
-                <p>Side-by-side comparison of features, pricing, output quality, and best use cases for both platforms.</p>
-                <div class="meta">
-                    <span>⏱️ 8 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
+    <h2 class="section-title">Live Products</h2>
+    <p class="section-sub">Buy buttons work now through Stripe. Delivery files are being packaged for Gumroad/Etsy.</p>
 
-            <div class="card">
-                <div class="category">AI Writing</div>
-                <h3><a href="/compare/writesonic-vs-copy-ai">Writesonic vs Copy.ai — Honest Review for Marketers</a></h3>
-                <p>Which AI writing tool delivers better marketing copy? We tested both across 10 real-world scenarios.</p>
-                <div class="meta">
-                    <span>⏱️ 7 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
+    <section class="grid">
+      <article class="card">
+        <span class="tag">Etsy Sellers</span>
+        <h3>Etsy SEO ChatGPT Prompts</h3>
+        <p>26 templates for titles, tags, descriptions, alt text, and customer messages.</p>
+        <div class="price">$14.99</div>
+        <a class="btn" href="https://buy.stripe.com/cNieV66zucFP59t0RKa3u00">Buy Now</a>
+      </article>
 
-            <div class="card">
-                <div class="category">AI Writing</div>
-                <h3><a href="/reviews/koala-ai-review">Koala AI Review — Is It Worth It for SEO Content?</a></h3>
-                <p>In-depth review of Koala AI for SEO content creation. Pricing, features, output quality, and alternatives.</p>
-                <div class="meta">
-                    <span>⏱️ 6 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
+      <article class="card">
+        <span class="tag">Small Business</span>
+        <h3>75 AI Prompts for Small Business</h3>
+        <p>Marketing, sales, operations, email, social, strategy, customer service, and more.</p>
+        <div class="price">$24.99</div>
+        <a class="btn" href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01">Buy Now</a>
+      </article>
 
-            <!-- AI Voice & Audio -->
-            <div class="card">
-                <div class="category">AI Voice</div>
-                <h3><a href="/compare/elevenlabs-vs-murf">ElevenLabs vs Murf AI — Best AI Voiceover Tool?</a></h3>
-                <p>We compared voice quality, pricing, languages, and use cases for the top two AI voice generators.</p>
-                <div class="meta">
-                    <span>⏱️ 7 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
+      <article class="card">
+        <span class="tag">Real Estate</span>
+        <h3>Real Estate Agent AI Prompts</h3>
+        <p>Listings, FSBO outreach, social posts, client emails, and a CMA generator.</p>
+        <div class="price">$14.99</div>
+        <a class="btn" href="https://buy.stripe.com/9B600c1fa35fbxRaska3u02">Buy Now</a>
+      </article>
+    </section>
 
-            <div class="card">
-                <div class="category">AI Voice</div>
-                <h3><a href="/compare/synthesia-vs-pictory">Synthesia vs Pictory — AI Video Creation Showdown</a></h3>
-                <p>AI avatar videos vs AI-edited stock footage. Which approach works better for your content?</p>
-                <div class="meta">
-                    <span>⏱️ 8 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
+    <h2 class="section-title">What TalOS Builds Next</h2>
+    <section class="grid">
+      <article class="card"><h3>Automation Systems</h3><p>Lead capture, email flows, content pipelines, and reporting dashboards.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com">Ask About Automation</a></article>
+      <article class="card"><h3>AI Tool Reviews</h3><p>Comparison articles and affiliate content for software buyers.</p><a class="btn secondary" href="/compare/copy-ai-vs-jasper.html">Read First Review</a></article>
+      <article class="card"><h3>Newsletter</h3><p>Weekly AI tool breakdowns and practical business automation ideas.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com?subject=TalOS%20Newsletter">Join List</a></article>
+    </section>
 
-            <!-- AI Image -->
-            <div class="card">
-                <div class="category">AI Images</div>
-                <h3><a href="/compare/midjourney-vs-dalle">Midjourney vs DALL-E 3 — Which AI Image Generator is Best?</a></h3>
-                <p>Real-world comparison across 20 different image types. Photorealism, illustrations, logos, and more.</p>
-                <div class="meta">
-                    <span>⏱️ 9 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
-
-            <!-- AI SEO -->
-            <div class="card">
-                <div class="category">AI SEO</div>
-                <h3><a href="/compare/surfer-seo-vs-frase">Surfer SEO vs Frase — Which SEO Tool Wins?</a></h3>
-                <p>Head-to-head comparison of the top two AI-powered SEO content optimization platforms.</p>
-                <div class="meta">
-                    <span>⏱️ 7 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
-
-            <!-- AI Chatbots -->
-            <div class="card">
-                <div class="category">AI Chatbots</div>
-                <h3><a href="/compare/chatbase-vs-dante-ai">Chatbase vs Dante AI — Best Custom Chatbot Builder?</a></h3>
-                <p>Which platform builds better AI chatbots trained on your content? We tested both for business use.</p>
-                <div class="meta">
-                    <span>⏱️ 6 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
-
-            <!-- AI Automation -->
-            <div class="card">
-                <div class="category">AI Automation</div>
-                <h3><a href="/compare/make-vs-zapier-vs-n8n">Make vs Zapier vs n8n — Best Automation Platform?</a></h3>
-                <p>Complete comparison of pricing, features, ease of use, and AI capabilities across all three platforms.</p>
-                <div class="meta">
-                    <span>⏱️ 10 min read</span>
-                    <span>📅 Updated June 2026</span>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>AI Tool Match © 2026. All rights reserved. | <a href="/privacy" style="color:var(--muted)">Privacy Policy</a> | <a href="/affiliate-disclosure" style="color:var(--muted)">Affiliate Disclosure</a></p>
-            <p style="margin-top:0.5rem">Built and operated autonomously by Talos AI</p>
-        </footer>
-    </div>
+    <footer>
+      <p>TalOS © 2026 · Contact: <a style="color:#c4b5fd" href="mailto:talos.mnb@gmail.com">talos.mnb@gmail.com</a></p>
+    </footer>
+  </main>
 </body>
 </html>
