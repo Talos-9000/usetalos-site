@@ -3,153 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TalOS — AI Tools, Prompts & Automations</title>
-  <meta name="description" content="AI prompt packs, automation templates, and practical tools for business owners, creators, and operators." />
+  <title>TalOS — AI Templates, Automations & Business Tools</title>
+  <meta name="description" content="AI prompt packs, business software templates, social media templates, and automation systems for small businesses and creators." />
   <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
+  <link rel="stylesheet" href="/assets/styles.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MVJEF87R2F');
-  </script>
-  <style>
-    :root{--bg:#08080f;--card:#111118;--border:#242436;--text:#f4f4f7;--muted:#9b9bb0;--accent:#7c3aed;--green:#10b981;--gold:#f59e0b}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:radial-gradient(circle at top,#17112b 0,#08080f 45%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
-    nav{background:rgba(17,17,24,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
-    nav .inner{max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
-    nav a.logo{font-weight:900;font-size:20px;text-decoration:none;background:linear-gradient(135deg,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    nav .links{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
-    nav .links a{color:var(--muted);text-decoration:none;transition:color .15s}
-    nav .links a:hover{color:var(--text)}
-    .wrap{max-width:1050px;margin:0 auto;padding:28px 18px 60px}
-    header{padding:56px 0 34px;text-align:center}
-    .eyebrow{display:inline-block;color:#c4b5fd;background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.35);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-bottom:18px}
-    h1{font-size:clamp(38px,8vw,76px);line-height:.95;font-weight:900;letter-spacing:-.06em;background:linear-gradient(135deg,#fff,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:18px}
-    .sub{max-width:680px;margin:0 auto;color:var(--muted);font-size:18px}
-    .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:28px}
-    .btn{display:inline-block;padding:13px 20px;border-radius:10px;text-decoration:none;font-weight:800;color:#fff;background:var(--accent);box-shadow:0 12px 35px rgba(124,58,237,.28)}
-    .btn.secondary{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
-    .notice{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:16px 18px;margin:18px auto 34px;max-width:760px;color:#d1fae5;text-align:center}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:22px}
-    .card{background:rgba(17,17,24,.86);border:1px solid var(--border);border-radius:16px;padding:22px;min-height:210px}
-    .card h3{font-size:20px;margin-bottom:8px}
-    .card p{color:var(--muted);font-size:15px;margin-bottom:16px}
-    .price{font-size:30px;font-weight:900;margin:10px 0;color:#fff}
-    .tag{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fde68a;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);border-radius:999px;padding:4px 9px;margin-bottom:12px}
-    .section-title{font-size:28px;margin-top:48px;margin-bottom:8px;text-align:center}
-    .section-sub{text-align:center;color:var(--muted);margin-bottom:18px}
-    .resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
-    .resource-card{background:rgba(17,17,24,.86);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;text-decoration:none;color:var(--text);transition:border-color .15s,transform .1s}
-    .resource-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-    .resource-card .icon{font-size:30px;margin-bottom:8px}
-    .resource-card h4{font-size:16px;margin-bottom:4px}
-    .resource-card p{color:var(--muted);font-size:13px}
-    footer{margin-top:52px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
-    footer a{color:#c4b5fd;text-decoration:none}
-  </style>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
 </head>
 <body>
-  <nav>
-    <div class="inner">
-      <a href="/" class="logo">TalOS</a>
-      <div class="links">
-        <a href="/store/">Store</a>
-        <a href="/blog/">Blog</a>
-        <a href="/tools/">Tools</a>
-        <a href="/newsletter/">Newsletter</a>
-      </div>
-    </div>
-  </nav>
-
-  <main class="wrap">
-    <header>
-      <div class="eyebrow">TalOS is live</div>
-      <h1>AI tools that make business move faster.</h1>
-      <p class="sub">Prompt packs, templates, and automation playbooks built for creators, small businesses, and operators who want output today.</p>
-      <div class="cta">
-        <a class="btn" href="/store/">Shop Prompt Packs</a>
-        <a class="btn secondary" href="/blog/">Read the Blog</a>
-      </div>
-    </header>
-
-    <div class="notice">✅ Store is deployed. Stripe checkout links live. New: Blog, Tools Directory, and ChatGPT vs Claude comparison live now.</div>
-
-    <h2 class="section-title">Live Products</h2>
-    <p class="section-sub">Instant digital delivery via Stripe. Buy once, use forever.</p>
-
-    <section class="grid">
-      <article class="card">
-        <span class="tag">Bestseller</span>
-        <h3>Etsy SEO ChatGPT Prompts</h3>
-        <p>26 templates for titles, tags, descriptions, alt text, and customer messages.</p>
-        <div class="price">$14.99</div>
-        <a class="btn" href="https://buy.stripe.com/cNieV66zucFP59t0RKa3u00">Buy Now</a>
-      </article>
-
-      <article class="card">
-        <span class="tag">Most Comprehensive</span>
-        <h3>75 AI Prompts for Small Business</h3>
-        <p>Marketing, sales, operations, email, social, strategy, customer service, and more.</p>
-        <div class="price">$24.99</div>
-        <a class="btn" href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01">Buy Now</a>
-      </article>
-
-      <article class="card">
-        <span class="tag">Industry-Specific</span>
-        <h3>Real Estate Agent AI Prompts</h3>
-        <p>Listings, FSBO outreach, social posts, client emails, and a CMA generator.</p>
-        <div class="price">$14.99</div>
-        <a class="btn" href="https://buy.stripe.com/9B600c1fa35fbxRaska3u02">Buy Now</a>
-      </article>
-    </section>
-
-    <h2 class="section-title">Explore TalOS</h2>
-    <section class="resource-grid">
-      <a href="/blog/" class="resource-card">
-        <div class="icon">📝</div>
-        <h4>Blog</h4>
-        <p>AI tool comparisons and business automation guides</p>
-      </a>
-      <a href="/compare/chatgpt-vs-claude.html" class="resource-card">
-        <div class="icon">⚔️</div>
-        <h4>ChatGPT vs Claude</h4>
-        <p>Which AI assistant wins for business in 2026?</p>
-      </a>
-      <a href="/compare/copy-ai-vs-jasper.html" class="resource-card">
-        <div class="icon">✍️</div>
-        <h4>Copy.ai vs Jasper</h4>
-        <p>Honest comparison of the top AI writing tools</p>
-      </a>
-      <a href="/tools/" class="resource-card">
-        <div class="icon">🧰</div>
-        <h4>Tools Directory</h4>
-        <p>Curated list of the best AI tools for business</p>
-      </a>
-      <a href="/newsletter/" class="resource-card">
-        <div class="icon">📬</div>
-        <h4>Newsletter</h4>
-        <p>Weekly AI tips and automation recipes</p>
-      </a>
-      <a href="mailto:talos.mnb@gmail.com" class="resource-card">
-        <div class="icon">🤝</div>
-        <h4>Work With TalOS</h4>
-        <p>Automation consulting and custom builds</p>
-      </a>
-    </section>
-
-    <h2 class="section-title">What TalOS Builds</h2>
-    <section class="grid">
-      <article class="card"><h3>Automation Systems</h3><p>Lead capture, email flows, content pipelines, and reporting dashboards for small businesses.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com">Ask About Automation</a></article>
-      <article class="card"><h3>AI Tool Reviews</h3><p>In-depth comparisons of AI writing, image, and automation tools. Real tests, no fluff.</p><a class="btn secondary" href="/blog/">Read Comparisons</a></article>
-      <article class="card"><h3>Prompt Packs</h3><p>Ready-to-use prompt templates for ChatGPT, Claude, and Gemini. Industry-specific packs.</p><a class="btn secondary" href="/store/">Browse Store</a></article>
-    </section>
-
-    <footer>
-      <p>TalOS © 2026 · <a href="mailto:talos.mnb@gmail.com">talos.mnb@gmail.com</a></p>
-      <p style="margin-top:6px">AI tools, prompts, and automation for business.</p>
-    </footer>
+  <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><div class="nav-links"><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav>
+  <header class="hero"><div class="container hero-inner"><div><span class="eyebrow">Built for creators, small businesses, and operators</span><h1>AI templates and automations that turn work into systems.</h1><p class="lead">Browse ready-to-use prompt packs, request business software templates, join the newsletter, or send TalOS a project request through a real form. No scary email popups. No mystery links.</p><div class="cta-row"><a class="btn" href="/store/">Browse Store</a><a class="btn secondary" href="/templates/">Pick a Template Type</a><a class="btn ghost" href="/consultation/">Request Consultation</a></div></div><div class="mockup"><div class="mock-screen"><span class="badge green">Live revenue stack</span><h3>Prompt packs + templates + automation requests</h3><ul class="list"><li>Stripe checkout links live</li><li>Storefront ready for custom domain</li><li>Newsletter and consultation flows built</li><li>Browser light/dark mode supported</li></ul><div class="stat-grid"><div class="stat"><strong>3</strong><p>live products</p></div><div class="stat"><strong>24/7</strong><p>builder loop</p></div><div class="stat"><strong>0</strong><p>mailto CTAs</p></div></div></div></div></div></header>
+  <main>
+    <section class="section"><div class="container"><div class="section-head"><div><h2>Explore TalOS</h2><p>Every card opens a real page with a clear next step. No primary CTAs launch an email client.</p></div></div><div class="grid">
+      <a class="card" href="/blog/" style="text-decoration:none"><div class="card-icon">📝</div><h3>Blog</h3><p>AI tool comparisons and practical business automation guides.</p><span class="btn secondary">Read Articles</span></a>
+      <a class="card" href="/compare/chatgpt-vs-claude.html" style="text-decoration:none"><div class="card-icon">⚔️</div><h3>ChatGPT vs Claude</h3><p>Which assistant wins for business work, writing, and analysis?</p><span class="btn secondary">Read Comparison</span></a>
+      <a class="card" href="/compare/copy-ai-vs-jasper.html" style="text-decoration:none"><div class="card-icon">✍️</div><h3>Copy.ai vs Jasper</h3><p>Honest comparison of the top AI writing tools.</p><span class="btn secondary">Read Review</span></a>
+      <a class="card" href="/tools/" style="text-decoration:none"><div class="card-icon">🧰</div><h3>Tools Directory</h3><p>Curated software and AI tools for business owners.</p><span class="btn secondary">Browse Tools</span></a>
+      <a class="card" href="/newsletter/" style="text-decoration:none"><div class="card-icon">📬</div><h3>Newsletter</h3><p>Weekly AI tips, product drops, and automation recipes.</p><span class="btn secondary">See Signup Page</span></a>
+      <a class="card" href="/consultation/" style="text-decoration:none"><div class="card-icon">🤝</div><h3>Work With TalOS</h3><p>Fill out a structured request for automations, templates, or custom builds.</p><span class="btn secondary">Open Form</span></a>
+    </div></div></section>
+    <section class="section" style="background:var(--surface)"><div class="container"><div class="section-head"><div><h2>What TalOS Builds</h2><p>Pick the lane that matches what you need. Each one routes to a page or form instead of a mailto link.</p></div><a class="btn" href="/templates/">Choose Template Type</a></div><div class="grid">
+      <div class="card"><div class="card-icon">⚙️</div><h3>Automation Systems</h3><p>Lead capture, email flows, content pipelines, reporting dashboards, and repeatable operating systems.</p><a class="btn" href="/consultation/?type=automation">Request Automation Help</a></div>
+      <div class="card"><div class="card-icon">📊</div><h3>Business Software Templates</h3><p>CRM sheets, content trackers, SOP docs, dashboards, inventory logs, and workflow templates.</p><a class="btn" href="/templates/#business-software">Pick Business Templates</a></div>
+      <div class="card"><div class="card-icon">📣</div><h3>Social Media Templates</h3><p>Caption packs, calendars, hook banks, carousel scripts, and launch campaigns.</p><a class="btn" href="/templates/#social-media">Pick Social Templates</a></div>
+    </div></div></section>
+    <section class="section"><div class="container"><div class="trust-bar"><div class="trust-item">Instant digital products</div><div class="trust-item">Secure Stripe checkout</div><div class="trust-item">Commercial-use prompts</div><div class="trust-item">Custom requests accepted</div></div></div></section>
   </main>
+  <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><p style="margin-top:12px">AI templates, automations, and practical systems for turning business chaos into repeatable workflows.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools Directory</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Consultation</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/refunds/">Refund Policy</a></div></div><div class="container fine">© 2026 TalOS. Built for Bailey Souza's AI business stack.</div></footer>
 </body>
 </html>
