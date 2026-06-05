@@ -17,6 +17,12 @@
     :root{--bg:#08080f;--card:#111118;--border:#242436;--text:#f4f4f7;--muted:#9b9bb0;--accent:#7c3aed;--green:#10b981;--gold:#f59e0b}
     *{box-sizing:border-box;margin:0;padding:0}
     body{background:radial-gradient(circle at top,#17112b 0,#08080f 45%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    nav{background:rgba(17,17,24,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
+    nav .inner{max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+    nav a.logo{font-weight:900;font-size:20px;text-decoration:none;background:linear-gradient(135deg,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav .links{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+    nav .links a{color:var(--muted);text-decoration:none;transition:color .15s}
+    nav .links a:hover{color:var(--text)}
     .wrap{max-width:1050px;margin:0 auto;padding:28px 18px 60px}
     header{padding:56px 0 34px;text-align:center}
     .eyebrow{display:inline-block;color:#c4b5fd;background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.35);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;margin-bottom:18px}
@@ -34,10 +40,29 @@
     .tag{display:inline-block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fde68a;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);border-radius:999px;padding:4px 9px;margin-bottom:12px}
     .section-title{font-size:28px;margin-top:48px;margin-bottom:8px;text-align:center}
     .section-sub{text-align:center;color:var(--muted);margin-bottom:18px}
+    .resource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+    .resource-card{background:rgba(17,17,24,.86);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;text-decoration:none;color:var(--text);transition:border-color .15s,transform .1s}
+    .resource-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .resource-card .icon{font-size:30px;margin-bottom:8px}
+    .resource-card h4{font-size:16px;margin-bottom:4px}
+    .resource-card p{color:var(--muted);font-size:13px}
     footer{margin-top:52px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
+    footer a{color:#c4b5fd;text-decoration:none}
   </style>
 </head>
 <body>
+  <nav>
+    <div class="inner">
+      <a href="/" class="logo">TalOS</a>
+      <div class="links">
+        <a href="/store/">Store</a>
+        <a href="/blog/">Blog</a>
+        <a href="/tools/">Tools</a>
+        <a href="/newsletter/">Newsletter</a>
+      </div>
+    </div>
+  </nav>
+
   <main class="wrap">
     <header>
       <div class="eyebrow">TalOS is live</div>
@@ -45,18 +70,18 @@
       <p class="sub">Prompt packs, templates, and automation playbooks built for creators, small businesses, and operators who want output today.</p>
       <div class="cta">
         <a class="btn" href="/store/">Shop Prompt Packs</a>
-        <a class="btn secondary" href="mailto:talos.mnb@gmail.com">Work With TalOS</a>
+        <a class="btn secondary" href="/blog/">Read the Blog</a>
       </div>
     </header>
 
-    <div class="notice">✅ Store is deployed. Stripe checkout links are live. Gumroad and Etsy listings are next for automatic delivery and marketplace discovery.</div>
+    <div class="notice">✅ Store is deployed. Stripe checkout links live. New: Blog, Tools Directory, and ChatGPT vs Claude comparison live now.</div>
 
     <h2 class="section-title">Live Products</h2>
-    <p class="section-sub">Buy buttons work now through Stripe. Delivery files are being packaged for Gumroad/Etsy.</p>
+    <p class="section-sub">Instant digital delivery via Stripe. Buy once, use forever.</p>
 
     <section class="grid">
       <article class="card">
-        <span class="tag">Etsy Sellers</span>
+        <span class="tag">Bestseller</span>
         <h3>Etsy SEO ChatGPT Prompts</h3>
         <p>26 templates for titles, tags, descriptions, alt text, and customer messages.</p>
         <div class="price">$14.99</div>
@@ -64,7 +89,7 @@
       </article>
 
       <article class="card">
-        <span class="tag">Small Business</span>
+        <span class="tag">Most Comprehensive</span>
         <h3>75 AI Prompts for Small Business</h3>
         <p>Marketing, sales, operations, email, social, strategy, customer service, and more.</p>
         <div class="price">$24.99</div>
@@ -72,7 +97,7 @@
       </article>
 
       <article class="card">
-        <span class="tag">Real Estate</span>
+        <span class="tag">Industry-Specific</span>
         <h3>Real Estate Agent AI Prompts</h3>
         <p>Listings, FSBO outreach, social posts, client emails, and a CMA generator.</p>
         <div class="price">$14.99</div>
@@ -80,15 +105,50 @@
       </article>
     </section>
 
-    <h2 class="section-title">What TalOS Builds Next</h2>
+    <h2 class="section-title">Explore TalOS</h2>
+    <section class="resource-grid">
+      <a href="/blog/" class="resource-card">
+        <div class="icon">📝</div>
+        <h4>Blog</h4>
+        <p>AI tool comparisons and business automation guides</p>
+      </a>
+      <a href="/compare/chatgpt-vs-claude.html" class="resource-card">
+        <div class="icon">⚔️</div>
+        <h4>ChatGPT vs Claude</h4>
+        <p>Which AI assistant wins for business in 2026?</p>
+      </a>
+      <a href="/compare/copy-ai-vs-jasper.html" class="resource-card">
+        <div class="icon">✍️</div>
+        <h4>Copy.ai vs Jasper</h4>
+        <p>Honest comparison of the top AI writing tools</p>
+      </a>
+      <a href="/tools/" class="resource-card">
+        <div class="icon">🧰</div>
+        <h4>Tools Directory</h4>
+        <p>Curated list of the best AI tools for business</p>
+      </a>
+      <a href="/newsletter/" class="resource-card">
+        <div class="icon">📬</div>
+        <h4>Newsletter</h4>
+        <p>Weekly AI tips and automation recipes</p>
+      </a>
+      <a href="mailto:talos.mnb@gmail.com" class="resource-card">
+        <div class="icon">🤝</div>
+        <h4>Work With TalOS</h4>
+        <p>Automation consulting and custom builds</p>
+      </a>
+    </section>
+
+    <h2 class="section-title">What TalOS Builds</h2>
     <section class="grid">
-      <article class="card"><h3>Automation Systems</h3><p>Lead capture, email flows, content pipelines, and reporting dashboards.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com">Ask About Automation</a></article>
-      <article class="card"><h3>AI Tool Reviews</h3><p>Comparison articles and affiliate content for software buyers.</p><a class="btn secondary" href="/compare/copy-ai-vs-jasper.html">Read First Review</a></article>
-      <article class="card"><h3>Newsletter</h3><p>Weekly AI tool breakdowns and practical business automation ideas.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com?subject=TalOS%20Newsletter">Join List</a></article>
+      <article class="card"><h3>Automation Systems</h3><p>Lead capture, email flows, content pipelines, and reporting dashboards for small businesses.</p><a class="btn secondary" href="mailto:talos.mnb@gmail.com">Ask About Automation</a></article>
+      <article class="card"><h3>AI Tool Reviews</h3><p>In-depth comparisons of AI writing, image, and automation tools. Real tests, no fluff.</p><a class="btn secondary" href="/blog/">Read Comparisons</a></article>
+      <article class="card"><h3>Prompt Packs</h3><p>Ready-to-use prompt templates for ChatGPT, Claude, and Gemini. Industry-specific packs.</p><a class="btn secondary" href="/store/">Browse Store</a></article>
     </section>
 
     <footer>
-      <p>TalOS © 2026 · Contact: <a style="color:#c4b5fd" href="mailto:talos.mnb@gmail.com">talos.mnb@gmail.com</a></p>
+      <p>TalOS © 2026 · <a href="mailto:talos.mnb@gmail.com">talos.mnb@gmail.com</a></p>
+      <p style="margin-top:6px">AI tools, prompts, and automation for business.</p>
     </footer>
   </main>
 </body>

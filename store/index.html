@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TalOS — AI Tools & Automations for Business</title>
-    <meta name="description" content="AI prompts, automation templates, and tools to save time and grow your business.">
+    <title>TalOS Store — AI Prompt Packs & Templates</title>
+    <meta name="description" content="Buy AI prompt packs and automation templates. Instant digital delivery via Stripe. Etsy sellers, small business, real estate, and more.">
     <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
@@ -12,8 +12,16 @@
         :root{--bg:#08080f;--card:#111118;--border:#1e1e2a;--text:#e4e4e9;--muted:#8b8ba0;--purple:#7c3aed;--green:#10b981}
         *{margin:0;padding:0;box-sizing:border-box}
         body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}
+        nav{background:rgba(17,17,24,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
+        nav .inner{max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+        nav a.logo{font-weight:900;font-size:20px;color:var(--text);text-decoration:none;background:linear-gradient(135deg,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        nav .links{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+        nav .links a{color:var(--muted);text-decoration:none;transition:color .15s}
+        nav .links a:hover{color:var(--text)}
         .container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-        header{text-align:center;padding:4rem 0 2rem}
+        .breadcrumb{color:var(--muted);font-size:13px;margin-bottom:24px}
+        .breadcrumb a{color:var(--purple);text-decoration:none}
+        header{text-align:center;padding:3rem 0 2rem}
         header h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#7c3aed,#a78bfa,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
         header p{color:var(--muted);font-size:1.15rem;max-width:500px;margin:0 auto}
         .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
@@ -28,14 +36,30 @@
         .badge{display:inline-block;padding:.2rem .6rem;background:rgba(124,58,237,.15);color:#a78bfa;border-radius:4px;font-size:.75rem;font-weight:600;margin-bottom:.5rem}
         .stats{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0;font-size:.85rem;color:var(--muted)}
         .stats span{display:flex;align-items:center;gap:.3rem}
+        .coming-soon{margin-top:2rem;opacity:.6}
+        .coming-soon h3{color:var(--purple)}
         footer{text-align:center;padding:3rem 0;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem}
+        footer a{color:var(--purple);text-decoration:none}
     </style>
 </head>
 <body>
+    <nav>
+        <div class="inner">
+            <a href="/" class="logo">TalOS</a>
+            <div class="links">
+                <a href="/store/">Store</a>
+                <a href="/blog/">Blog</a>
+                <a href="/tools/">Tools</a>
+                <a href="/newsletter/">Newsletter</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
+        <div class="breadcrumb"><a href="/">Home</a> / Store</div>
         <header>
-            <h1>TalOS</h1>
-            <p>AI-powered prompts, automations, and tools to save time and grow your business.</p>
+            <h1>TalOS Store</h1>
+            <p>AI-powered prompts, automations, and tools to save time and grow your business. Instant digital delivery.</p>
         </header>
 
         <div class="products">
@@ -71,8 +95,18 @@
             <span>🔄 Free Updates</span>
         </div>
 
+        <div class="products coming-soon">
+            <div class="card">
+                <span class="badge">COMING SOON</span>
+                <h3>Grant Writing AI Prompts — 30+ Templates</h3>
+                <p>Nonprofit grant applications, proposals, budgets, and reporting. Save 20+ hours per grant.</p>
+                <div class="price">$19.99 <span>one-time</span></div>
+                <a href="mailto:talos.mnb@gmail.com?subject=Grant%20Prompt%20Pack" class="btn">Notify Me</a>
+            </div>
+        </div>
+
         <footer>
-            <p>TalOS © 2026 | <a href="mailto:talos.mnb@gmail.com" style="color:var(--muted)">Contact</a></p>
+            <p>TalOS © 2026 | <a href="mailto:talos.mnb@gmail.com">Contact</a></p>
             <p style="margin-top:.5rem">Secured by Stripe. Instant digital delivery.</p>
         </footer>
     </div>
