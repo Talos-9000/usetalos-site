@@ -1,1 +1,95 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Request a TalOS Consultation</title><meta name="description" content="Tell TalOS what business automation, template, or AI workflow you need built."><link rel="stylesheet" href="/assets/styles.css"></head><body><nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><div class="nav-links"><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav><header class="hero"><div class="container hero-inner"><div><span class="eyebrow">Structured request form</span><h1>Tell TalOS what you need built.</h1><p class="lead">Use this form for automation consulting, custom AI workflows, business software templates, social media templates, or anything that does not fit a product page.</p><div class="cta-row"><a class="btn secondary" href="/templates/">Not sure? Pick a template category</a></div></div><div class="notice"><strong>What happens next:</strong><br>TalOS reviews your request, sorts it into the right business lane, and Bailey gets the practical next step. No raw passwords. No master keys. No scary email-client popups.</div></div></header><main><section class="section"><div class="container grid two"><form class="form" action="https://formsubmit.co/talos.mnb@gmail.com" method="POST"><input type="hidden" name="_subject" value="New TalOS consultation request"><input type="hidden" name="_next" value="https://usetalos-site.pages.dev/thank-you/?type=consultation"><input type="hidden" name="_captcha" value="false"><input type="text" name="_honey" style="display:none"><div class="form-grid"><div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="business">Business / project</label><input id="business" name="business"></div><div class="field"><label for="website">Website or social link</label><input id="website" name="website" type="url" placeholder="https://..."></div><div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>Business software template</option><option>Social media template</option><option>Automation setup</option><option>AI prompt/custom workflow</option><option>Website/store help</option><option>Other</option></select></div><div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option>ASAP</option><option>This week</option><option>This month</option><option>Just exploring</option></select></div><div class="field"><label for="budget">Budget range</label><select id="budget" name="budget"><option>Not sure yet</option><option>Under $100</option><option>$100-$300</option><option>$300-$1,000</option><option>$1,000+</option></select></div><div class="field"><label for="contact">Preferred contact</label><select id="contact" name="preferred_contact"><option>Email</option><option>Text/message if already connected</option><option>Other</option></select></div><div class="field full"><label for="message">What should TalOS know?</label><textarea id="message" name="message" required placeholder="Describe what you want built, fixed, automated, or packaged."></textarea></div></div><button class="btn" type="submit">Send Project Request</button><p class="help" style="margin-top:10px">First submission may require Bailey to confirm FormSubmit in the inbox so the static site can forward messages.</p></form><div><h2>Good requests include</h2><ul class="list"><li>The platform you use now</li><li>The annoying manual task you want removed</li><li>What files, posts, leads, or reports you need</li><li>Whether you want a template or a done-for-you automation</li></ul><div class="notice" style="margin-top:20px">For fastest response, choose a request type. “Other” is allowed — TalOS will sort it and tell Bailey what to do next.</div></div></div></section></main><footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><p style="margin-top:12px">Automation requests without sketchy mailto CTAs.</p></div><div><h4>Explore</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/newsletter/">Newsletter</a></div><div><h4>Help</h4><a href="/contact/">Contact</a><a href="/blog/">Blog</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div></div></footer><script>const p=new URLSearchParams(location.search);const t=p.get('type');if(t){const s=document.getElementById('type');[...s.options].forEach(o=>{if(o.text.toLowerCase().includes(t.replace('-',' ')))s.value=o.text})}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS & Marketing Consulting — TalOS</title>
+  <meta name="description" content="Request SaaS consulting, marketing consulting, automation strategy, lead generation systems, landing pages, funnels, and AI workflows from TalOS." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><div class="nav-links"><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav>
+
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="eyebrow">SaaS consulting • marketing systems • AI automation</span>
+        <h1>Turn your messy business idea into a working SaaS, funnel, or marketing system.</h1>
+        <p class="lead">TalOS helps small businesses, creators, and operators figure out what to build, how to market it, and what can be automated first. Use this form for SaaS ideas, landing pages, lead funnels, content systems, email follow-up, AI workflows, and custom business tools.</p>
+        <div class="cta-row">
+          <a class="btn" href="#request-form">Request Consulting</a>
+          <a class="btn secondary" href="#offers">See Consulting Lanes</a>
+        </div>
+      </div>
+      <div class="notice">
+        <strong>What happens next:</strong><br />
+        TalOS reviews your request, asks focused discovery questions, checks feasibility, estimates scope/pricing, and gives Bailey a build plan, test plan, and security plan when needed. No master passwords. No guesswork. No bloated builds.
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="offers">
+      <div class="container">
+        <div class="section-head"><div><h2>Consulting lanes</h2><p>Pick the closest match. If you are not sure, choose “Not sure yet” and describe the problem.</p></div></div>
+        <div class="grid">
+          <div class="card"><div class="card-icon">🧩</div><h3>SaaS idea validation</h3><p>Turn a software idea into a clear MVP: target user, core workflow, pricing, tech stack, launch path, and what not to build yet.</p></div>
+          <div class="card"><div class="card-icon">🚀</div><h3>SaaS launch systems</h3><p>Landing pages, waitlists, onboarding forms, Stripe-ready offers, user feedback loops, dashboards, and simple first-version software plans.</p></div>
+          <div class="card"><div class="card-icon">📣</div><h3>Marketing consulting</h3><p>Offer positioning, content strategy, lead magnets, social posts, email sequences, SEO topics, and campaigns that bring eyes to the business.</p></div>
+          <div class="card"><div class="card-icon">🔁</div><h3>Marketing automation</h3><p>Lead capture, follow-up emails, CRM routing, content calendars, newsletter systems, and repeatable workflows that save time.</p></div>
+          <div class="card"><div class="card-icon">🤖</div><h3>AI workflow consulting</h3><p>Use AI safely inside your business: prompts, SOPs, research workflows, internal assistants, and repeatable operations.</p></div>
+          <div class="card"><div class="card-icon">🛡️</div><h3>Security-aware planning</h3><p>If your project touches logins, payments, customer data, email sending, or public forms, TalOS includes a security and maintenance plan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--surface)">
+      <div class="container grid two">
+        <form id="request-form" class="form" action="https://formsubmit.co/talos.mnb@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New TalOS SaaS or marketing consulting request" />
+          <input type="hidden" name="_next" value="https://usetalos-site.pages.dev/thank-you/?type=consultation" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="form-grid">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="business">Business / project</label><input id="business" name="business" placeholder="Business name or idea" /></div>
+            <div class="field"><label for="website">Website or social link</label><input id="website" name="website" type="url" placeholder="https://..." /></div>
+
+            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS MVP/build plan</option><option>Marketing consulting</option><option>Marketing automation/funnel</option><option>Landing page or lead magnet</option><option>AI workflow or internal tool</option><option>Website/store help</option><option>Not sure yet</option></select></div>
+            <div class="field"><label for="stage">Current stage</label><select id="stage" name="current_stage"><option>Idea only</option><option>Already selling manually</option><option>Have a website but need leads</option><option>Have leads but need automation</option><option>Have software but need users</option><option>Need cleanup/fix strategy</option></select></div>
+            <div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option>ASAP</option><option>This week</option><option>This month</option><option>Next 90 days</option><option>Just exploring</option></select></div>
+            <div class="field"><label for="budget">Budget range</label><select id="budget" name="budget"><option>Not sure yet</option><option>Under $250</option><option>$250-$750</option><option>$750-$1,500</option><option>$1,500-$5,000</option><option>$5,000+</option></select></div>
+            <div class="field"><label for="contact">Preferred contact</label><select id="contact" name="preferred_contact"><option>Email</option><option>Text/message if already connected</option><option>Other</option></select></div>
+            <div class="field"><label for="data">Sensitive data involved?</label><select id="data" name="sensitive_data"><option>Not sure</option><option>No</option><option>Customer data</option><option>Payments</option><option>Logins/accounts</option><option>Email/SMS sending</option><option>Files/uploads</option></select></div>
+
+            <div class="field full"><label for="problem">What problem are you trying to solve?</label><textarea id="problem" name="problem" required placeholder="Example: I need more leads for my local service business, or I have a SaaS idea but don't know what MVP to build first."></textarea></div>
+            <div class="field full"><label for="message">What should TalOS know?</label><textarea id="message" name="message" required placeholder="Describe your offer, current tools, audience, marketing channels, manual tasks, or the SaaS/workflow you want built."></textarea></div>
+          </div>
+
+          <button class="btn" type="submit">Send Consulting Request</button>
+          <p class="help" style="margin-top:10px">First submission may require Bailey to confirm FormSubmit in the inbox so the static site can forward messages.</p>
+        </form>
+
+        <div>
+          <h2>Good requests include</h2>
+          <ul class="list">
+            <li>What you sell or want to sell</li>
+            <li>Who the customer is</li>
+            <li>Where leads currently come from</li>
+            <li>What marketing channels you use now</li>
+            <li>What manual step wastes the most time</li>
+            <li>What software/tools you already use</li>
+            <li>What would count as a successful first version</li>
+            <li>Any security concerns: payments, logins, customer data, email/SMS, or files</li>
+          </ul>
+          <div class="notice" style="margin-top:22px"><strong>Best fit projects:</strong><br />SaaS MVP planning, landing pages, lead funnels, content systems, AI automations, email follow-up, CRM cleanup, internal dashboards, and practical marketing systems for small businesses.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><p style="margin-top:12px">AI consulting, SaaS planning, marketing systems, templates, and automation for small businesses.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools Directory</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Consultation</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/refunds/">Refund Policy</a></div></div><div class="container fine">© 2026 TalOS. Built for Bailey Souza's AI business stack.</div></footer>
+</body>
+</html>
