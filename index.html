@@ -9,44 +9,34 @@
   <link rel="stylesheet" href="/assets/styles.css" /><link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
-  <style>
-    :root{--bg:#fafaf8;--card:#ffffff;--border:#e8e5df;--text:#1a1a1a;--muted:#6b6b6b;--navy:#1a2a3a;--gold:#c9a84c;--accent:#8b6914;--green:#2d6a4f;--surface:#f5f3ee;--shadow:0 2px 16px rgba(0,0,0,0.06)}
-    @media(prefers-color-scheme:dark){:root{--bg:#0d0d12;--card:#15151c;--border:#252530;--text:#f0f0f0;--muted:#999;--surface:#111118;--shadow:0 2px 16px rgba(0,0,0,0.3)}}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-    
-    /* Nav */
-    nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
-    @media(prefers-color-scheme:dark){nav{background:rgba(13,13,18,0.92)}}
-    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
-    .nav-inner .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-    .nav-inner .logo img{height:32px;width:auto}
-    .nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
-    .nav-links a{text-decoration:none;color:var(--muted);font-weight:600;padding:8px 14px;border-radius:100px;font-size:14px;transition:all .15s}
-    .nav-links a:hover{color:var(--text);background:var(--surface)}
-    .nav-links .nav-cta{background:var(--navy);color:#fff!important}
-    .nav-links .nav-cta:hover{background:var(--accent)}
+</head>
+<body>
 
-    /* Hero */
-    .hero{padding:60px 16px 40px;text-align:center;max-width:720px;margin:0 auto}
-    .hero h1{font-size:clamp(28px,6vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-0.02em}
-    .hero h1 span{color:var(--gold)}
-    .hero p{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 28px;line-height:1.55}
-    .hero .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-    .btn{display:inline-block;padding:14px 28px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
-    .btn-primary{background:var(--navy);color:#fff}
-    .btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
-    .btn-outline{border:2px solid var(--navy);color:var(--navy);background:transparent}
-    .btn-outline:hover{background:var(--navy);color:#fff}
-    .btn-gold{background:var(--gold);color:#fff}
-    .btn-gold:hover{background:var(--accent);transform:translateY(-1px)}
-
-    /* Sections */
-    section{padding:60px 16px}
-    .section-inner{max-width:1100px;margin:0 auto}
-    .section-label{text-transform:uppercase;font-size:12px;font-weight:700;letter-spacing:0.08em;color:var(--gold);margin-bottom:8px}
-    .section-title{font-size:clamp(24px,4vw,34px);font-weight:800;margin-bottom:12px;letter-spacing:-0.02em}
-    .section-sub{color:var(--muted);font-size:16px;max-width:600px;margin-bottom:36px}
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
 
     /* Hub grid */
     .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
@@ -117,27 +107,11 @@
     .animate{animation:fadeUp .6s ease-out both}
     .animate:nth-child(2){animation-delay:.1s}
     .animate:nth-child(3){animation-delay:.2s}
-    .animate:nth-child(4){animation-delay:.3s}
-    .animate:nth-child(5){animation-delay:.4s}
-    .animate:nth-child(6){animation-delay:.5s}
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="logo"><img src="/assets/talos-logo.png" alt="Tal.OS" /></a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#store">Store</a>
-      <a href="/personal-ai">Personal AI</a>
-      <a href="#consult">Consulting</a>
-      <a href="/about/">About</a>
-      <a href="/blog/">Blog</a>
-      <a href="#consult" class="nav-cta">Get Help</a>
-    </div>
-  </div>
-</nav>
+
 
 <!-- HERO — Simple, no jargon -->
 <header class="hero">
@@ -453,5 +427,6 @@ services.forEach((svc, i) => {
 });
 </script>
 
+<script src="/assets/nav.js"></script>
 </body>
 </html>
