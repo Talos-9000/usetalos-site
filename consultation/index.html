@@ -23,9 +23,9 @@
   <header class="hero">
     <div class="container hero-inner">
       <div>
-        <span class="eyebrow">SaaS consulting • marketing systems • AI automation</span>
-        <h1>Turn your messy business idea into a working SaaS, funnel, or marketing system.</h1>
-        <p class="lead">TalOS helps small businesses, creators, and operators figure out what to build, how to market it, and what can be automated first. Use this form for SaaS ideas, landing pages, lead funnels, content systems, email follow-up, AI workflows, and custom business tools.</p>
+        <span class="eyebrow">SaaS consulting • marketing systems • AI automation • AI lessons</span>
+        <h1>Turn your messy business idea into a working SaaS, funnel, workshop, or marketing system.</h1>
+        <p class="lead">TalOS helps small businesses, creators, operators, schools, and teams figure out what to build, how to market it, what can be automated first, and how to teach AI clearly. Use this form for SaaS ideas, landing pages, lead funnels, content systems, email follow-up, AI workflows, custom business tools, school lessons, business workshops, and public speaking requests.</p>
         <div class="cta-row">
           <a class="btn" href="#request-form">Request Consulting</a>
           <a class="btn secondary" href="#offers">See Consulting Lanes</a>
@@ -49,6 +49,7 @@
           <button class="card lane-card" type="button" data-lane="Marketing automation"><div class="card-icon">🔁</div><h3>Marketing automation</h3><p>Lead capture, follow-up emails, CRM routing, content calendars, newsletter systems, and repeatable workflows that save time.</p></button>
           <button class="card lane-card" type="button" data-lane="AI workflow consulting"><div class="card-icon">🤖</div><h3>AI workflow consulting</h3><p>Use AI safely inside your business: prompts, SOPs, research workflows, internal assistants, and repeatable operations.</p></button>
           <button class="card lane-card" type="button" data-lane="Security-aware planning"><div class="card-icon">🛡️</div><h3>Security-aware planning</h3><p>If your project touches logins, payments, customer data, email sending, or public forms, TalOS includes a security and maintenance plan.</p></button>
+          <button class="card lane-card" type="button" data-lane="AI lessons and public speaking"><div class="card-icon">🎤</div><h3>AI lessons and public speaking</h3><p>Schools, businesses, clubs, libraries, training centers, or events can request in-person or virtual AI lessons, workshops, talks, and beginner-friendly demos.</p></button>
         </div>
       </div>
     </section>
@@ -73,7 +74,7 @@
             <div class="field"><label for="business">Business / project</label><input id="business" name="business" placeholder="Business name or idea" /></div>
             <div class="field"><label for="website">Website or social link</label><input id="website" name="website" type="url" placeholder="https://..." /></div>
 
-            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS launch systems</option><option>Marketing consulting</option><option>Marketing automation</option><option>AI workflow consulting</option><option>Security-aware planning</option><option>Landing page or lead magnet</option><option>Website/store help</option><option>Not sure yet</option></select></div>
+            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS launch systems</option><option>Marketing consulting</option><option>Marketing automation</option><option>AI workflow consulting</option><option>Security-aware planning</option><option>AI lessons and public speaking</option><option>Landing page or lead magnet</option><option>Website/store help</option><option>Not sure yet</option></select></div>
             <div class="field"><label for="stage">Current stage</label><select id="stage" name="current_stage"><option>Idea only</option><option>Already selling manually</option><option>Have a website but need leads</option><option>Have leads but need automation</option><option>Have software but need users</option><option>Need cleanup/fix strategy</option></select></div>
             <div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option>ASAP</option><option>This week</option><option>This month</option><option>Next 90 days</option><option>Just exploring</option></select></div>
             <div class="field"><label for="budget">Budget range</label><select id="budget" name="budget"><option>Not sure yet</option><option>Under $250</option><option>$250-$750</option><option>$750-$1,500</option><option>$1,500-$5,000</option><option>$5,000+</option></select></div>
@@ -99,9 +100,10 @@
             <li>What manual step wastes the most time</li>
             <li>What software/tools you already use</li>
             <li>What would count as a successful first version</li>
+            <li>For lessons or talks: audience size, age/role, location, format, topic, date, and budget</li>
             <li>Any security concerns: payments, logins, customer data, email/SMS, or files</li>
           </ul>
-          <div class="notice" style="margin-top:22px"><strong>Best fit projects:</strong><br />SaaS MVP planning, landing pages, lead funnels, content systems, AI automations, email follow-up, CRM cleanup, internal dashboards, and practical marketing systems for small businesses.</div>
+          <div class="notice" style="margin-top:22px"><strong>Best fit projects:</strong><br />SaaS MVP planning, landing pages, lead funnels, content systems, AI automations, email follow-up, CRM cleanup, internal dashboards, school AI lessons, business AI workshops, public speaking, and practical marketing systems for small businesses.</div>
         </div>
       </div>
     </section>
@@ -169,6 +171,18 @@
           'What systems need API keys, OAuth, webhooks, or payment access?',
           'What should be logged for safety and troubleshooting?',
           'What would be the worst-case failure and how should it be prevented?'
+        ]
+      },
+      'AI lessons and public speaking': {
+        intro: 'Use this when a school, business, club, library, training center, event, or other place of learning/work wants Bailey to teach, demo, or publicly speak about AI.',
+        prompts: [
+          'What type of organization is requesting this: school, business, nonprofit, club, library, event, or other?',
+          'Who is the audience: students, teachers, employees, leaders, creators, beginners, or mixed group?',
+          'What format do you want: in-person lesson, virtual workshop, keynote talk, Q&A, hands-on training, or short demo?',
+          'What AI topic should be covered: AI basics, safe AI use, prompt writing, business automation, careers, ethics, content creation, or custom topic?',
+          'How many people will attend and what age range or skill level should the lesson be built for?',
+          'What date, time, location, session length, and budget/rate range should TalOS know about?',
+          'Do you need slides, handouts, live demos, certificates, recording permission, or follow-up materials?'
         ]
       }
     };
