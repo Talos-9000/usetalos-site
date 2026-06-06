@@ -5,27 +5,22 @@
   <title>Tal.OS Store — AI Prompt Packs & Business Templates</title>
   <meta name="description" content="Buy ready-to-use AI prompt packs for small business, real estate, nonprofits, Etsy sellers, insurance, and more. Instant download. Works with ChatGPT, Claude, and Gemini." />
   <link rel="stylesheet" href="/assets/styles.css" /><link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  <style>
-    .store-section{margin-bottom:48px}
-    .trust-items{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;padding:24px 0}
-    .trust-item{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);font-weight:600}
-    .trust-item span{font-size:18px}
-  </style>
-</head>
+  </head>
 <body>
-  <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><div class="nav-links"><a class="nav-cta" href="/store/">Store</a><a href="/personal-ai">Personal AI</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Get Help</a></div></div></nav>
-
-  <header class="hero">
-    <div class="container hero-inner">
-      <div>
-        <span class="eyebrow">Digital products — instant download</span>
-        <h1>AI prompt packs built for real business work.</h1>
-        <p class="lead">Ready-to-use prompts for ChatGPT, Claude, and Gemini. Each pack targets a specific business outcome — not 1,000 generic prompts you'll never use.</p>
-        <div class="cta-row"><a class="btn" href="#products">Shop All Packs</a><a class="btn secondary" href="/consultation/">Need a Custom Pack?</a></div>
-      </div>
-      <div class="mockup"><div class="mock-screen"><span class="badge gold">Secure checkout</span><h3>Stripe + Gumroad</h3><ul class="list"><li>Instant download after purchase</li><li>Works with ChatGPT, Claude, Gemini</li><li>Commercial use allowed</li></ul></div></div>
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
     </div>
-  </header>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
 
   <main>
     <section class="section"><div class="container"><div class="trust-items"><div class="trust-item"><span>⚡</span> Instant digital download</div><div class="trust-item"><span>🔒</span> Secure Stripe & Gumroad checkout</div><div class="trust-item"><span>💼</span> Commercial use allowed</div><div class="trust-item"><span>🤖</span> ChatGPT + Claude + Gemini</div></div></div></section>
@@ -91,27 +86,28 @@
 
     <section class="section" id="courses" style="background:var(--surface)">
       <div class="container">
-        <div class="section-head"><div><span class="eyebrow">Live training — taught by Bailey Souza</span><h2>AI Agent Training Classes</h2><p class="lead">Hands-on live classes that teach you to build, deploy, and sell AI agents. Bailey walks you through every step. No theory-fluff — you build working agents during class.</p></div><a class="btn" href="/consultation">Book a Class →</a></div>
+        <div class="section-head"><div><span class="eyebrow">Live training — taught by Bailey Souza</span><h2>AI Agent Training Classes</h2><p class="lead">Hands-on live classes that teach you to build, deploy, and sell AI agents. Bailey walks you through every step. No theory-fluff — you build working agents during class.</p></div><a class="btn" href="/consultation/">Book a Class →</a></div>
 
         <div class="grid three" style="margin-bottom:16px">
-          <article class="card product"><div class="card-icon">🎓</div><h3>AI Agent Foundations</h3><p>Build your first agent in 2 hours. Learn the agent loop, safety guardrails, and tool selection.</p><ul class="list"><li>2 hours live instruction</li><li>No experience needed</li><li>Full printed study guide</li></ul><div class="price">$99</div><a class="btn secondary" href="/consultation">Book This Class →</a></article>
+          <article class="card product"><div class="card-icon">🎓</div><h3>AI Agent Foundations</h3><p>Build your first agent in 2 hours. Learn the agent loop, safety guardrails, and tool selection.</p><ul class="list"><li>2 hours live instruction</li><li>No experience needed</li><li>Full printed study guide</li></ul><div class="price">$99</div><a class="btn secondary" href="/consultation/">Book This Class →</a></article>
 
-          <article class="card product"><div class="card-icon">⚡</div><h3>Business Automation Agents</h3><p>Build 8 working agents: email, calendar, research, social, CRM, finance, and multi-agent systems.</p><ul class="list"><li>4 hours live instruction</li><li>8 agents built during class</li><li>Full printed study guide</li></ul><div class="price">$199</div><a class="btn secondary" href="/consultation">Book This Class →</a></article>
+          <article class="card product"><div class="card-icon">⚡</div><h3>Business Automation Agents</h3><p>Build 8 working agents: email, calendar, research, social, CRM, finance, and multi-agent systems.</p><ul class="list"><li>4 hours live instruction</li><li>8 agents built during class</li><li>Full printed study guide</li></ul><div class="price">$199</div><a class="btn secondary" href="/consultation/">Book This Class →</a></article>
 
-          <article class="card product"><div class="card-icon">🧠</div><h3>Advanced Architecture</h3><p>Memory systems, model routing, prompt engineering, security hardening, voice agents, and production deployment.</p><ul class="list"><li>6 hours live instruction</li><li>Red team security exercise</li><li>Full printed study guide</li></ul><div class="price">$299</div><a class="btn secondary" href="/consultation">Book This Class →</a></article>
+          <article class="card product"><div class="card-icon">🧠</div><h3>Advanced Architecture</h3><p>Memory systems, model routing, prompt engineering, security hardening, voice agents, and production deployment.</p><ul class="list"><li>6 hours live instruction</li><li>Red team security exercise</li><li>Full printed study guide</li></ul><div class="price">$299</div><a class="btn secondary" href="/consultation/">Book This Class →</a></article>
         </div>
 
         <div class="grid three">
-          <article class="card product"><div class="card-icon">💼</div><h3>AI Agency Building</h3><p>Pricing, client acquisition, sales pitches, onboarding, scaling. Leave with a real agency business plan.</p><ul class="list"><li>6 hours live instruction</li><li>Live pitch practice</li><li>Full printed study guide</li></ul><div class="price">$399</div><a class="btn secondary" href="/consultation">Book This Class →</a></article>
+          <article class="card product"><div class="card-icon">💼</div><h3>AI Agency Building</h3><p>Pricing, client acquisition, sales pitches, onboarding, scaling. Leave with a real agency business plan.</p><ul class="list"><li>6 hours live instruction</li><li>Live pitch practice</li><li>Full printed study guide</li></ul><div class="price">$399</div><a class="btn secondary" href="/consultation/">Book This Class →</a></article>
 
-          <article class="card product"><div class="card-icon">🏢</div><h3>Industry-Specific Agents</h3><p>Real estate, insurance, legal, healthcare, e-commerce, construction — custom agents for your industry.</p><ul class="list"><li>4 hours live instruction</li><li>Custom agent for your industry</li><li>Full printed study guide</li></ul><div class="price">$249</div><a class="btn secondary" href="/consultation">Book This Class →</a></article>
+          <article class="card product"><div class="card-icon">🏢</div><h3>Industry-Specific Agents</h3><p>Real estate, insurance, legal, healthcare, e-commerce, construction — custom agents for your industry.</p><ul class="list"><li>4 hours live instruction</li><li>Custom agent for your industry</li><li>Full printed study guide</li></ul><div class="price">$249</div><a class="btn secondary" href="/consultation/">Book This Class →</a></article>
 
-          <article class="card product" style="border:2px solid var(--gold)"><span class="badge gold">Best value</span><div class="card-icon">🚀</div><h3>Weekend Intensive</h3><p>Two days, 12 hours. Everything from foundations to deployed agent. Most popular format.</p><ul class="list"><li>2 full days (12 hours)</li><li>All 6 courses condensed</li><li>Full printed study guide</li></ul><div class="price">$499</div><a class="btn" href="/consultation">Book This Class →</a></article>
+          <article class="card product" style="border:2px solid var(--gold)"><span class="badge gold">Best value</span><div class="card-icon">🚀</div><h3>Weekend Intensive</h3><p>Two days, 12 hours. Everything from foundations to deployed agent. Most popular format.</p><ul class="list"><li>2 full days (12 hours)</li><li>All 6 courses condensed</li><li>Full printed study guide</li></ul><div class="price">$499</div><a class="btn" href="/consultation/">Book This Class →</a></article>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><p style="margin-top:12px">AI prompt packs and automation templates for people who want output, not fluff.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/refunds/">Refunds</a></div></div><div class="container fine">© 2026 Tal.OS.</div></footer>
+<script src="/assets/nav.js"></script>
 </body>
 </html>

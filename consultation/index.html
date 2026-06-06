@@ -6,37 +6,22 @@
   <title>SaaS & Marketing Consulting — Tal.OS</title>
   <meta name="description" content="Request SaaS consulting, marketing consulting, automation strategy, lead generation systems, landing pages, funnels, and AI workflows from Tal.OS." />
   <link rel="stylesheet" href="/assets/styles.css" />
-  <style>
-    .lane-card { text-align:left; width:100%; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text); transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
-    .lane-card:hover, .lane-card:focus-visible { transform:translateY(-3px); border-color:var(--accent); box-shadow:var(--shadow); outline:none; }
-    .lane-card.active { border-color:var(--accent); box-shadow:0 0 0 3px rgba(109,40,217,.18), var(--shadow); }
-    .template-panel { border:1px solid var(--border); border-radius:20px; padding:22px; background:linear-gradient(135deg, rgba(109,40,217,.09), rgba(8,145,178,.08)); margin-bottom:22px; }
-    .template-panel h3 { margin:0 0 8px; }
-    .template-panel p { margin:0 0 14px; color:var(--muted); }
-    .prompt-list { display:grid; gap:10px; margin:14px 0 0; padding:0; list-style:none; }
-    .prompt-list li { padding:10px 12px; border:1px solid var(--border); border-radius:14px; background:var(--surface); color:var(--text); }
-  </style>
-</head>
+  </head>
 <body>
-  <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><div class="nav-links"><a href="/store/">Store</a><a href="/personal-ai">Personal AI</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav>
-
-  <header class="hero">
-    <div class="container hero-inner">
-      <div>
-        <span class="eyebrow">SaaS consulting • marketing systems • AI automation • AI lessons</span>
-        <h1>Turn your messy business idea into a working SaaS, funnel, workshop, or marketing system.</h1>
-        <p class="lead">Free initial consultation. Tal.OS reviews your request, asks focused discovery questions, checks feasibility, and returns a practical build plan. If we move forward, custom pricing is based on scope — but the first conversation costs nothing.</p>
-        <div class="cta-row">
-          <a class="btn" href="#request-form">Request Consulting</a>
-          <a class="btn secondary" href="#offers">See Consulting Lanes</a>
-        </div>
-      </div>
-      <div class="notice">
-        <strong>What happens next:</strong><br />
-        Tal.OS reviews your request, asks focused discovery questions, checks feasibility, estimates scope/pricing, and returns a practical build plan, test plan, and security plan when needed. No master passwords. No guesswork. No bloated builds.
-      </div>
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
     </div>
-  </header>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
 
   <main>
     <section class="section" id="offers">
@@ -212,5 +197,6 @@
 
     document.querySelectorAll('.lane-card').forEach(card => card.addEventListener('click', () => setLane(card.dataset.lane)));
   </script>
+<script src="/assets/nav.js"></script>
 </body>
 </html>

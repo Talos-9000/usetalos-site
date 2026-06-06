@@ -8,55 +8,34 @@
   <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
-  <style>
-    :root{--bg:#08080f;--card:#111118;--border:#242436;--text:#f4f4f7;--muted:#9b9bb0;--purple:#7c3aed;--green:#10b981;--gold:#f59e0b}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:radial-gradient(circle at top,#17112b 0,#08080f 45%);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.7}
-    nav{background:rgba(17,17,24,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;backdrop-filter:blur(12px)}
-    nav .inner{max-width:1050px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
-    nav a.logo{font-weight:900;font-size:20px;color:var(--text);text-decoration:none;background:linear-gradient(135deg,#c4b5fd,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    nav .links{display:flex;gap:22px;font-size:14px}
-    nav .links a{color:var(--muted);text-decoration:none;transition:color .15s}
-    nav .links a:hover{color:var(--text)}
-    .wrap{max-width:820px;margin:0 auto;padding:40px 18px 60px}
-    .breadcrumb{color:var(--muted);font-size:13px;margin-bottom:24px}
-    .breadcrumb a{color:var(--purple);text-decoration:none}
-    h1{font-size:clamp(28px,5vw,44px);line-height:1.15;font-weight:900;margin-bottom:10px}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:32px}
-    .verdict{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:14px;padding:22px;margin:28px 0}
-    .verdict h2{color:var(--green);margin-bottom:10px;font-size:20px}
-    .verdict p{color:#d1fae5;margin:6px 0}
-    table{width:100%;border-collapse:collapse;margin:28px 0;font-size:14px}
-    th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border)}
-    th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
-    td{color:var(--text)}
-    tr:last-child td{border-bottom:none}
-    h2{font-size:26px;margin:40px 0 16px;color:#fff}
-    h3{font-size:19px;margin:24px 0 10px}
-    p,li{color:var(--muted);font-size:15px;margin-bottom:10px}
-    ul,ol{padding-left:22px;margin-bottom:16px}
-    strong{color:var(--text)}
-    .winner{color:var(--green);font-weight:700}
-    .btn{display:inline-block;padding:12px 22px;background:var(--purple);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:background .2s;margin-top:8px}
-    .btn:hover{background:#6d28d9}
-    .disclosure{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px;margin-top:40px;font-size:13px;color:#fde68a}
-    footer{margin-top:52px;padding-top:24px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:14px}
-    footer a{color:#c4b5fd;text-decoration:none}
-  </style>
-</head>
+  </head>
 <body>
-  <nav>
-    <div class="inner">
-      <a href="/" class="logo"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a>
-      <div class="links">
-        <a href="/store/">Store</a>
-        <a href="/personal-ai">Personal AI</a>
-        <a href="/blog/">Blog</a>
-        <a href="/tools/">Tools</a>
-        <a href="/newsletter/">Newsletter</a>
-      </div>
-    </div>
-  </nav>
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
 
   <main class="wrap">
     <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Notion vs ClickUp</div>
@@ -159,5 +138,6 @@
     <p>Tal.OS &copy; 2026 &middot; <a href="/contact/">Contact</a></p>
     <p style="margin-top:6px">AI tools, prompts, and automation for business.</p>
   </footer>
+<script src="/assets/nav.js"></script>
 </body>
 </html>
