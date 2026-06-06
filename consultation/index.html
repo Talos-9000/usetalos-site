@@ -6,6 +6,16 @@
   <title>SaaS & Marketing Consulting — TalOS</title>
   <meta name="description" content="Request SaaS consulting, marketing consulting, automation strategy, lead generation systems, landing pages, funnels, and AI workflows from TalOS." />
   <link rel="stylesheet" href="/assets/styles.css" />
+  <style>
+    .lane-card { text-align:left; width:100%; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text); transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+    .lane-card:hover, .lane-card:focus-visible { transform:translateY(-3px); border-color:var(--accent); box-shadow:var(--shadow); outline:none; }
+    .lane-card.active { border-color:var(--accent); box-shadow:0 0 0 3px rgba(109,40,217,.18), var(--shadow); }
+    .template-panel { border:1px solid var(--border); border-radius:20px; padding:22px; background:linear-gradient(135deg, rgba(109,40,217,.09), rgba(8,145,178,.08)); margin-bottom:22px; }
+    .template-panel h3 { margin:0 0 8px; }
+    .template-panel p { margin:0 0 14px; color:var(--muted); }
+    .prompt-list { display:grid; gap:10px; margin:14px 0 0; padding:0; list-style:none; }
+    .prompt-list li { padding:10px 12px; border:1px solid var(--border); border-radius:14px; background:var(--surface); color:var(--text); }
+  </style>
 </head>
 <body>
   <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><div class="nav-links"><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav>
@@ -31,14 +41,14 @@
   <main>
     <section class="section" id="offers">
       <div class="container">
-        <div class="section-head"><div><h2>Consulting lanes</h2><p>Pick the closest match. If you are not sure, choose “Not sure yet” and describe the problem.</p></div></div>
+        <div class="section-head"><div><h2>Consulting lanes</h2><p>Pick the closest match. Each card opens a matching discovery template in the form. If you are not sure, choose “Not sure yet” and describe the problem.</p></div></div>
         <div class="grid">
-          <div class="card"><div class="card-icon">🧩</div><h3>SaaS idea validation</h3><p>Turn a software idea into a clear MVP: target user, core workflow, pricing, tech stack, launch path, and what not to build yet.</p></div>
-          <div class="card"><div class="card-icon">🚀</div><h3>SaaS launch systems</h3><p>Landing pages, waitlists, onboarding forms, Stripe-ready offers, user feedback loops, dashboards, and simple first-version software plans.</p></div>
-          <div class="card"><div class="card-icon">📣</div><h3>Marketing consulting</h3><p>Offer positioning, content strategy, lead magnets, social posts, email sequences, SEO topics, and campaigns that bring eyes to the business.</p></div>
-          <div class="card"><div class="card-icon">🔁</div><h3>Marketing automation</h3><p>Lead capture, follow-up emails, CRM routing, content calendars, newsletter systems, and repeatable workflows that save time.</p></div>
-          <div class="card"><div class="card-icon">🤖</div><h3>AI workflow consulting</h3><p>Use AI safely inside your business: prompts, SOPs, research workflows, internal assistants, and repeatable operations.</p></div>
-          <div class="card"><div class="card-icon">🛡️</div><h3>Security-aware planning</h3><p>If your project touches logins, payments, customer data, email sending, or public forms, TalOS includes a security and maintenance plan.</p></div>
+          <button class="card lane-card" type="button" data-lane="SaaS idea validation"><div class="card-icon">🧩</div><h3>SaaS idea validation</h3><p>Turn a software idea into a clear MVP: target user, core workflow, pricing, tech stack, launch path, and what not to build yet.</p></button>
+          <button class="card lane-card" type="button" data-lane="SaaS launch systems"><div class="card-icon">🚀</div><h3>SaaS launch systems</h3><p>Landing pages, waitlists, onboarding forms, Stripe-ready offers, user feedback loops, dashboards, and simple first-version software plans.</p></button>
+          <button class="card lane-card" type="button" data-lane="Marketing consulting"><div class="card-icon">📣</div><h3>Marketing consulting</h3><p>Offer positioning, content strategy, lead magnets, social posts, email sequences, SEO topics, and campaigns that bring eyes to the business.</p></button>
+          <button class="card lane-card" type="button" data-lane="Marketing automation"><div class="card-icon">🔁</div><h3>Marketing automation</h3><p>Lead capture, follow-up emails, CRM routing, content calendars, newsletter systems, and repeatable workflows that save time.</p></button>
+          <button class="card lane-card" type="button" data-lane="AI workflow consulting"><div class="card-icon">🤖</div><h3>AI workflow consulting</h3><p>Use AI safely inside your business: prompts, SOPs, research workflows, internal assistants, and repeatable operations.</p></button>
+          <button class="card lane-card" type="button" data-lane="Security-aware planning"><div class="card-icon">🛡️</div><h3>Security-aware planning</h3><p>If your project touches logins, payments, customer data, email sending, or public forms, TalOS includes a security and maintenance plan.</p></button>
         </div>
       </div>
     </section>
@@ -51,21 +61,28 @@
           <input type="hidden" name="_captcha" value="false" />
           <input type="text" name="_honey" style="display:none" />
 
+          <div id="lane-template" class="template-panel" aria-live="polite">
+            <h3>Pick a consulting lane above</h3>
+            <p>The form will load focused questions for that type of project. You can still use the broad project section for anything that does not fit neatly.</p>
+            <ul class="prompt-list"><li>Start by choosing the closest card, or continue with the general form below.</li></ul>
+          </div>
+
           <div class="form-grid">
             <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /></div>
             <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
             <div class="field"><label for="business">Business / project</label><input id="business" name="business" placeholder="Business name or idea" /></div>
             <div class="field"><label for="website">Website or social link</label><input id="website" name="website" type="url" placeholder="https://..." /></div>
 
-            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS MVP/build plan</option><option>Marketing consulting</option><option>Marketing automation/funnel</option><option>Landing page or lead magnet</option><option>AI workflow or internal tool</option><option>Website/store help</option><option>Not sure yet</option></select></div>
+            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS launch systems</option><option>Marketing consulting</option><option>Marketing automation</option><option>AI workflow consulting</option><option>Security-aware planning</option><option>Landing page or lead magnet</option><option>Website/store help</option><option>Not sure yet</option></select></div>
             <div class="field"><label for="stage">Current stage</label><select id="stage" name="current_stage"><option>Idea only</option><option>Already selling manually</option><option>Have a website but need leads</option><option>Have leads but need automation</option><option>Have software but need users</option><option>Need cleanup/fix strategy</option></select></div>
             <div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option>ASAP</option><option>This week</option><option>This month</option><option>Next 90 days</option><option>Just exploring</option></select></div>
             <div class="field"><label for="budget">Budget range</label><select id="budget" name="budget"><option>Not sure yet</option><option>Under $250</option><option>$250-$750</option><option>$750-$1,500</option><option>$1,500-$5,000</option><option>$5,000+</option></select></div>
             <div class="field"><label for="contact">Preferred contact</label><select id="contact" name="preferred_contact"><option>Email</option><option>Text/message if already connected</option><option>Other</option></select></div>
             <div class="field"><label for="data">Sensitive data involved?</label><select id="data" name="sensitive_data"><option>Not sure</option><option>No</option><option>Customer data</option><option>Payments</option><option>Logins/accounts</option><option>Email/SMS sending</option><option>Files/uploads</option></select></div>
 
-            <div class="field full"><label for="problem">What problem are you trying to solve?</label><textarea id="problem" name="problem" required placeholder="Example: I need more leads for my local service business, or I have a SaaS idea but don't know what MVP to build first."></textarea></div>
-            <div class="field full"><label for="message">What should TalOS know?</label><textarea id="message" name="message" required placeholder="Describe your offer, current tools, audience, marketing channels, manual tasks, or the SaaS/workflow you want built."></textarea></div>
+            <div class="field full"><label for="template_questions">Lane-specific answers</label><textarea id="template_questions" name="lane_specific_answers" placeholder="Choose a consulting lane above and answer the prompts that appear here."></textarea></div>
+            <div class="field full"><label for="problem">Broad project write-anything section</label><textarea id="problem" name="problem" required placeholder="Write anything here: the business idea, the problem, what you tried, what is broken, who the customer is, what you want TalOS to build, or what outcome you need."></textarea></div>
+            <div class="field full"><label for="message">Extra context / tools / links</label><textarea id="message" name="message" required placeholder="Describe your offer, current tools, audience, marketing channels, manual tasks, existing website/software, deadlines, or constraints."></textarea></div>
           </div>
 
           <button class="btn" type="submit">Send Consulting Request</button>
@@ -91,5 +108,95 @@
   </main>
 
   <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><span class="logo-mark">T</span><span>TalOS</span></a><p style="margin-top:12px">AI consulting, SaaS planning, marketing systems, templates, and automation for small businesses.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools Directory</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Consultation</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/refunds/">Refund Policy</a></div></div><div class="container fine">© 2026 TalOS. Designed for businesses that want practical AI systems.</div></footer>
+
+  <script>
+    const laneTemplates = {
+      'SaaS idea validation': {
+        intro: 'Use this when you have a software idea and need to know if it should exist, who it is for, and what the first MVP should include.',
+        prompts: [
+          'What is the software idea in one sentence?',
+          'Who has this problem and how are they solving it today?',
+          'What is the smallest workflow the MVP must complete?',
+          'What would someone pay for and what price feels realistic?',
+          'What should NOT be built in version one?'
+        ]
+      },
+      'SaaS launch systems': {
+        intro: 'Use this when you need the pieces around a launch: landing page, waitlist, offer, payment path, onboarding, feedback, and first dashboard/workflow.',
+        prompts: [
+          'What are you launching and who is the first audience?',
+          'Do you need a landing page, waitlist, checkout, dashboard, or onboarding form?',
+          'What should the customer do after signing up or paying?',
+          'What feedback or usage data do you need to collect first?',
+          'What does a successful first 30 days look like?'
+        ]
+      },
+      'Marketing consulting': {
+        intro: 'Use this when the main problem is getting attention, improving the offer, creating content, or turning traffic into leads.',
+        prompts: [
+          'What do you sell and why should customers care now?',
+          'Who is the target customer and where do they already hang out?',
+          'What content, SEO, email, or social channels are you using today?',
+          'What lead magnet, offer, or campaign do you want to test?',
+          'What result matters most: leads, booked calls, sales, subscribers, or awareness?'
+        ]
+      },
+      'Marketing automation': {
+        intro: 'Use this when leads, follow-ups, CRM updates, newsletters, or content workflows need to happen automatically instead of manually.',
+        prompts: [
+          'Where do leads come from right now?',
+          'What should happen immediately after someone submits a form or buys?',
+          'What tools do you use for email, CRM, calendars, payments, or newsletters?',
+          'Which manual step wastes the most time each week?',
+          'What messages, reminders, or reports should be automated?'
+        ]
+      },
+      'AI workflow consulting': {
+        intro: 'Use this when you want AI to help with research, writing, customer support, operations, SOPs, internal assistants, or repeatable decisions.',
+        prompts: [
+          'What task do you want AI to help with?',
+          'What inputs does the AI need and where do they come from?',
+          'What should the AI produce: draft, summary, decision, email, report, or action list?',
+          'What must a human review before anything is sent or published?',
+          'What data is sensitive or should never be pasted into AI tools?'
+        ]
+      },
+      'Security-aware planning': {
+        intro: 'Use this when the project touches accounts, forms, customer data, email/SMS, payments, files, or public-facing automation.',
+        prompts: [
+          'What sensitive data is involved: logins, payments, customer info, files, emails, or messages?',
+          'Who should be allowed to view, edit, export, or delete data?',
+          'What systems need API keys, OAuth, webhooks, or payment access?',
+          'What should be logged for safety and troubleshooting?',
+          'What would be the worst-case failure and how should it be prevented?'
+        ]
+      }
+    };
+
+    function setLane(lane) {
+      const data = laneTemplates[lane];
+      if (!data) return;
+      document.querySelectorAll('.lane-card').forEach(card => card.classList.toggle('active', card.dataset.lane === lane));
+      const type = document.getElementById('type');
+      if (type) type.value = lane;
+      const panel = document.getElementById('lane-template');
+      const answers = document.getElementById('template_questions');
+      panel.querySelector('h3').textContent = lane + ' template';
+      panel.querySelector('p').textContent = data.intro;
+      const list = panel.querySelector('.prompt-list');
+      list.replaceChildren();
+      data.prompts.forEach(prompt => {
+        const item = document.createElement('li');
+        item.textContent = prompt;
+        list.appendChild(item);
+      });
+      answers.placeholder = data.prompts.map((prompt, index) => (index + 1) + '. ' + prompt).join('\n');
+      if (!answers.value.trim()) answers.value = data.prompts.map((prompt, index) => (index + 1) + '. ' + prompt + '\nAnswer: ').join('\n\n');
+      document.getElementById('request-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      answers.focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('.lane-card').forEach(card => card.addEventListener('click', () => setLane(card.dataset.lane)));
+  </script>
 </body>
 </html>
