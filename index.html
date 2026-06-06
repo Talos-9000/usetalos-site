@@ -3,32 +3,418 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tal.OS — AI Templates, Automations & Business Tools</title>
-  <meta name="description" content="AI prompt packs, business software templates, social media templates, and automation systems for small businesses and creators." />
+  <title>Tal.OS — AI Help for Your Business</title>
+  <meta name="description" content="Tal.OS helps small businesses save time with simple AI tools. Get AI prompt packs, custom AI setup, and business help — no tech skills needed." />
   <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
   <link rel="stylesheet" href="/assets/styles.css" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
+  <style>
+    :root{--bg:#fafaf8;--card:#ffffff;--border:#e8e5df;--text:#1a1a1a;--muted:#6b6b6b;--navy:#1a2a3a;--gold:#c9a84c;--accent:#8b6914;--green:#2d6a4f;--surface:#f5f3ee;--shadow:0 2px 16px rgba(0,0,0,0.06)}
+    @media(prefers-color-scheme:dark){:root{--bg:#0d0d12;--card:#15151c;--border:#252530;--text:#f0f0f0;--muted:#999;--surface:#111118;--shadow:0 2px 16px rgba(0,0,0,0.3)}}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    
+    /* Nav */
+    nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 16px}
+    @media(prefers-color-scheme:dark){nav{background:rgba(13,13,18,0.92)}}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+    .nav-inner .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+    .nav-inner .logo img{height:32px;width:auto}
+    .nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+    .nav-links a{text-decoration:none;color:var(--muted);font-weight:600;padding:8px 14px;border-radius:100px;font-size:14px;transition:all .15s}
+    .nav-links a:hover{color:var(--text);background:var(--surface)}
+    .nav-links .nav-cta{background:var(--navy);color:#fff!important}
+    .nav-links .nav-cta:hover{background:var(--accent)}
+
+    /* Hero */
+    .hero{padding:60px 16px 40px;text-align:center;max-width:720px;margin:0 auto}
+    .hero h1{font-size:clamp(28px,6vw,44px);font-weight:800;line-height:1.15;margin-bottom:16px;letter-spacing:-0.02em}
+    .hero h1 span{color:var(--gold)}
+    .hero p{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 28px;line-height:1.55}
+    .hero .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn{display:inline-block;padding:14px 28px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+    .btn-primary{background:var(--navy);color:#fff}
+    .btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
+    .btn-outline{border:2px solid var(--navy);color:var(--navy);background:transparent}
+    .btn-outline:hover{background:var(--navy);color:#fff}
+    .btn-gold{background:var(--gold);color:#fff}
+    .btn-gold:hover{background:var(--accent);transform:translateY(-1px)}
+
+    /* Sections */
+    section{padding:60px 16px}
+    .section-inner{max-width:1100px;margin:0 auto}
+    .section-label{text-transform:uppercase;font-size:12px;font-weight:700;letter-spacing:0.08em;color:var(--gold);margin-bottom:8px}
+    .section-title{font-size:clamp(24px,4vw,34px);font-weight:800;margin-bottom:12px;letter-spacing:-0.02em}
+    .section-sub{color:var(--muted);font-size:16px;max-width:600px;margin-bottom:36px}
+
+    /* Hub grid */
+    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .hub-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:var(--text);transition:all .25s;display:block;position:relative;overflow:hidden}
+    .hub-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow)}
+    .hub-card .icon{font-size:32px;margin-bottom:12px;display:block}
+    .hub-card h3{font-size:19px;font-weight:700;margin-bottom:6px}
+    .hub-card p{color:var(--muted);font-size:14px;line-height:1.5}
+    .hub-card .arrow{display:inline-block;margin-top:12px;color:var(--gold);font-weight:700;font-size:14px}
+
+    /* Store grid */
+    .store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .store-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .25s}
+    .store-card:hover{border-color:var(--gold);box-shadow:var(--shadow)}
+    .store-card h3{font-size:17px;margin-bottom:4px}
+    .store-card .price{color:var(--gold);font-weight:800;font-size:20px;margin:8px 0}
+    .store-card .tag{display:inline-block;background:var(--surface);color:var(--muted);padding:4px 10px;border-radius:100px;font-size:12px;margin:3px 3px 0 0}
+    .store-card .buy-btn{display:inline-block;margin-top:14px;padding:10px 22px;background:var(--navy);color:#fff;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;transition:all .2s}
+    .store-card .buy-btn:hover{background:var(--accent)}
+
+    /* Flip cards */
+    .flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+    .flip-card{perspective:1000px;height:420px}
+    .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+    .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+    .flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;border:1px solid var(--border);background:var(--card);overflow-y:auto}
+    .flip-front{padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+    .flip-front .flip-icon{font-size:40px;margin-bottom:12px}
+    .flip-front h3{font-size:20px;margin-bottom:8px}
+    .flip-front p{color:var(--muted);font-size:14px;margin-bottom:16px}
+    .flip-front .flip-hint{color:var(--gold);font-size:13px;font-weight:600}
+    .flip-back{transform:rotateY(180deg);padding:24px}
+    .flip-back h3{font-size:17px;margin-bottom:12px;color:var(--navy)}
+    .flip-back label{display:block;font-weight:600;font-size:13px;margin:10px 0 4px;color:var(--text)}
+    .flip-back input,.flip-back select,.flip-back textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--text);margin-bottom:4px}
+    .flip-back textarea{min-height:80px;resize:vertical}
+    .flip-back .send-btn{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;border-radius:100px;font-weight:700;font-size:14px;cursor:pointer;margin-top:10px;transition:all .2s}
+    .flip-back .send-btn:hover{background:var(--accent)}
+    .flip-back .back-btn{display:block;text-align:center;margin-top:8px;color:var(--muted);font-size:13px;cursor:pointer;text-decoration:underline}
+    .flip-confirm{display:none;text-align:center;padding:20px}
+    .flip-confirm .check{font-size:48px;color:var(--green);margin-bottom:8px}
+    .flip-confirm h3{color:var(--green)}
+
+    /* Personal AI section */
+    .personal-ai{background:var(--navy);color:#fff;border-radius:20px;padding:40px 28px;text-align:center;margin:20px 0}
+    .personal-ai h2{font-size:26px;margin-bottom:12px}
+    .personal-ai h2 span{color:var(--gold)}
+    .personal-ai p{color:#c0c8d4;font-size:15px;max-width:600px;margin:0 auto 20px;line-height:1.6}
+    .personal-ai .features{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+    .personal-ai .feat{flex:1;min-width:140px;max-width:200px}
+    .personal-ai .feat .f-icon{font-size:28px;margin-bottom:8px}
+    .personal-ai .feat h4{font-size:14px;margin-bottom:4px;color:var(--gold)}
+    .personal-ai .feat p{font-size:13px;color:#a0a8b8}
+
+    /* Footer */
+    footer{padding:40px 16px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+    footer a{color:var(--gold);text-decoration:none}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:left;max-width:1100px;margin:0 auto 30px}
+
+    @media(max-width:600px){
+      .hero{padding:40px 12px 24px}
+      .hero h1{font-size:26px}
+      .flip-card{height:460px}
+    }
+
+    /* Fade animations */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .animate{animation:fadeUp .6s ease-out both}
+    .animate:nth-child(2){animation-delay:.1s}
+    .animate:nth-child(3){animation-delay:.2s}
+    .animate:nth-child(4){animation-delay:.3s}
+    .animate:nth-child(5){animation-delay:.4s}
+    .animate:nth-child(6){animation-delay:.5s}
+  </style>
 </head>
 <body>
-  <nav class="nav"><div class="container nav-inner"><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><div class="nav-links"><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a class="nav-cta" href="/consultation/">Get Help</a></div></div></nav>
-  <header class="hero"><div class="container hero-inner"><div><span class="eyebrow">SaaS consulting, marketing systems, and AI automation</span><h1>Turn business ideas into SaaS plans, lead funnels, and automated marketing systems.</h1><p class="lead">Tal.OS helps small businesses and creators figure out what to build, how to market it, and which parts can be automated first. Request SaaS consulting, marketing consulting, landing pages, lead funnels, AI workflows, or practical business templates.</p><div class="cta-row"><a class="btn" href="/consultation/">Request Consulting</a><a class="btn secondary" href="/tools/">Browse AI Tools</a><a class="btn ghost" href="/store/">Browse Store</a></div></div><div class="mockup"><div class="mock-screen"><span class="badge green">Consulting-first revenue stack</span><h3>SaaS + marketing + automation requests</h3><ul class="list"><li>SaaS idea validation and MVP planning</li><li>Marketing funnels, lead magnets, and email follow-up</li><li>AI workflows and business automation systems</li><li>Digital products support the consulting offer</li></ul><div class="stat-grid"><div class="stat"><strong>6</strong><p>consulting lanes</p></div><div class="stat"><strong>24/7</strong><p>builder loop</p></div><div class="stat"><strong>Fast</strong><p>request intake</p></div></div></div></div></div></header>
-  <main>
-    <section class="section"><div class="container"><div class="section-head"><div><h2>Explore Tal.OS</h2><p>Every card opens a real page with a clear next step for tools, consulting, templates, or business automation help.</p></div></div><div class="grid">
-      <a class="card" href="/blog/" style="text-decoration:none"><div class="card-icon">📝</div><h3>Blog</h3><p>AI tool comparisons and practical business automation guides.</p><span class="btn secondary">Read Articles</span></a>
-      <a class="card" href="/compare/chatgpt-vs-claude.html" style="text-decoration:none"><div class="card-icon">⚔️</div><h3>ChatGPT vs Claude</h3><p>Which assistant wins for business work, writing, and analysis?</p><span class="btn secondary">Read Comparison</span></a>
-      <a class="card" href="/compare/copy-ai-vs-jasper.html" style="text-decoration:none"><div class="card-icon">✍️</div><h3>Copy.ai vs Jasper</h3><p>Honest comparison of the top AI writing tools.</p><span class="btn secondary">Read Review</span></a>
-      <a class="card" href="/tools/" style="text-decoration:none"><div class="card-icon">🧰</div><h3>Tools Directory</h3><p>Curated software and AI tools for business owners.</p><span class="btn secondary">Browse Tools</span></a>
-      <a class="card" href="/newsletter/" style="text-decoration:none"><div class="card-icon">📬</div><h3>Newsletter</h3><p>Weekly AI tips, product drops, and automation recipes.</p><span class="btn secondary">See Signup Page</span></a>
-      <a class="card" href="/consultation/" style="text-decoration:none"><div class="card-icon">🤝</div><h3>Work With Tal.OS</h3><p>Fill out a structured request for automations, templates, or custom builds.</p><span class="btn secondary">Open Form</span></a>
-    </div></div></section>
-    <section class="section" style="background:var(--surface)"><div class="container"><div class="section-head"><div><h2>Consulting that becomes systems</h2><p>Tal.OS is focused on higher-value SaaS consulting and marketing consulting, then turning the best parts into reusable automation.</p></div><a class="btn" href="/consultation/">Request Consulting</a></div><div class="grid">
-      <div class="card"><div class="card-icon">🧩</div><h3>SaaS Consulting</h3><p>Validate your software idea, define the MVP, pick the right stack, map pricing, and avoid building features nobody needs.</p><a class="btn" href="/consultation/?type=saas">Plan a SaaS MVP</a></div>
-      <div class="card"><div class="card-icon">📣</div><h3>Marketing Consulting</h3><p>Clarify your offer, build lead magnets, plan content, improve landing pages, and create campaigns that get the business seen.</p><a class="btn" href="/consultation/?type=marketing">Improve Marketing</a></div>
-      <div class="card"><div class="card-icon">🔁</div><h3>Marketing Automation</h3><p>Connect forms, emails, CRM sheets, newsletters, social content, reporting, and follow-up into repeatable lead-generation workflows.</p><a class="btn" href="/consultation/?type=funnel">Automate a Funnel</a></div>
-    </div></div></section>
-    <section class="section"><div class="container"><div class="trust-bar"><div class="trust-item">Instant digital products</div><div class="trust-item">Secure Stripe checkout</div><div class="trust-item">Commercial-use prompts</div><div class="trust-item">Custom requests accepted</div></div></div></section>
-  </main>
-  <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><p style="margin-top:12px">AI templates, automations, and practical systems for turning business chaos into repeatable workflows.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools Directory</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Consultation</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/refunds/">Refund Policy</a></div></div><div class="container fine">© 2026 Tal.OS. Designed for businesses that want practical AI systems.</div></footer>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/assets/talos-logo.png" alt="Tal.OS" /></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#store">Store</a>
+      <a href="#consult">Consulting</a>
+      <a href="/blog/">Blog</a>
+      <a href="#consult" class="nav-cta">Get Help</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO — Simple, no jargon -->
+<header class="hero">
+  <h1>AI help for your business — <span>no tech skills needed</span></h1>
+  <p>We set up simple AI tools that save you time on emails, customer questions, follow-ups, and busywork. You don't need to learn anything complicated.</p>
+  <div class="btns">
+    <a href="#consult" class="btn btn-primary">Get Free AI Time-Saver Review</a>
+    <a href="#store" class="btn btn-outline">Browse AI Tools & Packs</a>
+  </div>
+</header>
+
+<!-- HUB — What we do, hyperlinks to sections -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Everything your business needs to work smarter</h2>
+    <p class="section-sub">Pick what fits. No long contracts. No tech jargon. Just practical help.</p>
+    <div class="hub-grid">
+      <a href="#consult" class="hub-card animate">
+        <span class="icon">🤝</span>
+        <h3>AI Consulting & Setup</h3>
+        <p>We set up AI helpers for your business — replies, follow-ups, organization. Done for you.</p>
+        <span class="arrow">See packages →</span>
+      </a>
+      <a href="#store" class="hub-card animate">
+        <span class="icon">📦</span>
+        <h3>AI Prompt Packs & Tools</h3>
+        <p>Ready-to-use AI prompts for real estate, nonprofits, small business, insurance, and more.</p>
+        <span class="arrow">Browse store →</span>
+      </a>
+      <a href="/blog/" class="hub-card animate">
+        <span class="icon">📝</span>
+        <h3>Free Guides & Comparisons</h3>
+        <p>Honest breakdowns of AI tools, automation platforms, and what actually works for small business.</p>
+        <span class="arrow">Read articles →</span>
+      </a>
+      <a href="/newsletter/" class="hub-card animate">
+        <span class="icon">📬</span>
+        <h3>Weekly AI Tips Newsletter</h3>
+        <p>One email a week with practical AI tips, tools, and time-savers for business owners.</p>
+        <span class="arrow">Sign up free →</span>
+      </a>
+      <a href="/tools/" class="hub-card animate">
+        <span class="icon">🧰</span>
+        <h3>Business Tools Directory</h3>
+        <p>Curated list of software and AI tools that actually help small businesses save time.</p>
+        <span class="arrow">Browse tools →</span>
+      </a>
+      <a href="#personal-ai" class="hub-card animate">
+        <span class="icon">⭐</span>
+        <h3>Personal AI — What Is It?</h3>
+        <p>Learn how a Personal AI gets to know your business and helps you every day.</p>
+        <span class="arrow">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL AI EXPLANATION -->
+<section id="personal-ai" style="padding-top:0">
+  <div class="section-inner">
+    <div class="personal-ai">
+      <h2>What is a <span>Personal AI</span>?</h2>
+      <p>A Personal AI is like having a smart assistant who learns how your business works and helps you every day. It remembers your customers, your routines, and what matters to you — so you spend less time on busywork and more time on what actually moves your business forward.</p>
+      <div class="features">
+        <div class="feat"><div class="f-icon">🧠</div><h4>Learns Your Business</h4><p>Gets to know your customers, services, and daily routines over time.</p></div>
+        <div class="feat"><div class="f-icon">✍️</div><h4>Writes & Replies</h4><p>Drafts emails, answers common questions, and helps with follow-ups.</p></div>
+        <div class="feat"><div class="f-icon">📋</div><h4>Stays Organized</h4><p>Keeps track of requests, reminders, and what needs attention.</p></div>
+        <div class="feat"><div class="f-icon">🔒</div><h4>Private & Secure</h4><p>Your data stays yours. No sharing, no selling, no funny business.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE -->
+<section id="store" style="background:var(--surface)">
+  <div class="section-inner">
+    <div class="section-label">AI Prompt Packs</div>
+    <h2 class="section-title">Ready-to-use AI tools for your industry</h2>
+    <p class="section-sub">Download and use with ChatGPT, Claude, or Gemini. Instant delivery. Also available on <a href="https://usetalos.gumroad.com" style="color:var(--gold)">Gumroad</a> and Etsy.</p>
+    <div class="store-grid">
+      <div class="store-card animate">
+        <h3>🏠 Real Estate Agent Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">21 prompts for listings, outreach, and client communication.</p>
+        <div class="price">$14.99</div>
+        <span class="tag">real estate</span><span class="tag">chatgpt</span>
+        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
+      </div>
+      <div class="store-card animate">
+        <h3>📝 Grant Writing Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">30 prompts for nonprofits, proposals, LOIs, and fundraising.</p>
+        <div class="price">$19.99</div>
+        <span class="tag">nonprofit</span><span class="tag">funding</span>
+        <a href="https://usetalos.gumroad.com/l/grant-writing-prompts-pack" class="buy-btn">Buy Now</a>
+      </div>
+      <div class="store-card animate">
+        <h3>🏢 Small Business AI Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">75 prompts for marketing, ops, finance, and customer service.</p>
+        <div class="price">$24.99</div>
+        <span class="tag">business</span><span class="tag">marketing</span>
+        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
+      </div>
+      <div class="store-card animate">
+        <h3>🔍 Etsy SEO Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">26 prompts for titles, tags, descriptions, and ranking higher.</p>
+        <div class="price">$14.99</div>
+        <span class="tag">etsy</span><span class="tag">seo</span>
+        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
+      </div>
+      <div class="store-card animate">
+        <h3>📋 SOP Builder Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">50 prompts to document and systematize your business.</p>
+        <div class="price">$19.99</div>
+        <span class="tag">operations</span><span class="tag">systems</span>
+        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
+      </div>
+      <div class="store-card animate">
+        <h3>🛡️ Insurance Claims Prompts</h3>
+        <p style="color:var(--muted);font-size:14px">40 prompts for claims docs, client comms, and reports.</p>
+        <div class="price">$19.99</div>
+        <span class="tag">insurance</span><span class="tag">claims</span>
+        <a href="https://buy.stripe.com/5kQ28kaPK9tDatN7g8a3u05" class="buy-btn">Buy Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTATION — Flip Cards -->
+<section id="consult">
+  <div class="section-inner">
+    <div class="section-label">AI Consulting</div>
+    <h2 class="section-title">Get AI set up for your business</h2>
+    <p class="section-sub">Click a card, fill out what you need, and we'll build a plan. No commitment — just figuring out what's possible.</p>
+    <div class="flip-grid" id="flipGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><strong style="color:var(--gold)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI help for small businesses.</p></div>
+    <div><strong>Products</strong><br><a href="#store">Store</a><br><a href="/templates/">Templates</a><br><a href="/tools/">Tools</a></div>
+    <div><strong>Company</strong><br><a href="/blog/">Blog</a><br><a href="/newsletter/">Newsletter</a><br><a href="/contact/">Contact</a></div>
+    <div><strong>Legal</strong><br><a href="/privacy/">Privacy</a><br><a href="/terms/">Terms</a><br><a href="/refunds/">Refunds</a></div>
+  </div>
+  <p>© 2026 Tal.OS — AI tools and consulting for businesses that want practical help.</p>
+</footer>
+
+<script>
+// Flip card consultation system
+const services = [
+  {
+    icon: '📣', title: 'Marketing Help',
+    desc: 'Get help with content, social posts, email campaigns, and getting your business seen.',
+    fields: [
+      {label:'Your Name',name:'name',type:'text',required:true},
+      {label:'Email',name:'email',type:'email',required:true},
+      {label:'Business Name',name:'business',type:'text'},
+      {label:'What kind of marketing help do you need?',name:'message',type:'textarea',required:true,placeholder:'Social media, email campaigns, content writing, ads, getting more customers...'}
+    ]
+  },
+  {
+    icon: '🔁', title: 'Automation & Systems',
+    desc: 'Stop doing the same thing over and over. We set up tools that handle the busywork.',
+    fields: [
+      {label:'Your Name',name:'name',type:'text',required:true},
+      {label:'Email',name:'email',type:'email',required:true},
+      {label:'Business Name',name:'business',type:'text'},
+      {label:'What task do you want automated or simplified?',name:'message',type:'textarea',required:true,placeholder:'Following up with leads, organizing customer requests, sending reminders, managing emails...'}
+    ]
+  },
+  {
+    icon: '🤖', title: 'AI Setup & Training',
+    desc: 'Get AI tools set up for YOUR business. We do the setup, you get the results.',
+    fields: [
+      {label:'Your Name',name:'name',type:'text',required:true},
+      {label:'Email',name:'email',type:'email',required:true},
+      {label:'Business Name',name:'business',type:'text'},
+      {label:'What would you like AI to help with?',name:'message',type:'textarea',required:true,placeholder:'Writing replies, organizing info, answering questions, planning, research...'}
+    ]
+  },
+  {
+    icon: '💡', title: 'Not Sure? Ask Us',
+    desc: 'Tell us about your business and we\'ll suggest where AI can save you the most time.',
+    fields: [
+      {label:'Your Name',name:'name',type:'text',required:true},
+      {label:'Email',name:'email',type:'email',required:true},
+      {label:'Business Name',name:'business',type:'text'},
+      {label:'Tell us about your business and what you need help with',name:'message',type:'textarea',required:true,placeholder:'What do you do? What takes too much time? What would you like to improve?'}
+    ]
+  }
+];
+
+const grid = document.getElementById('flipGrid');
+
+services.forEach((svc, i) => {
+  const card = document.createElement('div');
+  card.className = 'flip-card animate';
+  
+  const fieldsHTML = svc.fields.map(f => {
+    const req = f.required ? 'required' : '';
+    if (f.type === 'textarea') {
+      return `<label>${f.label}${f.required?' *':''}</label><textarea name="${f.name}" placeholder="${f.placeholder||''}" ${req}></textarea>`;
+    }
+    return `<label>${f.label}${f.required?' *':''}</label><input type="${f.type}" name="${f.name}" placeholder="${f.placeholder||''}" ${req} />`;
+  }).join('');
+
+  card.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-front">
+        <div class="flip-icon">${svc.icon}</div>
+        <h3>${svc.title}</h3>
+        <p>${svc.desc}</p>
+        <span class="flip-hint">Click to get started →</span>
+      </div>
+      <div class="flip-back">
+        <h3>${svc.title}</h3>
+        <form class="flip-form" data-service="${svc.title}">
+          ${fieldsHTML}
+          <input type="hidden" name="service" value="${svc.title}" />
+          <button type="submit" class="send-btn">Send Request</button>
+        </form>
+        <span class="back-btn">← Back</span>
+        <div class="flip-confirm">
+          <div class="check">✓</div>
+          <h3>Request Sent!</h3>
+          <p style="color:var(--muted);font-size:14px">We'll review your request and get back to you within 48 hours.</p>
+          <span class="back-btn" style="margin-top:12px">Send Another →</span>
+        </div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+
+  // Flip on front click
+  card.querySelector('.flip-front').addEventListener('click', () => {
+    card.classList.add('flipped');
+  });
+
+  // Back button
+  card.querySelectorAll('.back-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      card.classList.remove('flipped');
+      // Reset confirm display
+      setTimeout(() => {
+        card.querySelector('.flip-confirm').style.display = 'none';
+        card.querySelector('.flip-back form').style.display = 'block';
+        card.querySelector('.flip-back .back-btn').style.display = 'block';
+      }, 300);
+    });
+  });
+
+  // Form submit
+  card.querySelector('.flip-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    
+    // Send to FormSubmit
+    const body = new FormData();
+    body.append('_subject', `New Tal.OS request: ${svc.title}`);
+    body.append('_next', 'about:blank');
+    body.append('_captcha', 'false');
+    data.forEach((v,k) => body.append(k,v));
+    
+    try {
+      await fetch('https://formsubmit.co/talos.mnb@gmail.com', {
+        method: 'POST',
+        body: body
+      });
+    } catch(e) {}
+
+    // Show confirmation
+    form.style.display = 'none';
+    card.querySelector('.flip-back .back-btn:first-of-type').style.display = 'none';
+    card.querySelector('.flip-confirm').style.display = 'block';
+  });
+});
+</script>
+
 </body>
 </html>
