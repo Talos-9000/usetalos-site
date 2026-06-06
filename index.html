@@ -2,13 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Tal.OS — AI Help for Your Business</title>
   <meta name="description" content="Tal.OS helps small businesses save time with simple AI tools. Get AI prompt packs, custom AI setup, and business help — no tech skills needed." />
   <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
-  <link rel="stylesheet" href="/assets/styles.css" /><link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
+  <style>
+    /* ── Homepage-specific layout ── */
+    .section-inner { max-width: var(--container-max); margin: 0 auto; padding: clamp(32px, 6vw, 62px) var(--gutter); }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 900; margin-bottom: 14px; }
+    .section-title { margin-bottom: 10px; }
+    .section-sub { max-width: 680px; margin-bottom: 26px; }
+
+    /* Hero */
+    .hero { background: var(--hero); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px, 8vw, 90px) var(--gutter) clamp(36px, 6vw, 64px); }
+    .hero h1 { max-width: 780px; margin: 0 auto 14px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { max-width: 580px; margin: 0 auto 22px; }
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn-primary { background: var(--accent); color: white; box-shadow: 0 14px 35px color-mix(in srgb, var(--accent) 22%, transparent); border-radius: 12px; padding: 14px 24px; font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform .16s ease, box-shadow .16s ease; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 30%, transparent); }
+    .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 14px 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: border-color .16s; }
+    .btn-outline:hover { border-color: var(--accent); }
+
+    /* Hub grid */
+    .hub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 48em) { .hub-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64em) { .hub-grid { grid-template-columns: repeat(3, 1fr); } }
+    .hub-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-decoration: none; color: var(--text); transition: all .25s; display: block; position: relative; overflow: hidden; min-height: 0; }
+    .hub-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .hub-card .icon { font-size: 32px; margin-bottom: 12px; display: block; }
+    .hub-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+    .hub-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .hub-card .arrow { display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 700; font-size: 14px; }
+
+    /* Store grid */
+    .store-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 48em) { .store-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64em) { .store-grid { grid-template-columns: repeat(3, 1fr); } }
+    .store-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: all .25s; min-height: 0; }
+    .store-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .store-card h3 { font-size: 17px; margin-bottom: 4px; }
+    .store-card .price { color: var(--accent); font-weight: 800; font-size: 20px; margin: 8px 0; }
+    .store-card .tag { display: inline-block; background: var(--surface-2); color: var(--muted); padding: 4px 10px; border-radius: 100px; font-size: 12px; margin: 3px 3px 0 0; }
+    .store-card .buy-btn { display: inline-block; margin-top: 14px; padding: 10px 22px; background: var(--accent); color: #fff; border-radius: 100px; font-weight: 700; font-size: 13px; text-decoration: none; transition: all .2s; }
+
+    /* Flip cards */
+    .flip-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 48em) { .flip-grid { grid-template-columns: repeat(2, 1fr); } }
+    .flip-card { perspective: 1000px; height: 460px; }
+    .flip-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; cursor: pointer; }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; border: 1px solid var(--border); background: var(--card); overflow-y: auto; }
+    .flip-front { padding: 28px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .flip-front .flip-icon { font-size: 40px; margin-bottom: 12px; }
+    .flip-front h3 { font-size: 20px; margin-bottom: 8px; }
+    .flip-front p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+    .flip-front .flip-hint { color: var(--accent); font-size: 13px; font-weight: 600; }
+    .flip-back { transform: rotateY(180deg); padding: 24px; }
+    .flip-back h3 { font-size: 17px; margin-bottom: 12px; }
+    .flip-back label { display: block; font-weight: 600; font-size: 13px; margin: 10px 0 4px; color: var(--text); }
+    .flip-back input, .flip-back select, .flip-back textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 16px; font-family: inherit; background: var(--bg); color: var(--text); margin-bottom: 4px; }
+    .flip-back textarea { min-height: 80px; resize: vertical; }
+    .flip-back .send-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: all .2s; min-height: 44px; }
+    .flip-back .back-btn { display: block; text-align: center; margin-top: 8px; color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; }
+    .flip-confirm { display: none; text-align: center; padding: 20px; }
+    .flip-confirm .check { font-size: 48px; color: var(--accent-3); margin-bottom: 8px; }
+    .flip-confirm h3 { color: var(--accent-3); }
+
+    /* Personal AI section */
+    .personal-ai { background: color-mix(in srgb, var(--accent) 85%, #1e1b4b); color: #fff; border-radius: 20px; padding: 40px 28px; text-align: center; margin: 20px 0; }
+    .personal-ai h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 12px; color: #fff; }
+    .personal-ai h2 span { color: var(--gold); }
+    .personal-ai p { color: #c0c8d4; font-size: 15px; max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
+    .personal-ai .features { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+    .personal-ai .feat { flex: 1; min-width: 140px; max-width: 200px; }
+    .personal-ai .feat .f-icon { font-size: 28px; margin-bottom: 8px; }
+    .personal-ai .feat h4 { font-size: 14px; margin-bottom: 4px; color: var(--gold); }
+    .personal-ai .feat p { font-size: 13px; color: #a0a8b8; }
+
+    /* Footer */
+    footer { padding: 40px var(--gutter); border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 24px; text-align: left; max-width: 1100px; margin: 0 auto 30px; }
+    @media (min-width: 48em) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64em) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeUp .6s ease-out both; }
+    .animate:nth-child(2) { animation-delay: .1s; }
+    .animate:nth-child(3) { animation-delay: .2s; }
+  </style>
 </head>
 <body>
 
@@ -22,96 +110,33 @@
       <span class="nav-toggle__bar"></span>
       <span class="nav-toggle__bar"></span>
     </button>
-    </div>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 <div class="nav-backdrop" id="navBackdrop" hidden></div>
 
-    /* Hub grid */
-    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-    .hub-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;text-decoration:none;color:var(--text);transition:all .25s;display:block;position:relative;overflow:hidden}
-    .hub-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:var(--shadow)}
-    .hub-card .icon{font-size:32px;margin-bottom:12px;display:block}
-    .hub-card h3{font-size:19px;font-weight:700;margin-bottom:6px}
-    .hub-card p{color:var(--muted);font-size:14px;line-height:1.5}
-    .hub-card .arrow{display:inline-block;margin-top:12px;color:var(--gold);font-weight:700;font-size:14px}
-
-    /* Store grid */
-    .store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-    .store-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .25s}
-    .store-card:hover{border-color:var(--gold);box-shadow:var(--shadow)}
-    .store-card h3{font-size:17px;margin-bottom:4px}
-    .store-card .price{color:var(--gold);font-weight:800;font-size:20px;margin:8px 0}
-    .store-card .tag{display:inline-block;background:var(--surface);color:var(--muted);padding:4px 10px;border-radius:100px;font-size:12px;margin:3px 3px 0 0}
-    .store-card .buy-btn{display:inline-block;margin-top:14px;padding:10px 22px;background:var(--navy);color:#fff;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;transition:all .2s}
-    .store-card .buy-btn:hover{background:var(--accent)}
-
-    /* Flip cards */
-    .flip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-    .flip-card{perspective:1000px;height:420px}
-    .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
-    .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
-    .flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;border:1px solid var(--border);background:var(--card);overflow-y:auto}
-    .flip-front{padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-    .flip-front .flip-icon{font-size:40px;margin-bottom:12px}
-    .flip-front h3{font-size:20px;margin-bottom:8px}
-    .flip-front p{color:var(--muted);font-size:14px;margin-bottom:16px}
-    .flip-front .flip-hint{color:var(--gold);font-size:13px;font-weight:600}
-    .flip-back{transform:rotateY(180deg);padding:24px}
-    .flip-back h3{font-size:17px;margin-bottom:12px;color:var(--navy)}
-    .flip-back label{display:block;font-weight:600;font-size:13px;margin:10px 0 4px;color:var(--text)}
-    .flip-back input,.flip-back select,.flip-back textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--text);margin-bottom:4px}
-    .flip-back textarea{min-height:80px;resize:vertical}
-    .flip-back .send-btn{width:100%;padding:12px;background:var(--navy);color:#fff;border:none;border-radius:100px;font-weight:700;font-size:14px;cursor:pointer;margin-top:10px;transition:all .2s}
-    .flip-back .send-btn:hover{background:var(--accent)}
-    .flip-back .back-btn{display:block;text-align:center;margin-top:8px;color:var(--muted);font-size:13px;cursor:pointer;text-decoration:underline}
-    .flip-confirm{display:none;text-align:center;padding:20px}
-    .flip-confirm .check{font-size:48px;color:var(--green);margin-bottom:8px}
-    .flip-confirm h3{color:var(--green)}
-
-    /* Personal AI section */
-    .personal-ai{background:var(--navy);color:#fff;border-radius:20px;padding:40px 28px;text-align:center;margin:20px 0}
-    .personal-ai h2{font-size:26px;margin-bottom:12px}
-    .personal-ai h2 span{color:var(--gold)}
-    .personal-ai p{color:#c0c8d4;font-size:15px;max-width:600px;margin:0 auto 20px;line-height:1.6}
-    .personal-ai .features{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-    .personal-ai .feat{flex:1;min-width:140px;max-width:200px}
-    .personal-ai .feat .f-icon{font-size:28px;margin-bottom:8px}
-    .personal-ai .feat h4{font-size:14px;margin-bottom:4px;color:var(--gold)}
-    .personal-ai .feat p{font-size:13px;color:#a0a8b8}
-
-    /* Footer */
-    footer{padding:40px 16px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
-    footer a{color:var(--gold);text-decoration:none}
-    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:left;max-width:1100px;margin:0 auto 30px}
-
-    @media(max-width:600px){
-      .hero{padding:40px 12px 24px}
-      .hero h1{font-size:26px}
-      .flip-card{height:460px}
-    }
-
-    /* Fade animations */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .animate{animation:fadeUp .6s ease-out both}
-    .animate:nth-child(2){animation-delay:.1s}
-    .animate:nth-child(3){animation-delay:.2s}
-  </style>
-</head>
-<body>
-
-
-
-<!-- HERO — Simple, no jargon -->
+<!-- HERO -->
 <header class="hero">
   <h1>AI help for your business — <span>no tech skills needed</span></h1>
   <p>We set up simple AI tools that save you time on emails, customer questions, follow-ups, and busywork. You don't need to learn anything complicated.</p>
   <div class="btns">
     <a href="#consult" class="btn btn-primary">Get Free AI Time-Saver Review</a>
-    <a href="#store" class="btn btn-outline">Browse AI Tools & Packs</a>
+    <a href="#store" class="btn btn-outline">Browse AI Tools &amp; Packs</a>
   </div>
 </header>
 
-<!-- HUB — What we do, hyperlinks to sections -->
+<!-- HUB — What we do -->
 <section id="services">
   <div class="section-inner">
     <div class="section-label">What We Do</div>
@@ -120,19 +145,19 @@
     <div class="hub-grid">
       <a href="#consult" class="hub-card animate">
         <span class="icon">🤝</span>
-        <h3>AI Consulting & Setup</h3>
+        <h3>AI Consulting &amp; Setup</h3>
         <p>We set up AI helpers for your business — replies, follow-ups, organization. Done for you.</p>
         <span class="arrow">See packages →</span>
       </a>
       <a href="#store" class="hub-card animate">
         <span class="icon">📦</span>
-        <h3>AI Prompt Packs & Tools</h3>
+        <h3>AI Prompt Packs &amp; Tools</h3>
         <p>Ready-to-use AI prompts for real estate, nonprofits, small business, insurance, and more.</p>
         <span class="arrow">Browse store →</span>
       </a>
       <a href="/blog/" class="hub-card animate">
         <span class="icon">📝</span>
-        <h3>Free Guides & Comparisons</h3>
+        <h3>Free Guides &amp; Comparisons</h3>
         <p>Honest breakdowns of AI tools, automation platforms, and what actually works for small business.</p>
         <span class="arrow">Read articles →</span>
       </a>
@@ -158,7 +183,7 @@
   </div>
 </section>
 
-<!-- PERSONAL AI EXPLANATION -->
+<!-- PERSONAL AI -->
 <section id="personal-ai" style="padding-top:0">
   <div class="section-inner">
     <div class="personal-ai">
@@ -166,20 +191,20 @@
       <p>A Personal AI is like having a smart assistant who learns how your business works and helps you every day. It remembers your customers, your routines, and what matters to you — so you spend less time on busywork and more time on what actually moves your business forward.</p>
       <div class="features">
         <div class="feat"><div class="f-icon">🧠</div><h4>Learns Your Business</h4><p>Gets to know your customers, services, and daily routines over time.</p></div>
-        <div class="feat"><div class="f-icon">✍️</div><h4>Writes & Replies</h4><p>Drafts emails, answers common questions, and helps with follow-ups.</p></div>
+        <div class="feat"><div class="f-icon">✍️</div><h4>Writes &amp; Replies</h4><p>Drafts emails, answers common questions, and helps with follow-ups.</p></div>
         <div class="feat"><div class="f-icon">📋</div><h4>Stays Organized</h4><p>Keeps track of requests, reminders, and what needs attention.</p></div>
-        <div class="feat"><div class="f-icon">🔒</div><h4>Private & Secure</h4><p>Your data stays yours. No sharing, no selling, no funny business.</p></div>
+        <div class="feat"><div class="f-icon">🔒</div><h4>Private &amp; Secure</h4><p>Your data stays yours. No sharing, no selling, no funny business.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- STORE -->
-<section id="store" style="background:var(--surface)">
+<section id="store" style="background:var(--surface-2)">
   <div class="section-inner">
     <div class="section-label">AI Prompt Packs</div>
     <h2 class="section-title">Ready-to-use AI tools for your industry</h2>
-    <p class="section-sub">Download and use with ChatGPT, Claude, or Gemini. Instant delivery. Also available on <a href="https://usetalos.gumroad.com" style="color:var(--gold)">Gumroad</a>.</p>
+    <p class="section-sub">Download and use with ChatGPT, Claude, or Gemini. Instant delivery. Also available on <a href="https://usetalos.gumroad.com" style="color:var(--accent);font-weight:700">Gumroad</a>.</p>
     <div class="store-grid">
       <div class="store-card animate">
         <h3>🚀 AI Quick Start Pack</h3>
@@ -238,7 +263,7 @@
         <a href="https://buy.stripe.com/cNi6oA0b66hrgSdcAsa3u06" class="buy-btn">Buy Now</a>
       </div>
       <div class="store-card animate">
-        <h3 style="color:var(--gold)">⭐ Complete AI Business Bundle</h3>
+        <h3 style="color:var(--accent)">⭐ Complete AI Business Bundle</h3>
         <p style="color:var(--muted);font-size:14px">All 6 prompt packs — Small Business, Grant Writing, Real Estate, Etsy SEO, Insurance Claims, SOP Builder. Over 240 prompts.</p>
         <div class="price">$49.99</div>
         <span class="tag">bundle</span><span class="tag">all-packs</span><span class="tag">best-value</span>
@@ -274,12 +299,12 @@
 
 <footer>
   <div class="footer-grid">
-    <div><strong style="color:var(--gold)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI help for small businesses.</p></div>
-    <div><strong>Products</strong><br><a href="#store">Store</a><br><a href="/templates/">Templates</a><br><a href="/tools/">Tools</a></div>
+    <div><strong style="color:var(--accent)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI help for small businesses.</p></div>
+    <div><strong>Products</strong><br><a href="/store/">Store</a><br><a href="/templates/">Templates</a><br><a href="/tools/">Tools</a></div>
     <div><strong>Company</strong><br><a href="/blog/">Blog</a><br><a href="/newsletter/">Newsletter</a><br><a href="/contact/">Contact</a></div>
     <div><strong>Legal</strong><br><a href="/privacy/">Privacy</a><br><a href="/terms/">Terms</a><br><a href="/refunds/">Refunds</a></div>
   </div>
-  <p>© 2026 Tal.OS — AI tools and consulting for businesses that want practical help.</p>
+  <p>&copy; 2026 Tal.OS — AI tools and consulting for businesses that want practical help.</p>
 </footer>
 
 <script>
@@ -328,91 +353,61 @@ const services = [
 ];
 
 const grid = document.getElementById('flipGrid');
+if (grid) {
+  services.forEach((svc, i) => {
+    const card = document.createElement('div');
+    card.className = 'flip-card animate';
 
-services.forEach((svc, i) => {
-  const card = document.createElement('div');
-  card.className = 'flip-card animate';
-  
-  const fieldsHTML = svc.fields.map(f => {
-    const req = f.required ? 'required' : '';
-    if (f.type === 'textarea') {
-      return `<label>${f.label}${f.required?' *':''}</label><textarea name="${f.name}" placeholder="${f.placeholder||''}" ${req}></textarea>`;
-    }
-    return `<label>${f.label}${f.required?' *':''}</label><input type="${f.type}" name="${f.name}" placeholder="${f.placeholder||''}" ${req} />`;
-  }).join('');
+    const fieldsHTML = svc.fields.map(f => {
+      const req = f.required ? 'required' : '';
+      if (f.type === 'textarea') {
+        return '<label>' + f.label + (f.required ? ' *' : '') + '</label><textarea name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + '></textarea>';
+      }
+      return '<label>' + f.label + (f.required ? ' *' : '') + '</label><input type="' + f.type + '" name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + ' />';
+    }).join('');
 
-  card.innerHTML = `
-    <div class="flip-inner">
-      <div class="flip-front">
-        <div class="flip-icon">${svc.icon}</div>
-        <h3>${svc.title}</h3>
-        <p>${svc.desc}</p>
-        <span class="flip-hint">Click to get started →</span>
-      </div>
-      <div class="flip-back">
-        <h3>${svc.title}</h3>
-        <form class="flip-form" data-service="${svc.title}">
-          ${fieldsHTML}
-          <input type="hidden" name="service" value="${svc.title}" />
-          <button type="submit" class="send-btn">Send Request</button>
-        </form>
-        <span class="back-btn">← Back</span>
-        <div class="flip-confirm">
-          <div class="check">✓</div>
-          <h3>Request Sent!</h3>
-          <p style="color:var(--muted);font-size:14px">We'll review your request and get back to you within 48 hours.</p>
-          <span class="back-btn" style="margin-top:12px">Send Another →</span>
-        </div>
-      </div>
-    </div>
-  `;
-  grid.appendChild(card);
+    card.innerHTML = '<div class="flip-inner"><div class="flip-front"><div class="flip-icon">' + svc.icon + '</div><h3>' + svc.title + '</h3><p>' + svc.desc + '</p><span class="flip-hint">Click to get started →</span></div><div class="flip-back"><h3>' + svc.title + '</h3><form class="flip-form" data-service="' + svc.title + '">' + fieldsHTML + '<input type="hidden" name="service" value="' + svc.title + '" /><button type="submit" class="send-btn">Send Request</button></form><span class="back-btn">← Back</span><div class="flip-confirm"><div class="check">✓</div><h3>Request Sent!</h3><p style="color:var(--muted);font-size:14px">We\'ll review your request and get back to you within 48 hours.</p><span class="back-btn" style="margin-top:12px">Send Another →</span></div></div></div>';
+    grid.appendChild(card);
 
-  // Flip on front click
-  card.querySelector('.flip-front').addEventListener('click', () => {
-    card.classList.add('flipped');
-  });
+    card.querySelector('.flip-front').addEventListener('click', function() {
+      card.classList.add('flipped');
+    });
 
-  // Back button
-  card.querySelectorAll('.back-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      card.classList.remove('flipped');
-      // Reset confirm display
-      setTimeout(() => {
-        card.querySelector('.flip-confirm').style.display = 'none';
-        card.querySelector('.flip-back form').style.display = 'block';
-        card.querySelector('.flip-back .back-btn').style.display = 'block';
-      }, 300);
+    card.querySelectorAll('.back-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        card.classList.remove('flipped');
+        setTimeout(function() {
+          var confirm = card.querySelector('.flip-confirm');
+          var form = card.querySelector('.flip-back form');
+          var backBtn = card.querySelector('.flip-back .back-btn');
+          if (confirm) { confirm.style.display = 'none'; }
+          if (form) { form.style.display = 'block'; }
+          if (backBtn) { backBtn.style.display = 'block'; }
+        }, 300);
+      });
+    });
+
+    card.querySelector('.flip-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+      var body = new FormData();
+      body.append('_subject', 'New Tal.OS request: ' + svc.title);
+      body.append('_next', 'about:blank');
+      body.append('_captcha', 'false');
+      data.forEach(function(v, k) { body.append(k, v); });
+      try {
+        await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body: body });
+      } catch(e) {}
+      form.style.display = 'none';
+      var backBtns = card.querySelectorAll('.flip-back .back-btn');
+      if (backBtns.length > 0) { backBtns[0].style.display = 'none'; }
+      var confirm = card.querySelector('.flip-confirm');
+      if (confirm) { confirm.style.display = 'block'; }
     });
   });
-
-  // Form submit
-  card.querySelector('.flip-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
-    
-    // Send to FormSubmit
-    const body = new FormData();
-    body.append('_subject', `New Tal.OS request: ${svc.title}`);
-    body.append('_next', 'about:blank');
-    body.append('_captcha', 'false');
-    data.forEach((v,k) => body.append(k,v));
-    
-    try {
-      await fetch('https://formsubmit.co/talos.mnb@gmail.com', {
-        method: 'POST',
-        body: body
-      });
-    } catch(e) {}
-
-    // Show confirmation
-    form.style.display = 'none';
-    card.querySelector('.flip-back .back-btn:first-of-type').style.display = 'none';
-    card.querySelector('.flip-confirm').style.display = 'block';
-  });
-});
+}
 </script>
 
 <script src="/assets/nav.js"></script>
