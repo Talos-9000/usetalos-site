@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit a Photo | ColoringSubmission.com</title>
+  <meta name="description" content="Submit a family-friendly photo to be considered for a community coloring page or coloring book collection.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true"></span> ColoringSubmission</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a><a class="active" href="submit.html">Submit</a><a href="gallery.html">Gallery</a><a href="store.html">Store</a><a href="adult.html">Adult (18+)</a><a href="index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">📸 Share a photo</span>
+        <h1>Submit a photo for coloring page magic</h1>
+        <p class="section-lead">Send us a clear, family-friendly image and a short story behind it. Selected photos may become printable coloring pages donated to hospitals, schools, daycares, and community art programs.</p>
+        <div class="ad-slot" role="complementary" aria-label="Advertisement slot">Ad banner slot <small>Future family-safe ad network placement</small></div>
+
+        <form class="form-card" data-demo-form data-success="Thank you! Your photo submission has been saved as a demo submission." enctype="multipart/form-data">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="">Choose a category</option>
+                <option>Animals</option><option>Nature</option><option>Vehicles</option><option>Fantasy</option><option>People</option><option>Abstract</option><option>Food</option><option>Holidays</option><option>Patterns</option><option>Space</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="title">Photo title</label>
+              <input id="title" name="title" type="text" placeholder="Grandma's garden turtle" required>
+            </div>
+            <div class="form-field full">
+              <label for="description">Description</label>
+              <textarea id="description" name="description" minlength="80" maxlength="700" placeholder="Write 3–4 sentences about the photo. Who or what is in it? Why would it make a fun coloring page? Mention any details kids might enjoy coloring, like patterns, shapes, or scenery." required></textarea>
+            </div>
+            <div class="form-field full">
+              <label for="photo">Photo upload</label>
+              <div class="upload-box">
+                <p><strong>Drag in a JPG or PNG, or choose a file.</strong></p>
+                <p class="meta">Please only upload photos you own or have permission to share.</p>
+                <input id="photo" name="photo" type="file" accept="image/png,image/jpeg,image/webp" required>
+              </div>
+            </div>
+            <div class="form-field full">
+              <label for="email">Email address <span class="meta">(optional)</span></label>
+              <input id="email" name="email" type="email" placeholder="Send the finished coloring page to me">
+            </div>
+            <div class="form-field full checkbox-row">
+              <input id="donation" name="donation" type="checkbox" required>
+              <label for="donation">I agree that my submitted photo may be transformed into a coloring page or coloring book page and donated to hospitals, schools, daycares, and community programs. I confirm this is family-friendly content and I have permission to submit it.</label>
+            </div>
+            <div class="form-field full button-row">
+              <button class="btn btn-primary" type="submit">Submit Photo</button>
+              <a class="btn btn-secondary" href="gallery.html">View Gallery</a>
+            </div>
+          </div>
+          <div class="form-message" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true"></span> ColoringSubmission</a><p class="footer-small">Community-powered coloring pages from real photos. Main site content is family-friendly.</p></div>
+      <div class="footer-links"><strong>Sections</strong><a href="index.html">Home</a><a href="submit.html">Submit</a><a href="gallery.html">Gallery</a><a href="store.html">Store</a><a href="adult.html">Adult (18+)</a><a href="index.html#about">About</a></div>
+      <div class="footer-links"><strong>Legal</strong><a href="#">Privacy Policy</a><a href="#">Terms</a><span class="footer-small">© <span data-year></span> ColoringSubmission.com</span></div>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
