@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Tools Newsletter — Tal.OS</title>
   <meta name="description" content="Join the free Tal.OS weekly newsletter for practical AI tools, automation tips, and business time-savers. No jargon, no spam." />
-  <link rel="stylesheet" href="/assets/styles.css" /><link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  </head>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+</head>
 <body>
 <header class="site-header" id="siteHeader">
   <div class="site-header__inner">
@@ -34,49 +35,86 @@
 </header>
 <div class="nav-backdrop" id="navBackdrop" hidden></div>
 
-
-  <main>
-    <section class="section" style="background:var(--surface)" id="subscribe">
-      <div class="container">
-        <div class="section-head" style="text-align:center"><div><h2>Join the newsletter</h2><p>Free. Every Tuesday. Unsubscribe anytime. No spam ever.</p></div></div>
-        <div class="newsletter-shell card" aria-label="Newsletter signup">
-          <div class="newsletter-fallback">
-            <span class="badge gold">Free weekly briefing</span>
-            <h3>Newsletter signup is loading.</h3>
-            <p>If it does not appear, email <a href="mailto:bjsmithtechllc@gmail.com">bjsmithtechllc@gmail.com</a>.</p>
-            <form class="newsletter-native" action="https://formsubmit.co/bjsmithtechllc@gmail.com" method="POST" accept-charset="UTF-8">
-              <input type="hidden" name="_subject" value="Tal.OS newsletter signup" />
-              <input type="hidden" name="_captcha" value="false" />
-              <label for="newsletter-email">Email address</label>
-              <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
-              <button class="btn" type="submit">Join the Newsletter</button>
-            </form>
-          </div>
-          <iframe class="beehiiv-frame" src="https://embeds.beehiiv.com/pub_29a390aa-0b31-4acd-896a-c3efbeb77f87" data-test-id="beehiiv-embed" title="Tal.OS newsletter signup" loading="lazy"></iframe>
+<main>
+  <section class="hero section" style="background:var(--surface)">
+    <div class="container grid two" style="align-items:center">
+      <div>
+        <span class="badge gold">Free weekly briefing</span>
+        <h1>Practical AI moves for small businesses</h1>
+        <p class="lead">A clear weekly email with useful AI tools, automation ideas, prompt workflows, and business systems you can actually use. No hype. No spam. No giant tech essays unless the topic needs it.</p>
+        <div class="trust-row" style="margin-top:18px">
+          <span>Free</span>
+          <span>Every Tuesday</span>
+          <span>Unsubscribe anytime</span>
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-head"><div><h2>What subscribers get</h2><p>This is a business-focused briefing, not another generic AI news roundup.</p></div></div>
-        <div class="grid">
-          <div class="card"><div class="card-icon">🎯</div><h3>Actionable every week</h3><p>Each issue gives you one useful move: a tool to try, a workflow to automate, or a prompt pack worth your time.</p></div>
-          <div class="card"><div class="card-icon">🛠</div><h3>Tool matchmaker</h3><p>Tal.OS finds AI tools that fit YOUR kind of business — not enterprise software you'll never use.</p></div>
-          <div class="card"><div class="card-icon">📦</div><h3>First access to new packs</h3><p>Subscribers get early access to new prompt packs and product launches before anyone else.</p></div>
-          <div class="card"><div class="card-icon">🤖</div><h3>Written by AI, reviewed by humans</h3><p>Tal.OS researches and writes every issue. Real business owners review it before it hits your inbox.</p></div>
+      <form id="newsletter-form" class="form card" action="https://formsubmit.co/talos.mnb@gmail.com" method="POST" accept-charset="UTF-8">
+        <h2>Join the newsletter</h2>
+        <p>Get the next Tal.OS AI business briefing in your inbox.</p>
+        <input type="hidden" name="_subject" value="Tal.OS newsletter signup" />
+        <input type="hidden" name="_next" value="https://usetalos.com/thank-you/?type=newsletter" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="source" value="usetalos.com newsletter page" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
+
+        <div class="field">
+          <label for="newsletter-name">Name</label>
+          <input id="newsletter-name" name="name" autocomplete="name" placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label for="newsletter-email">Email address</label>
+          <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="newsletter-interest">What do you want most?</label>
+          <select id="newsletter-interest" name="interest">
+            <option>AI tools for my business</option>
+            <option>Automation ideas</option>
+            <option>Prompt packs and templates</option>
+            <option>Personal AI agents</option>
+            <option>AI classes and workshops</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <button class="btn" type="submit">Join Free</button>
+        <p class="help" style="margin-top:10px">After signup, you will land on a confirmation page. Pricing for paid help or custom work is discussed only after the consultation process.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>What subscribers get</h2>
+          <p>This is a business-focused briefing, not another generic AI news roundup.</p>
         </div>
       </div>
-    </section>
-
-    <section class="section" style="background:var(--surface)">
-      <div class="container">
-        <div class="section-head" style="text-align:center"><div><h2>Paid tiers coming soon</h2><p>Deeper strategy briefings, implementation playbooks, and custom consulting add-ons are in the works. Free subscribers will be the first to know when they launch.</p></div></div>
+      <div class="grid">
+        <div class="card"><div class="card-icon">🎯</div><h3>One useful move each week</h3><p>A tool to try, a workflow to automate, a prompt to reuse, or a business system worth building.</p></div>
+        <div class="card"><div class="card-icon">🛠</div><h3>Tool matchmaker</h3><p>Tal.OS points people toward tools that fit real small-business problems — not random enterprise software.</p></div>
+        <div class="card"><div class="card-icon">📦</div><h3>First access to new packs</h3><p>Subscribers hear about prompt packs, classes, templates, and launch offers before the public push.</p></div>
+        <div class="card"><div class="card-icon">🎤</div><h3>Classes and workshops</h3><p>Tal.OS also offers full lessons and guided classes teaching users how to operate AI agents and get real value from them.</p></div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><p style="margin-top:12px">Practical AI tools and automation tips for small businesses.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/refunds/">Refunds</a></div></div><div class="container fine">© 2026 Tal.OS.</div></footer>
+  <section class="section" style="background:var(--surface)">
+    <div class="container grid two" style="align-items:center">
+      <div>
+        <span class="badge">For deeper readers</span>
+        <h2>Simple up front. More technical when it matters.</h2>
+        <p>Most emails start plain: what changed, why it matters, and what to do next. When the topic is personal AI agents, automation, data, or implementation, the briefing can go deeper for readers who want the details.</p>
+      </div>
+      <div class="notice">
+        <strong>Need custom help?</strong><br />Use the consultation page for personal AI agents, automation systems, websites, store setup, training, or classes. Pricing is discussed after the consultation process so the recommendation matches the actual project.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><p style="margin-top:12px">Practical AI tools and automation tips for small businesses.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/refunds/">Refunds</a></div></div><div class="container fine">© 2026 Tal.OS.</div></footer>
 <script src="/assets/nav.js"></script>
 </body>
 </html>
