@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "test:mobile": "QA_PHASE=after npx playwright test tests/mobile-responsive.spec.js --project=chromium-mobile --project=webkit-mobile --reporter=line"
+    "test:mobile": "QA_PHASE=after npx playwright test tests/mobile-responsive.spec.js --project=chromium-mobile --project=webkit-mobile --reporter=line",
+    "test:visual": "QA_PHASE=visual-local npx playwright test tests/visual-quality.spec.js --project=chromium-mobile --reporter=line",
+    "test:visual:live": "QA_BASE_URL=https://usetalos.com QA_PHASE=visual-live npx playwright test tests/visual-quality.spec.js --project=chromium-mobile --reporter=line",
+    "test:maintenance": "npm run test:mobile && npm run test:visual:live"
   },
   "repository": {
     "type": "git",
