@@ -39,14 +39,20 @@
     <section class="section" style="background:var(--surface)" id="subscribe">
       <div class="container">
         <div class="section-head" style="text-align:center"><div><h2>Join the newsletter</h2><p>Free. Every Tuesday. Unsubscribe anytime. No spam ever.</p></div></div>
-        <div class="beehiiv-embed">
-          <iframe src="https://embeds.beehiiv.com/pub_29a390aa-0b31-4acd-896a-c3efbeb77f87" 
-                  data-test-id="beehiiv-embed" 
-                  height="420" 
-                  frameborder="0" 
-                  scrolling="no" 
-                  style="margin:0;border-radius:16px !important;background-color:transparent">
-          </iframe>
+        <div class="newsletter-shell card" aria-label="Newsletter signup">
+          <div class="newsletter-fallback">
+            <span class="badge gold">Free weekly briefing</span>
+            <h3>Newsletter signup is loading.</h3>
+            <p>If it does not appear, email <a href="mailto:talos.mnb@gmail.com">talos.mnb@gmail.com</a>.</p>
+            <form class="newsletter-native" action="https://formsubmit.co/talos.mnb@gmail.com" method="POST" accept-charset="UTF-8">
+              <input type="hidden" name="_subject" value="Tal.OS newsletter signup" />
+              <input type="hidden" name="_captcha" value="false" />
+              <label for="newsletter-email">Email address</label>
+              <input id="newsletter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+              <button class="btn" type="submit">Join the Newsletter</button>
+            </form>
+          </div>
+          <iframe class="beehiiv-frame" src="https://embeds.beehiiv.com/pub_29a390aa-0b31-4acd-896a-c3efbeb77f87" data-test-id="beehiiv-embed" title="Tal.OS newsletter signup" loading="lazy"></iframe>
         </div>
       </div>
     </section>
