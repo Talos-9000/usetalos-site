@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 
-const baseURL = process.env.BASE_URL || 'http://127.0.0.1:4173';
+const baseURL = process.env.QA_BASE_URL || process.env.BASE_URL || 'http://127.0.0.1:4173';
 const phase = process.env.QA_PHASE || 'run';
 const outDir = path.join(process.cwd(), 'qa-artifacts', phase);
 fs.mkdirSync(outDir, { recursive: true });
