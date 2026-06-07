@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="description" content="TalOS Growth Systems — 120+ consulting websites for local businesses. Lead generation, marketing, and operations systems for 12 industries.">
     <title>TalOS Growth Systems — Local Business Consulting Websites</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #1a1a1a; background: #f8fafc; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e293b 100%); color: white; padding: 80px 0 60px; text-align: center; }
+        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e293b 100%); color: white; padding: 48px 0 48px; text-align: center; }
         .hero h1 { font-size: 3rem; margin-bottom: 15px; font-weight: 800; }
         .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
         .stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
@@ -31,6 +33,31 @@
     </style>
 </head>
 <body>
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
     <div class="hero">
         <div class="container">
             <h1>🏗️ TalOS Growth Systems</h1>
@@ -129,5 +156,6 @@
         <p style="margin-top:8px;"><a href="https://usetalos.com">usetalos.com</a> · Auto Repair · Laundromats · Restaurants · Bars · Venues · HVAC · Landscaping · Cleaning · Gyms · Salons · Home Maintenance · Home Repair</p>
         <p style="margin-top:15px;font-size:0.8rem;">© 2025 TalOS. All rights reserved. Made with ❤️ by Bailey & Talos</p>
     </footer>
+<script src="/assets/nav.js"></script>
 </body>
 </html>
