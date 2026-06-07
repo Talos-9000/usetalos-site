@@ -1,415 +1,416 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Tal.OS — AI Help for Your Business</title>
-  <meta name="description" content="Tal.OS helps small businesses save time with simple AI tools. Get AI prompt packs, custom AI setup, and business help — no tech skills needed." />
-  <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
-  <link rel="stylesheet" href="/assets/styles.css" />
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
-  <style>
-    /* ── Homepage-specific layout ── */
-    .section-inner { max-width: var(--container-max); margin: 0 auto; padding: clamp(32px, 6vw, 62px) var(--gutter); }
-    .section-label { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 900; margin-bottom: 14px; }
-    .section-title { margin-bottom: 10px; }
-    .section-sub { max-width: 680px; margin-bottom: 26px; }
-
-    /* Hero */
-    .hero { background: var(--hero); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px, 8vw, 90px) var(--gutter) clamp(36px, 6vw, 64px); }
-    .hero h1 { max-width: 780px; margin: 0 auto 14px; }
-    .hero h1 span { color: var(--accent); }
-    .hero p { max-width: 580px; margin: 0 auto 22px; }
-    .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-    .btn-primary { background: var(--accent); color: white; box-shadow: 0 14px 35px color-mix(in srgb, var(--accent) 22%, transparent); border-radius: 12px; padding: 14px 24px; font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform .16s ease, box-shadow .16s ease; }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 30%, transparent); }
-    .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 14px 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: border-color .16s; }
-    .btn-outline:hover { border-color: var(--accent); }
-
-    /* Hub grid */
-    .hub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 48em) { .hub-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 64em) { .hub-grid { grid-template-columns: repeat(3, 1fr); } }
-    .hub-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-decoration: none; color: var(--text); transition: all .25s; display: block; position: relative; overflow: hidden; min-height: 0; }
-    .hub-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
-    .hub-card .icon { font-size: 32px; margin-bottom: 12px; display: block; }
-    .hub-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
-    .hub-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
-    .hub-card .arrow { display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 700; font-size: 14px; }
-
-    /* Store grid */
-    .store-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 48em) { .store-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 64em) { .store-grid { grid-template-columns: repeat(3, 1fr); } }
-    .store-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: all .25s; min-height: 0; }
-    .store-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-    .store-card h3 { font-size: 17px; margin-bottom: 4px; }
-    .store-card .price { color: var(--accent); font-weight: 800; font-size: 20px; margin: 8px 0; }
-    .store-card .tag { display: inline-block; background: var(--surface-2); color: var(--muted); padding: 4px 10px; border-radius: 100px; font-size: 12px; margin: 3px 3px 0 0; }
-    .store-card .buy-btn { display: inline-block; margin-top: 14px; padding: 10px 22px; background: var(--accent); color: #fff; border-radius: 100px; font-weight: 700; font-size: 13px; text-decoration: none; transition: all .2s; }
-
-    /* Flip cards */
-    .flip-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 48em) { .flip-grid { grid-template-columns: repeat(2, 1fr); } }
-    .flip-card { perspective: 1000px; height: 460px; }
-    .flip-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; cursor: pointer; }
-    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-    .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; border: 1px solid var(--border); background: var(--card); overflow-y: auto; }
-    .flip-front { padding: 28px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .flip-front .flip-icon { font-size: 40px; margin-bottom: 12px; }
-    .flip-front h3 { font-size: 20px; margin-bottom: 8px; }
-    .flip-front p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
-    .flip-front .flip-hint { color: var(--accent); font-size: 13px; font-weight: 600; }
-    .flip-back { transform: rotateY(180deg); padding: 24px; }
-    .flip-back h3 { font-size: 17px; margin-bottom: 12px; }
-    .flip-back label { display: block; font-weight: 600; font-size: 13px; margin: 10px 0 4px; color: var(--text); }
-    .flip-back input, .flip-back select, .flip-back textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 16px; font-family: inherit; background: var(--bg); color: var(--text); margin-bottom: 4px; }
-    .flip-back textarea { min-height: 80px; resize: vertical; }
-    .flip-back .send-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: all .2s; min-height: 44px; }
-    .flip-back .back-btn { display: block; text-align: center; margin-top: 8px; color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; }
-    .flip-confirm { display: none; text-align: center; padding: 20px; }
-    .flip-confirm .check { font-size: 48px; color: var(--accent-3); margin-bottom: 8px; }
-    .flip-confirm h3 { color: var(--accent-3); }
-
-    /* Personal AI section */
-    .personal-ai { background: color-mix(in srgb, var(--accent) 85%, #1e1b4b); color: #fff; border-radius: 20px; padding: 40px 28px; text-align: center; margin: 20px 0; }
-    .personal-ai h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 12px; color: #fff; }
-    .personal-ai h2 span { color: var(--gold); }
-    .personal-ai p { color: #c0c8d4; font-size: 15px; max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
-    .personal-ai .features { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
-    .personal-ai .feat { flex: 1; min-width: 140px; max-width: 200px; }
-    .personal-ai .feat .f-icon { font-size: 28px; margin-bottom: 8px; }
-    .personal-ai .feat h4 { font-size: 14px; margin-bottom: 4px; color: var(--gold); }
-    .personal-ai .feat p { font-size: 13px; color: #a0a8b8; }
-
-    /* Footer */
-    footer { padding: 40px var(--gutter); border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
-    footer a { color: var(--accent); text-decoration: none; }
-    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 24px; text-align: left; max-width: 1100px; margin: 0 auto 30px; }
-    @media (min-width: 48em) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 64em) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    /* Animations */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .animate { animation: fadeUp .6s ease-out both; }
-    .animate:nth-child(2) { animation-delay: .1s; }
-    .animate:nth-child(3) { animation-delay: .2s; }
-  </style>
-</head>
-<body>
-
-<header class="site-header" id="siteHeader">
-  <div class="site-header__inner">
-    <a class="site-header__logo" href="/">
-      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-      <span class="nav-toggle__bar"></span>
-    </button>
-    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
-      <ul class="primary-nav__list">
-        <li><a href="/store/">Store</a></li>
-        <li><a href="/personal-ai/">Personal AI</a></li>
-        <li><a href="/templates/">Templates</a></li>
-        <li><a href="/tools/">Tools</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/newsletter/">Newsletter</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a class="btn" href="/consultation/">Get Help</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<div class="nav-backdrop" id="navBackdrop" hidden></div>
-
-<!-- HERO -->
-<header class="hero">
-  <h1>AI help for your business — <span>no tech skills needed</span></h1>
-  <p>We set up simple AI tools that save you time on emails, customer questions, follow-ups, and busywork. You don't need to learn anything complicated.</p>
-  <div class="btns">
-    <a href="#consult" class="btn btn-primary">Get Free AI Time-Saver Review</a>
-    <a href="#store" class="btn btn-outline">Browse AI Tools &amp; Packs</a>
-  </div>
-</header>
-
-<!-- HUB — What we do -->
-<section id="services">
-  <div class="section-inner">
-    <div class="section-label">What We Do</div>
-    <h2 class="section-title">Everything your business needs to work smarter</h2>
-    <p class="section-sub">Pick what fits. No long contracts. No tech jargon. Just practical help.</p>
-    <div class="hub-grid">
-      <a href="#consult" class="hub-card animate">
-        <span class="icon">🤝</span>
-        <h3>AI Consulting &amp; Setup</h3>
-        <p>We set up AI helpers for your business — replies, follow-ups, organization. Done for you.</p>
-        <span class="arrow">See packages →</span>
-      </a>
-      <a href="#store" class="hub-card animate">
-        <span class="icon">📦</span>
-        <h3>AI Prompt Packs &amp; Tools</h3>
-        <p>Ready-to-use AI prompts for real estate, nonprofits, small business, insurance, and more.</p>
-        <span class="arrow">Browse store →</span>
-      </a>
-      <a href="/blog/" class="hub-card animate">
-        <span class="icon">📝</span>
-        <h3>Free Guides &amp; Comparisons</h3>
-        <p>Honest breakdowns of AI tools, automation platforms, and what actually works for small business.</p>
-        <span class="arrow">Read articles →</span>
-      </a>
-      <a href="/newsletter/" class="hub-card animate">
-        <span class="icon">📬</span>
-        <h3>Weekly AI Tips Newsletter</h3>
-        <p>One email a week with practical AI tips, tools, and time-savers for business owners.</p>
-        <span class="arrow">Sign up free →</span>
-      </a>
-      <a href="/tools/" class="hub-card animate">
-        <span class="icon">🧰</span>
-        <h3>Business Tools Directory</h3>
-        <p>Curated list of software and AI tools that actually help small businesses save time.</p>
-        <span class="arrow">Browse tools →</span>
-      </a>
-      <a href="#personal-ai" class="hub-card animate">
-        <span class="icon">⭐</span>
-        <h3>Personal AI — What Is It?</h3>
-        <p>Learn how a Personal AI gets to know your business and helps you every day.</p>
-        <span class="arrow">Learn more →</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- PERSONAL AI -->
-<section id="personal-ai" style="padding-top:0">
-  <div class="section-inner">
-    <div class="personal-ai">
-      <h2>What is a <span>Personal AI</span>?</h2>
-      <p>A Personal AI is like having a smart assistant who learns how your business works and helps you every day. It remembers your customers, your routines, and what matters to you — so you spend less time on busywork and more time on what actually moves your business forward.</p>
-      <div class="features">
-        <div class="feat"><div class="f-icon">🧠</div><h4>Learns Your Business</h4><p>Gets to know your customers, services, and daily routines over time.</p></div>
-        <div class="feat"><div class="f-icon">✍️</div><h4>Writes &amp; Replies</h4><p>Drafts emails, answers common questions, and helps with follow-ups.</p></div>
-        <div class="feat"><div class="f-icon">📋</div><h4>Stays Organized</h4><p>Keeps track of requests, reminders, and what needs attention.</p></div>
-        <div class="feat"><div class="f-icon">🔒</div><h4>Private &amp; Secure</h4><p>Your data stays yours. No sharing, no selling, no funny business.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STORE -->
-<section id="store" style="background:var(--surface-2)">
-  <div class="section-inner">
-    <div class="section-label">AI Prompt Packs</div>
-    <h2 class="section-title">Ready-to-use AI tools for your industry</h2>
-    <p class="section-sub">Download and use with ChatGPT, Claude, or Gemini. Instant delivery. Also available on <a href="https://usetalos.gumroad.com" style="color:var(--accent);font-weight:700">Gumroad</a>.</p>
-    <div class="store-grid">
-      <div class="store-card animate">
-        <h3>🚀 AI Quick Start Pack</h3>
-        <p style="color:var(--muted);font-size:14px">15 essential prompts to get started with AI for your business today.</p>
-        <div class="price">$9.99</div>
-        <span class="tag">starter</span><span class="tag">beginner</span>
-        <a href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>🏢 Small Business AI Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">75 prompts for marketing, ops, finance, and customer service.</p>
-        <div class="price">$24.99</div>
-        <span class="tag">business</span><span class="tag">marketing</span>
-        <a href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>📝 Grant Writing Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">30 prompts for nonprofits, proposals, LOIs, and fundraising.</p>
-        <div class="price">$19.99</div>
-        <span class="tag">nonprofit</span><span class="tag">funding</span>
-        <a href="https://buy.stripe.com/4gM4gs0b66hrgSbfMEa3u03" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>🏠 Real Estate Agent Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">21 prompts for listings, outreach, and client communication.</p>
-        <div class="price">$14.99</div>
-        <span class="tag">real estate</span><span class="tag">chatgpt</span>
-        <a href="https://buy.stripe.com/9B600c1fa35fbxRaska3u02" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>🔍 Etsy SEO Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">26 prompts for titles, tags, descriptions, and ranking higher.</p>
-        <div class="price">$14.99</div>
-        <span class="tag">etsy</span><span class="tag">seo</span>
-        <a href="https://buy.stripe.com/cNieV66zucFP59t0RKa3u00" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>📋 SOP Builder Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">50 prompts to document and systematize your business.</p>
-        <div class="price">$19.99</div>
-        <span class="tag">operations</span><span class="tag">systems</span>
-        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>🛡️ Insurance Claims Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">40 prompts for claims docs, client comms, and reports.</p>
-        <div class="price">$19.99</div>
-        <span class="tag">insurance</span><span class="tag">claims</span>
-        <a href="https://buy.stripe.com/5kQ28kaPK9tDatN7g8a3u05" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3>📑 RFP Response Prompts</h3>
-        <p style="color:var(--muted);font-size:14px">40 prompts to win government and enterprise bids. Capture to submission.</p>
-        <div class="price">$24.99</div>
-        <span class="tag">rfps</span><span class="tag">contracts</span><span class="tag">new</span>
-        <a href="https://buy.stripe.com/6oUdR28HC5dn7hBfMEa3u07" class="buy-btn">Buy Now</a>
-      </div>
-      <div class="store-card animate">
-        <h3 style="color:var(--accent)">⭐ Complete AI Business Bundle</h3>
-        <p style="color:var(--muted);font-size:14px">All 7 prompt packs — Small Business, Grant Writing, Real Estate, Etsy SEO, Insurance Claims, SOP Builder, and RFP Response. Over 280 prompts.</p>
-        <div class="price">$49.99</div>
-        <span class="tag">bundle</span><span class="tag">all-packs</span><span class="tag">best-value</span>
-        <a href="/consultation/" class="buy-btn">Get the Bundle</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONSULTATION — Flip Cards -->
-<section id="consult">
-  <div class="section-inner">
-    <div class="section-label">AI Consulting</div>
-    <h2 class="section-title">Get AI set up for your business</h2>
-    <p class="section-sub">Click a card, fill out what you need, and we'll build a plan. No commitment — just figuring out what's possible.</p>
-    <div class="flip-grid" id="flipGrid"></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section style="padding-top:0">
-  <div class="section-inner">
-    <h2 class="section-title">Frequently asked questions</h2>
-    <div style="max-width:700px;margin:0 auto">
-      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Which AI tools do these work with?</summary><p style="margin-top:8px;color:var(--muted)">ChatGPT, Claude, Gemini — any modern AI chat tool. The prompts are plain text you copy and paste.</p></details>
-      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Can I use the prompts for my clients?</summary><p style="margin-top:8px;color:var(--muted)">Yes. All packs include commercial use rights. Use them for your own business or your clients.</p></details>
-      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">How do I get my download?</summary><p style="margin-top:8px;color:var(--muted)">Instant digital download after purchase. Both Stripe and Gumroad deliver your file immediately after checkout.</p></details>
-      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">What if I need something custom?</summary><p style="margin-top:8px;color:var(--muted)">Use the consultation form above. We build custom prompt packs for your specific industry and workflow.</p></details>
-      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Do you offer refunds?</summary><p style="margin-top:8px;color:var(--muted)">Digital products are non-refundable after download. If anything is broken or missing, contact us and we'll make it right immediately.</p></details>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-grid">
-    <div><strong style="color:var(--accent)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI help for small businesses.</p></div>
-    <div><strong>Products</strong><br><a href="/store/">Store</a><br><a href="/templates/">Templates</a><br><a href="/tools/">Tools</a></div>
-    <div><strong>Company</strong><br><a href="/blog/">Blog</a><br><a href="/newsletter/">Newsletter</a><br><a href="/contact/">Contact</a></div>
-    <div><strong>Legal</strong><br><a href="/privacy/">Privacy</a><br><a href="/terms/">Terms</a><br><a href="/refunds/">Refunds</a></div>
-  </div>
-  <p>&copy; 2026 Tal.OS — AI tools and consulting for businesses that want practical help.</p>
-</footer>
-
-<script>
-// Flip card consultation system
-const services = [
-  {
-    icon: '📣', title: 'Marketing Help',
-    desc: 'Get help with content, social posts, email campaigns, and getting your business seen.',
-    fields: [
-      {label:'Your Name',name:'name',type:'text',required:true},
-      {label:'Email',name:'email',type:'email',required:true},
-      {label:'Business Name',name:'business',type:'text'},
-      {label:'What kind of marketing help do you need?',name:'message',type:'textarea',required:true,placeholder:'Social media, email campaigns, content writing, ads, getting more customers...'}
-    ]
-  },
-  {
-    icon: '🔁', title: 'Automation & Systems',
-    desc: 'Stop doing the same thing over and over. We set up tools that handle the busywork.',
-    fields: [
-      {label:'Your Name',name:'name',type:'text',required:true},
-      {label:'Email',name:'email',type:'email',required:true},
-      {label:'Business Name',name:'business',type:'text'},
-      {label:'What task do you want automated or simplified?',name:'message',type:'textarea',required:true,placeholder:'Following up with leads, organizing customer requests, sending reminders, managing emails...'}
-    ]
-  },
-  {
-    icon: '🤖', title: 'AI Setup & Training',
-    desc: 'Get AI tools set up for YOUR business. We do the setup, you get the results.',
-    fields: [
-      {label:'Your Name',name:'name',type:'text',required:true},
-      {label:'Email',name:'email',type:'email',required:true},
-      {label:'Business Name',name:'business',type:'text'},
-      {label:'What would you like AI to help with?',name:'message',type:'textarea',required:true,placeholder:'Writing replies, organizing info, answering questions, planning, research...'}
-    ]
-  },
-  {
-    icon: '💡', title: 'Not Sure? Ask Us',
-    desc: 'Tell us about your business and we\'ll suggest where AI can save you the most time.',
-    fields: [
-      {label:'Your Name',name:'name',type:'text',required:true},
-      {label:'Email',name:'email',type:'email',required:true},
-      {label:'Business Name',name:'business',type:'text'},
-      {label:'Tell us about your business and what you need help with',name:'message',type:'textarea',required:true,placeholder:'What do you do? What takes too much time? What would you like to improve?'}
-    ]
-  }
-];
-
-const grid = document.getElementById('flipGrid');
-if (grid) {
-  services.forEach((svc, i) => {
-    const card = document.createElement('div');
-    card.className = 'flip-card animate';
-
-    const fieldsHTML = svc.fields.map(f => {
-      const req = f.required ? 'required' : '';
-      if (f.type === 'textarea') {
-        return '<label>' + f.label + (f.required ? ' *' : '') + '</label><textarea name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + '></textarea>';
-      }
-      return '<label>' + f.label + (f.required ? ' *' : '') + '</label><input type="' + f.type + '" name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + ' />';
-    }).join('');
-
-    card.innerHTML = '<div class="flip-inner"><div class="flip-front"><div class="flip-icon">' + svc.icon + '</div><h3>' + svc.title + '</h3><p>' + svc.desc + '</p><span class="flip-hint">Click to get started →</span></div><div class="flip-back"><h3>' + svc.title + '</h3><form class="flip-form" data-service="' + svc.title + '">' + fieldsHTML + '<input type="hidden" name="service" value="' + svc.title + '" /><button type="submit" class="send-btn">Send Request</button></form><span class="back-btn">← Back</span><div class="flip-confirm"><div class="check">✓</div><h3>Request Sent!</h3><p style="color:var(--muted);font-size:14px">We\'ll review your request and get back to you within 48 hours.</p><span class="back-btn" style="margin-top:12px">Send Another →</span></div></div></div>';
-    grid.appendChild(card);
-
-    card.querySelector('.flip-front').addEventListener('click', function() {
-      card.classList.add('flipped');
-    });
-
-    card.querySelectorAll('.back-btn').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        card.classList.remove('flipped');
-        setTimeout(function() {
-          var confirmEl = card.querySelector('.flip-confirm');
-          var form = card.querySelector('.flip-back form');
-          var backBtn = card.querySelector('.flip-back .back-btn');
-          if (confirmEl) { confirmEl.style.display = 'none'; }
-          if (form) { form.style.display = 'block'; }
-          if (backBtn) { backBtn.style.display = 'block'; }
-        }, 300);
-      });
-    });
-
-    card.querySelector('.flip-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      var form = e.target;
-      var data = new FormData(form);
-      var body = new FormData();
-      body.append('_subject', 'New Tal.OS request: ' + svc.title);
-      body.append('_next', 'https://usetalos.com/thank-you/?type=consultation');
-      body.append('_captcha', 'false');
-      data.forEach(function(v, k) { body.append(k, v); });
-      try {
-        await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body: body });
-      } catch(e) {}
-      form.style.display = 'none';
-      var backBtns = card.querySelectorAll('.flip-back .back-btn');
-      if (backBtns.length > 0) { backBtns[0].style.display = 'none'; }
-      var confirmEl = card.querySelector('.flip-confirm');
-      if (confirmEl) { confirmEl.style.display = 'block'; }
-    });
-  });
-}
-</script>
-
-<script src="/assets/nav.js"></script>
-</body>
-</html>
+1|<!DOCTYPE html>
+2|<html lang="en">
+3|<head>
+4|  <meta charset="UTF-8" />
+5|  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+6|  <title>Tal.OS — AI Help for Your Business</title>
+7|  <meta name="description" content="Tal.OS helps small businesses save time with simple AI tools. Get AI prompt packs, custom AI setup, and business help — no tech skills needed." />
+8|  <meta name="google-site-verification" content="dKHOwp9wad6qC9cuM9XvDw3IblUlx9bCODGRrcBnzV0" />
+9|  <link rel="stylesheet" href="/assets/styles.css" />
+10|  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+11|  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVJEF87R2F"></script>
+12|  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-MVJEF87R2F');</script>
+13|  <style>
+14|    /* ── Homepage-specific layout ── */
+15|    .section-inner { max-width: var(--container-max); margin: 0 auto; padding: clamp(32px, 6vw, 62px) var(--gutter); }
+16|    .section-label { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 900; margin-bottom: 14px; }
+17|    .section-title { margin-bottom: 10px; }
+18|    .section-sub { max-width: 680px; margin-bottom: 26px; }
+19|
+20|    /* Hero */
+21|    .hero { background: var(--hero); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px, 8vw, 90px) var(--gutter) clamp(36px, 6vw, 64px); }
+22|    .hero h1 { max-width: 780px; margin: 0 auto 14px; }
+23|    .hero h1 span { color: var(--accent); }
+24|    .hero p { max-width: 580px; margin: 0 auto 22px; }
+25|    .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+26|    .btn-primary { background: var(--accent); color: white; box-shadow: 0 14px 35px color-mix(in srgb, var(--accent) 22%, transparent); border-radius: 12px; padding: 14px 24px; font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform .16s ease, box-shadow .16s ease; }
+27|    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 42px color-mix(in srgb, var(--accent) 30%, transparent); }
+28|    .btn-outline { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 14px 24px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: border-color .16s; }
+29|    .btn-outline:hover { border-color: var(--accent); }
+30|
+31|    /* Hub grid */
+32|    .hub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+33|    @media (min-width: 48em) { .hub-grid { grid-template-columns: repeat(2, 1fr); } }
+34|    @media (min-width: 64em) { .hub-grid { grid-template-columns: repeat(3, 1fr); } }
+35|    .hub-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-decoration: none; color: var(--text); transition: all .25s; display: block; position: relative; overflow: hidden; min-height: 0; }
+36|    .hub-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow); }
+37|    .hub-card .icon { font-size: 32px; margin-bottom: 12px; display: block; }
+38|    .hub-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+39|    .hub-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+40|    .hub-card .arrow { display: inline-block; margin-top: 12px; color: var(--accent); font-weight: 700; font-size: 14px; }
+41|
+42|    /* Store grid */
+43|    .store-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+44|    @media (min-width: 48em) { .store-grid { grid-template-columns: repeat(2, 1fr); } }
+45|    @media (min-width: 64em) { .store-grid { grid-template-columns: repeat(3, 1fr); } }
+46|    .store-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: all .25s; min-height: 0; }
+47|    .store-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+48|    .store-card h3 { font-size: 17px; margin-bottom: 4px; }
+49|    .store-card .price { color: var(--accent); font-weight: 800; font-size: 20px; margin: 8px 0; }
+50|    .store-card .tag { display: inline-block; background: var(--surface-2); color: var(--muted); padding: 4px 10px; border-radius: 100px; font-size: 12px; margin: 3px 3px 0 0; }
+51|    .store-card .buy-btn { display: inline-block; margin-top: 14px; padding: 10px 22px; background: var(--accent); color: #fff; border-radius: 100px; font-weight: 700; font-size: 13px; text-decoration: none; transition: all .2s; }
+52|
+53|    /* Flip cards */
+54|    .flip-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+55|    @media (min-width: 48em) { .flip-grid { grid-template-columns: repeat(2, 1fr); } }
+56|    .flip-card { perspective: 1000px; height: 460px; }
+57|    .flip-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; cursor: pointer; }
+58|    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+59|    .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 16px; border: 1px solid var(--border); background: var(--card); overflow-y: auto; }
+60|    .flip-front { padding: 28px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+61|    .flip-front .flip-icon { font-size: 40px; margin-bottom: 12px; }
+62|    .flip-front h3 { font-size: 20px; margin-bottom: 8px; }
+63|    .flip-front p { color: var(--muted); font-size: 14px; margin-bottom: 16px; }
+64|    .flip-front .flip-hint { color: var(--accent); font-size: 13px; font-weight: 600; }
+65|    .flip-back { transform: rotateY(180deg); padding: 24px; }
+66|    .flip-back h3 { font-size: 17px; margin-bottom: 12px; }
+67|    .flip-back label { display: block; font-weight: 600; font-size: 13px; margin: 10px 0 4px; color: var(--text); }
+68|    .flip-back input, .flip-back select, .flip-back textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 16px; font-family: inherit; background: var(--bg); color: var(--text); margin-bottom: 4px; }
+69|    .flip-back textarea { min-height: 80px; resize: vertical; }
+70|    .flip-back .send-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 100px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: all .2s; min-height: 44px; }
+71|    .flip-back .back-btn { display: block; text-align: center; margin-top: 8px; color: var(--muted); font-size: 13px; cursor: pointer; text-decoration: underline; }
+72|    .flip-confirm { display: none; text-align: center; padding: 20px; }
+73|    .flip-confirm .check { font-size: 48px; color: var(--accent-3); margin-bottom: 8px; }
+74|    .flip-confirm h3 { color: var(--accent-3); }
+75|
+76|    /* Personal AI section */
+77|    .personal-ai { background: color-mix(in srgb, var(--accent) 85%, #1e1b4b); color: #fff; border-radius: 20px; padding: 40px 28px; text-align: center; margin: 20px 0; }
+78|    .personal-ai h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 12px; color: #fff; }
+79|    .personal-ai h2 span { color: var(--gold); }
+80|    .personal-ai p { color: #c0c8d4; font-size: 15px; max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
+81|    .personal-ai .features { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+82|    .personal-ai .feat { flex: 1; min-width: 140px; max-width: 200px; }
+83|    .personal-ai .feat .f-icon { font-size: 28px; margin-bottom: 8px; }
+84|    .personal-ai .feat h4 { font-size: 14px; margin-bottom: 4px; color: var(--gold); }
+85|    .personal-ai .feat p { font-size: 13px; color: #a0a8b8; }
+86|
+87|    /* Footer */
+88|    footer { padding: 40px var(--gutter); border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
+89|    footer a { color: var(--accent); text-decoration: none; }
+90|    .footer-grid { display: grid; grid-template-columns: 1fr; gap: 24px; text-align: left; max-width: 1100px; margin: 0 auto 30px; }
+91|    @media (min-width: 48em) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+92|    @media (min-width: 64em) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+93|
+94|    /* Animations */
+95|    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+96|    .animate { animation: fadeUp .6s ease-out both; }
+97|    .animate:nth-child(2) { animation-delay: .1s; }
+98|    .animate:nth-child(3) { animation-delay: .2s; }
+99|  </style>
+100|</head>
+101|<body>
+102|
+103|<header class="site-header" id="siteHeader">
+104|  <div class="site-header__inner">
+105|    <a class="site-header__logo" href="/">
+106|      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32">
+107|    </a>
+108|    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+109|      <span class="nav-toggle__bar"></span>
+110|      <span class="nav-toggle__bar"></span>
+111|      <span class="nav-toggle__bar"></span>
+112|    </button>
+113|    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+114|      <ul class="primary-nav__list">
+115|        <li><a href="/store/">Store</a></li>
+116|        <li><a href="/personal-ai/">Personal AI</a></li>
+117|        <li><a href="/templates/">Templates</a></li>
+118|        <li><a href="/tools/">Tools</a></li>
+119|        <li><a href="/blog/">Blog</a></li>
+120|        <li><a href="/newsletter/">Newsletter</a></li>
+121|        <li><a href="/about/">About</a></li>
+122|        <li><a class="btn" href="/consultation/">Get Help</a></li>
+123|      </ul>
+124|    </nav>
+125|  </div>
+126|</header>
+127|<div class="nav-backdrop" id="navBackdrop" hidden></div>
+128|
+129|<!-- HERO -->
+130|<header class="hero">
+131|  <h1>AI help for your business — <span>no tech skills needed</span></h1>
+132|  <p>We set up simple AI tools that save you time on emails, customer questions, follow-ups, and busywork. You don't need to learn anything complicated.</p>
+133|  <div class="btns">
+134|    <a href="#consult" class="btn btn-primary">Get Free AI Time-Saver Review</a>
+135|    <a href="#store" class="btn btn-outline">Browse AI Tools &amp; Packs</a>
+136|  </div>
+137|</header>
+138|
+139|<!-- HUB — What we do -->
+140|<section id="services">
+141|  <div class="section-inner">
+142|    <div class="section-label">What We Do</div>
+143|    <h2 class="section-title">Everything your business needs to work smarter</h2>
+144|    <p class="section-sub">Pick what fits. No long contracts. No tech jargon. Just practical help.</p>
+145|    <div class="hub-grid">
+146|      <a href="#consult" class="hub-card animate">
+147|        <span class="icon">🤝</span>
+148|        <h3>AI Consulting &amp; Setup</h3>
+149|        <p>We set up AI helpers for your business — replies, follow-ups, organization. Done for you.</p>
+150|        <span class="arrow">See packages →</span>
+151|      </a>
+152|      <a href="#store" class="hub-card animate">
+153|        <span class="icon">📦</span>
+154|        <h3>AI Prompt Packs &amp; Tools</h3>
+155|        <p>Ready-to-use AI prompts for real estate, nonprofits, small business, insurance, and more.</p>
+156|        <span class="arrow">Browse store →</span>
+157|      </a>
+158|      <a href="/blog/" class="hub-card animate">
+159|        <span class="icon">📝</span>
+160|        <h3>Free Guides &amp; Comparisons</h3>
+161|        <p>Honest breakdowns of AI tools, automation platforms, and what actually works for small business.</p>
+162|        <span class="arrow">Read articles →</span>
+163|      </a>
+164|      <a href="/newsletter/" class="hub-card animate">
+165|        <span class="icon">📬</span>
+166|        <h3>Weekly AI Tips Newsletter</h3>
+167|        <p>One email a week with practical AI tips, tools, and time-savers for business owners.</p>
+168|        <span class="arrow">Sign up free →</span>
+169|      </a>
+170|      <a href="/tools/" class="hub-card animate">
+171|        <span class="icon">🧰</span>
+172|        <h3>Business Tools Directory</h3>
+173|        <p>Curated list of software and AI tools that actually help small businesses save time.</p>
+174|        <span class="arrow">Browse tools →</span>
+175|      </a>
+176|      <a href="#personal-ai" class="hub-card animate">
+177|        <span class="icon">⭐</span>
+178|        <h3>Personal AI — What Is It?</h3>
+179|        <p>Learn how a Personal AI gets to know your business and helps you every day.</p>
+180|        <span class="arrow">Learn more →</span>
+181|      </a>
+182|    </div>
+183|  </div>
+184|</section>
+185|
+186|<!-- PERSONAL AI -->
+187|<section id="personal-ai" style="padding-top:0">
+188|  <div class="section-inner">
+189|    <div class="personal-ai">
+190|      <h2>What is a <span>Personal AI</span>?</h2>
+191|      <p>A Personal AI is like having a smart assistant who learns how your business works and helps you every day. It remembers your customers, your routines, and what matters to you — so you spend less time on busywork and more time on what actually moves your business forward.</p>
+192|      <div class="features">
+193|        <div class="feat"><div class="f-icon">🧠</div><h4>Learns Your Business</h4><p>Gets to know your customers, services, and daily routines over time.</p></div>
+194|        <div class="feat"><div class="f-icon">✍️</div><h4>Writes &amp; Replies</h4><p>Drafts emails, answers common questions, and helps with follow-ups.</p></div>
+195|        <div class="feat"><div class="f-icon">📋</div><h4>Stays Organized</h4><p>Keeps track of requests, reminders, and what needs attention.</p></div>
+196|        <div class="feat"><div class="f-icon">🔒</div><h4>Private &amp; Secure</h4><p>Your data stays yours. No sharing, no selling, no funny business.</p></div>
+197|      </div>
+198|    </div>
+199|  </div>
+200|</section>
+201|
+202|<!-- STORE -->
+203|<section id="store" style="background:var(--surface-2)">
+204|  <div class="section-inner">
+205|    <div class="section-label">AI Prompt Packs</div>
+206|    <h2 class="section-title">Ready-to-use AI tools for your industry</h2>
+207|    <p class="section-sub">Download and use with ChatGPT, Claude, or Gemini. Instant delivery. Also available on <a href="https://usetalos.gumroad.com" style="color:var(--accent);font-weight:700">Gumroad</a>.</p>
+208|    <div class="store-grid">
+209|      <div class="store-card animate">
+210|        <h3>🚀 AI Quick Start Pack</h3>
+211|        <p style="color:var(--muted);font-size:14px">15 essential prompts to get started with AI for your business today.</p>
+212|        <div class="price">$9.99</div>
+213|        <span class="tag">starter</span><span class="tag">beginner</span>
+214|        <a href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01" class="buy-btn">Buy Now</a>
+215|      </div>
+216|      <div class="store-card animate">
+217|        <h3>🏢 Small Business AI Prompts</h3>
+218|        <p style="color:var(--muted);font-size:14px">75 prompts for marketing, ops, finance, and customer service.</p>
+219|        <div class="price">$24.99</div>
+220|        <span class="tag">business</span><span class="tag">marketing</span>
+221|        <a href="https://buy.stripe.com/cNi3coe1WfS131lgQIa3u01" class="buy-btn">Buy Now</a>
+222|      </div>
+223|      <div class="store-card animate">
+224|        <h3>📝 Grant Writing Prompts</h3>
+225|        <p style="color:var(--muted);font-size:14px">30 prompts for nonprofits, proposals, LOIs, and fundraising.</p>
+226|        <div class="price">$19.99</div>
+227|        <span class="tag">nonprofit</span><span class="tag">funding</span>
+228|        <a href="https://buy.stripe.com/4gM4gs0b66hrgSbfMEa3u03" class="buy-btn">Buy Now</a>
+229|      </div>
+230|      <div class="store-card animate">
+231|        <h3>🏠 Real Estate Agent Prompts</h3>
+232|        <p style="color:var(--muted);font-size:14px">21 prompts for listings, outreach, and client communication.</p>
+233|        <div class="price">$14.99</div>
+234|        <span class="tag">real estate</span><span class="tag">chatgpt</span>
+235|        <a href="https://buy.stripe.com/9B600c1fa35fbxRaska3u02" class="buy-btn">Buy Now</a>
+236|      </div>
+237|      <div class="store-card animate">
+238|        <h3>🔍 Etsy SEO Prompts</h3>
+239|        <p style="color:var(--muted);font-size:14px">26 prompts for titles, tags, descriptions, and ranking higher.</p>
+240|        <div class="price">$14.99</div>
+241|        <span class="tag">etsy</span><span class="tag">seo</span>
+242|        <a href="https://buy.stripe.com/cNieV66zucFP59t0RKa3u00" class="buy-btn">Buy Now</a>
+243|      </div>
+244|      <div class="store-card animate">
+245|        <h3>📋 SOP Builder Prompts</h3>
+246|        <p style="color:var(--muted);font-size:14px">50 prompts to document and systematize your business.</p>
+247|        <div class="price">$19.99</div>
+248|        <span class="tag">operations</span><span class="tag">systems</span>
+249|        <a href="https://buy.stripe.com/14A8wIga4axH45pdEwa3u04" class="buy-btn">Buy Now</a>
+250|      </div>
+251|      <div class="store-card animate">
+252|        <h3>🛡️ Insurance Claims Prompts</h3>
+253|        <p style="color:var(--muted);font-size:14px">40 prompts for claims docs, client comms, and reports.</p>
+254|        <div class="price">$19.99</div>
+255|        <span class="tag">insurance</span><span class="tag">claims</span>
+256|        <a href="https://buy.stripe.com/5kQ28kaPK9tDatN7g8a3u05" class="buy-btn">Buy Now</a>
+257|      </div>
+258|      <div class="store-card animate">
+259|        <h3>📑 RFP Response Prompts</h3>
+260|        <p style="color:var(--muted);font-size:14px">40 prompts to win government and enterprise bids. Capture to submission.</p>
+261|        <div class="price">$24.99</div>
+262|        <span class="tag">rfps</span><span class="tag">contracts</span><span class="tag">new</span>
+263|        <a href="https://buy.stripe.com/6oUdR28HC5dn7hBfMEa3u07" class="buy-btn">Buy Now</a>
+264|      </div>
+265|      <div class="store-card animate">
+266|        <h3 style="color:var(--accent)">⭐ Complete AI Business Bundle</h3>
+267|        <p style="color:var(--muted);font-size:14px">All 7 prompt packs — Small Business, Grant Writing, Real Estate, Etsy SEO, Insurance Claims, SOP Builder, and RFP Response. Over 280 prompts.</p>
+268|        <div class="price">$49.99</div>
+269|        <span class="tag">bundle</span><span class="tag">all-packs</span><span class="tag">best-value</span>
+270|        <a href="/consultation/" class="buy-btn">Get the Bundle</a>
+271|      </div>
+272|    </div>
+273|  </div>
+274|</section>
+275|
+276|<!-- CONSULTATION — Flip Cards -->
+277|<section id="consult">
+278|  <div class="section-inner">
+279|    <div class="section-label">AI Consulting</div>
+280|    <h2 class="section-title">Get AI set up for your business</h2>
+281|    <p class="section-sub">Click a card, fill out what you need, and we'll build a plan. No commitment — just figuring out what's possible.</p>
+282|    <div class="flip-grid" id="flipGrid"></div>
+283|  </div>
+284|</section>
+285|
+286|<!-- FAQ -->
+287|<section style="padding-top:0">
+288|  <div class="section-inner">
+289|    <h2 class="section-title">Frequently asked questions</h2>
+290|    <div style="max-width:700px;margin:0 auto">
+291|      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Which AI tools do these work with?</summary><p style="margin-top:8px;color:var(--muted)">ChatGPT, Claude, Gemini — any modern AI chat tool. The prompts are plain text you copy and paste.</p></details>
+292|      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Can I use the prompts for my clients?</summary><p style="margin-top:8px;color:var(--muted)">Yes. All packs include commercial use rights. Use them for your own business or your clients.</p></details>
+293|      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">How do I get my download?</summary><p style="margin-top:8px;color:var(--muted)">Instant digital download after purchase. Both Stripe and Gumroad deliver your file immediately after checkout.</p></details>
+294|      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">What if I need something custom?</summary><p style="margin-top:8px;color:var(--muted)">Use the consultation form above. We build custom prompt packs for your specific industry and workflow.</p></details>
+295|      <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Do you offer refunds?</summary><p style="margin-top:8px;color:var(--muted)">Digital products are non-refundable after download. If anything is broken or missing, contact us and we'll make it right immediately.</p></details>
+296|    </div>
+297|  </div>
+298|</section>
+299|
+300|<footer>
+301|  <div class="footer-grid">
+302|    <div><strong style="color:var(--accent)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI help for small businesses.</p></div>
+303|    <div><strong>Products</strong><br><a href="/store/">Store</a><br><a href="/templates/">Templates</a><br><a href="/tools/">Tools</a></div>
+304|    <div><strong>Company</strong><br><a href="/blog/">Blog</a><br><a href="/newsletter/">Newsletter</a><br><a href="/contact/">Contact</a></div>
+305|    <div><strong>Legal</strong><br><a href="/privacy/">Privacy</a><br><a href="/terms/">Terms</a><br><a href="/refunds/">Refunds</a></div>
+306|  </div>
+307|  <p>&copy; 2026 Tal.OS — AI tools and consulting for businesses that want practical help.</p>
+308|</footer>
+309|
+310|<script>
+311|// Flip card consultation system
+312|const services = [
+313|  {
+314|    icon: '📣', title: 'Marketing Help',
+315|    desc: 'Get help with content, social posts, email campaigns, and getting your business seen.',
+316|    fields: [
+317|      {label:'Your Name',name:'name',type:'text',required:true},
+318|      {label:'Email',name:'email',type:'email',required:true},
+319|      {label:'Business Name',name:'business',type:'text'},
+320|      {label:'What kind of marketing help do you need?',name:'message',type:'textarea',required:true,placeholder:'Social media, email campaigns, content writing, ads, getting more customers...'}
+321|    ]
+322|  },
+323|  {
+324|    icon: '🔁', title: 'Automation & Systems',
+325|    desc: 'Stop doing the same thing over and over. We set up tools that handle the busywork.',
+326|    fields: [
+327|      {label:'Your Name',name:'name',type:'text',required:true},
+328|      {label:'Email',name:'email',type:'email',required:true},
+329|      {label:'Business Name',name:'business',type:'text'},
+330|      {label:'What task do you want automated or simplified?',name:'message',type:'textarea',required:true,placeholder:'Following up with leads, organizing customer requests, sending reminders, managing emails...'}
+331|    ]
+332|  },
+333|  {
+334|    icon: '🤖', title: 'AI Setup & Training',
+335|    desc: 'Get AI tools set up for YOUR business. We do the setup, you get the results.',
+336|    fields: [
+337|      {label:'Your Name',name:'name',type:'text',required:true},
+338|      {label:'Email',name:'email',type:'email',required:true},
+339|      {label:'Business Name',name:'business',type:'text'},
+340|      {label:'What would you like AI to help with?',name:'message',type:'textarea',required:true,placeholder:'Writing replies, organizing info, answering questions, planning, research...'}
+341|    ]
+342|  },
+343|  {
+344|    icon: '💡', title: 'Not Sure? Ask Us',
+345|    desc: 'Tell us about your business and we\'ll suggest where AI can save you the most time.',
+346|    fields: [
+347|      {label:'Your Name',name:'name',type:'text',required:true},
+348|      {label:'Email',name:'email',type:'email',required:true},
+349|      {label:'Business Name',name:'business',type:'text'},
+350|      {label:'Tell us about your business and what you need help with',name:'message',type:'textarea',required:true,placeholder:'What do you do? What takes too much time? What would you like to improve?'}
+351|    ]
+352|  }
+353|];
+354|
+355|const grid = document.getElementById('flipGrid');
+356|if (grid) {
+357|  services.forEach((svc, i) => {
+358|    const card = document.createElement('div');
+359|    card.className = 'flip-card animate';
+360|
+361|    const fieldsHTML = svc.fields.map(f => {
+362|      const req = f.required ? 'required' : '';
+363|      if (f.type === 'textarea') {
+364|        return '<label>' + f.label + (f.required ? ' *' : '') + '</label><textarea name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + '></textarea>';
+365|      }
+366|      return '<label>' + f.label + (f.required ? ' *' : '') + '</label><input type="' + f.type + '" name="' + f.name + '" placeholder="' + (f.placeholder || '') + '" ' + req + ' />';
+367|    }).join('');
+368|
+369|    card.innerHTML = '<div class="flip-inner"><div class="flip-front"><div class="flip-icon">' + svc.icon + '</div><h3>' + svc.title + '</h3><p>' + svc.desc + '</p><span class="flip-hint">Click to get started →</span></div><div class="flip-back"><h3>' + svc.title + '</h3><form class="flip-form" data-service="' + svc.title + '">' + fieldsHTML + '<input type="hidden" name="service" value="' + svc.title + '" /><button type="submit" class="send-btn">Send Request</button></form><span class="back-btn">← Back</span><div class="flip-confirm"><div class="check">✓</div><h3>Request Sent!</h3><p style="color:var(--muted);font-size:14px">We\'ll review your request and get back to you within 48 hours.</p><span class="back-btn" style="margin-top:12px">Send Another →</span></div></div></div>';
+370|    grid.appendChild(card);
+371|
+372|    card.querySelector('.flip-front').addEventListener('click', function() {
+373|      card.classList.add('flipped');
+374|    });
+375|
+376|    card.querySelectorAll('.back-btn').forEach(function(btn) {
+377|      btn.addEventListener('click', function(e) {
+378|        e.stopPropagation();
+379|        card.classList.remove('flipped');
+380|        setTimeout(function() {
+381|          var confirmEl = card.querySelector('.flip-confirm');
+382|          var form = card.querySelector('.flip-back form');
+383|          var backBtn = card.querySelector('.flip-back .back-btn');
+384|          if (confirmEl) { confirmEl.style.display = 'none'; }
+385|          if (form) { form.style.display = 'block'; }
+386|          if (backBtn) { backBtn.style.display = 'block'; }
+387|        }, 300);
+388|      });
+389|    });
+390|
+391|    card.querySelector('.flip-form').addEventListener('submit', async function(e) {
+392|      e.preventDefault();
+393|      var form = e.target;
+394|      var data = new FormData(form);
+395|      var body = new FormData();
+396|      body.append('_subject', 'New Tal.OS request: ' + svc.title);
+397|      body.append('_next', 'https://usetalos.com/thank-you/?type=consultation');
+398|      body.append('_captcha', 'false');
+399|      data.forEach(function(v, k) { body.append(k, v); });
+400|      try {
+401|        await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body: body });
+402|      } catch(e) {}
+403|      form.style.display = 'none';
+404|      var backBtns = card.querySelectorAll('.flip-back .back-btn');
+405|      if (backBtns.length > 0) { backBtns[0].style.display = 'none'; }
+406|      var confirmEl = card.querySelector('.flip-confirm');
+407|      if (confirmEl) { confirmEl.style.display = 'block'; }
+408|    });
+409|  });
+410|}
+411|</script>
+412|
+413|<script src="/assets/nav.js"></script>
+414|</body>
+415|</html>
+416|
