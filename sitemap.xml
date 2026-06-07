@@ -22,4 +22,14 @@
   <url><loc>https://usetalos.com/terms/</loc><priority>0.5</priority></url>
   <url><loc>https://usetalos.com/refunds/</loc><priority>0.5</priority></url>
   <url><loc>https://usetalos.com/thank-you/</loc><priority>0.3</priority></url>
+  <url><loc>https://usetalos.com/coloringsubmission/</loc><priority>0.5</priority></url>
+  <url><loc>https://usetalos.com/coloringsubmission/about.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/coloringsubmission/gallery.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/coloringsubmission/submit.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/coloringsubmission/store.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/pencilsforpaws/</loc><priority>0.5</priority></url>
+  <url><loc>https://usetalos.com/pencilsforpaws/store.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/pencilsforpaws/gallery.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/pencilsforpaws/submit.html</loc><priority>0.4</priority></url>
+  <url><loc>https://usetalos.com/pencilsforpaws/about.html</loc><priority>0.4</priority></url>
 </urlset>

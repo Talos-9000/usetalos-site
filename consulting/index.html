@@ -1,36 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="TalOS Growth Systems — 120+ consulting websites for local businesses. Lead generation, marketing, and operations systems for 12 industries.">
-    <title>TalOS Growth Systems — Local Business Consulting Websites</title>
-    <link rel="stylesheet" href="/assets/styles.css" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #1a1a1a; background: #f8fafc; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1e293b 100%); color: white; padding: 48px 0 48px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 15px; font-weight: 800; }
-        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-        .stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
-        .stat { text-align: center; }
-        .stat .number { font-size: 2.5rem; font-weight: 800; color: #3b82f6; }
-        .stat .label { color: #64748b; font-size: 0.9rem; }
-        .categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
-        .cat-card { background: white; border-radius: 12px; padding: 25px; text-decoration: none; color: inherit; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
-        .cat-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .cat-icon { font-size: 2.5rem; margin-bottom: 10px; }
-        .cat-card h3 { font-size: 1.3rem; color: #1e293b; margin-bottom: 5px; }
-        .cat-card p { color: #64748b; font-size: 0.9rem; margin-bottom: 10px; }
-        .sub-count { display: inline-block; background: #f1f5f9; padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; color: #64748b; }
-        .cta { background: linear-gradient(135deg, #1e3a5f, #1e293b); color: white; padding: 50px; border-radius: 16px; text-align: center; margin: 50px 0; }
-        .cta h2 { font-size: 2rem; margin-bottom: 12px; }
-        .cta a { display: inline-block; background: #3b82f6; color: white; padding: 16px 40px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.2rem; margin-top: 15px; }
-        footer { background: #0f172a; color: #94a3b8; padding: 40px 0; text-align: center; }
-        footer a { color: #3b82f6; text-decoration: none; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS & Marketing Consulting — Tal.OS</title>
+  <meta name="description" content="Request SaaS consulting, marketing consulting, automation strategy, lead generation systems, landing pages, funnels, and AI workflows from Tal.OS." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 </head>
 <body>
 <header class="site-header" id="siteHeader">
@@ -58,104 +35,182 @@
   </div>
 </header>
 <div class="nav-backdrop" id="navBackdrop" hidden></div>
-    <div class="hero">
-        <div class="container">
-            <h1>🏗️ TalOS Growth Systems</h1>
-            <p>120+ local business consulting websites across 12 industries. Lead generation, marketing automation, and operations systems — built for businesses that need to grow.</p>
-            <div class="stats">
-                <div class="stat"><div class="number">12</div><div class="label">Industries Covered</div></div>
-                <div class="stat"><div class="number">120</div><div class="label">Consulting Sites</div></div>
-                <div class="stat"><div class="number">240+</div><div class="label">SEO Keywords</div></div>
-                <div class="stat"><div class="number">48</div><div class="label">Lead Magnets</div></div>
-            </div>
+
+
+  <main>
+    <section class="section" id="offers">
+      <div class="container">
+        <div class="section-head"><div><h2>Consulting lanes</h2><p>Pick the closest match. Each card opens a matching discovery template in the form. If you are not sure, choose “Not sure yet” and describe the problem.</p></div></div>
+        <div class="grid">
+          <button class="card lane-card" type="button" data-lane="SaaS idea validation"><div class="card-icon">🧩</div><h3>SaaS idea validation</h3><p>Turn a software idea into a clear MVP: target user, core workflow, pricing, tech stack, launch path, and what not to build yet.</p></button>
+          <button class="card lane-card" type="button" data-lane="SaaS launch systems"><div class="card-icon">🚀</div><h3>SaaS launch systems</h3><p>Landing pages, waitlists, onboarding forms, Stripe-ready offers, user feedback loops, dashboards, and simple first-version software plans.</p></button>
+          <button class="card lane-card" type="button" data-lane="Marketing consulting"><div class="card-icon">📣</div><h3>Marketing consulting</h3><p>Offer positioning, content strategy, lead magnets, social posts, email sequences, SEO topics, and campaigns that bring eyes to the business.</p></button>
+          <button class="card lane-card" type="button" data-lane="Marketing automation"><div class="card-icon">🔁</div><h3>Marketing automation</h3><p>Lead capture, follow-up emails, CRM routing, content calendars, newsletter systems, and repeatable workflows that save time.</p></button>
+          <button class="card lane-card" type="button" data-lane="AI workflow consulting"><div class="card-icon">🤖</div><h3>AI workflow consulting</h3><p>Use AI safely inside your business: prompts, SOPs, research workflows, internal assistants, and repeatable operations.</p></button>
+          <button class="card lane-card" type="button" data-lane="Security-aware planning"><div class="card-icon">🛡️</div><h3>Security-aware planning</h3><p>If your project touches logins, payments, customer data, email sending, or public forms, Tal.OS includes a security and maintenance plan.</p></button>
+          <button class="card lane-card" type="button" data-lane="AI lessons and public speaking"><div class="card-icon">🎤</div><h3>AI lessons and public speaking</h3><p>Schools, businesses, clubs, libraries, training centers, or events can request in-person or virtual AI lessons, workshops, talks, and beginner-friendly demos.</p></button>
         </div>
-    </div>
-    <div class="container">
-        <div class="categories">
-            <a href="auto-repair/" class="cat-card">
-                <div class="cat-icon">🔧</div>
-                <h3>Auto Repair</h3>
-                <p>$78B US auto repair industry, 239K shops</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="laundromat/" class="cat-card">
-                <div class="cat-icon">🧺</div>
-                <h3>Laundromats</h3>
-                <p>$5B US laundromat industry, 29,000+ locations</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="restaurant/" class="cat-card">
-                <div class="cat-icon">🍽️</div>
-                <h3>Restaurants</h3>
-                <p>$1T US restaurant industry, 749K locations</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="bar/" class="cat-card">
-                <div class="cat-icon">🍸</div>
-                <h3>Bars & Nightlife</h3>
-                <p>$28B US bar industry, 65,000+ bars</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="venue/" class="cat-card">
-                <div class="cat-icon">🏛️</div>
-                <h3>Venues & Events</h3>
-                <p>$30B US event venue market</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="hvac/" class="cat-card">
-                <div class="cat-icon">❄️</div>
-                <h3>HVAC</h3>
-                <p>$140B US HVAC industry, 125K+ contractors</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="landscaping/" class="cat-card">
-                <div class="cat-icon">🌿</div>
-                <h3>Landscaping</h3>
-                <p>$130B US landscaping industry, 640K businesses</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="cleaning/" class="cat-card">
-                <div class="cat-icon">🧹</div>
-                <h3>Cleaning Services</h3>
-                <p>$75B US cleaning industry, 1</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="gym/" class="cat-card">
-                <div class="cat-icon">💪</div>
-                <h3>Gyms & Fitness</h3>
-                <p>$35B US fitness industry, 41K gyms</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="salon/" class="cat-card">
-                <div class="cat-icon">💇</div>
-                <h3>Salons & Beauty</h3>
-                <p>$65B US beauty salon industry, 1</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="home-maintenance/" class="cat-card">
-                <div class="cat-icon">🏠</div>
-                <h3>Home Maintenance</h3>
-                <p>$40B US handyman/home maintenance market</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
-            <a href="home-repair/" class="cat-card">
-                <div class="cat-icon">🔨</div>
-                <h3>Home Repair</h3>
-                <p>$500B US home improvement/repair</p>
-                <span class="sub-count">10 sites · 20 keywords · 4 lead magnets</span>
-            </a>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--surface)">
+      <div class="container grid two">
+        <form id="request-form" class="form" action="https://formsubmit.co/talos.mnb@gmail.com" method="POST" accept-charset="UTF-8">
+          <input type="hidden" name="_subject" value="New Tal.OS SaaS or marketing consulting request" />
+          <input type="hidden" name="_next" value="https://usetalos.com/thank-you/?type=consultation" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div id="lane-template" class="template-panel" aria-live="polite">
+            <h3>Pick a consulting lane above</h3>
+            <p>The form will load focused questions for that type of project. You can still use the broad project section for anything that does not fit neatly.</p>
+            <ul class="prompt-list"><li>Start by choosing the closest card, or continue with the general form below.</li></ul>
+          </div>
+
+          <div class="form-grid">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="business">Business / project</label><input id="business" name="business" placeholder="Business name or idea" /></div>
+            <div class="field"><label for="website">Website or social link</label><input id="website" name="website" type="url" placeholder="https://..." /></div>
+
+            <div class="field"><label for="type">What do you need?</label><select id="type" name="request_type" required><option value="">Choose one</option><option>SaaS idea validation</option><option>SaaS launch systems</option><option>Marketing consulting</option><option>Marketing automation</option><option>AI workflow consulting</option><option>Security-aware planning</option><option>AI lessons and public speaking</option><option>Landing page or lead magnet</option><option>Website/store help</option><option>Not sure yet</option></select></div>
+            <div class="field"><label for="stage">Current stage</label><select id="stage" name="current_stage"><option>Idea only</option><option>Already selling manually</option><option>Have a website but need leads</option><option>Have leads but need automation</option><option>Have software but need users</option><option>Need cleanup/fix strategy</option></select></div>
+            <div class="field"><label for="timeline">Timeline</label><select id="timeline" name="timeline"><option>ASAP</option><option>This week</option><option>This month</option><option>Next 90 days</option><option>Just exploring</option></select></div>
+            <div class="field"><label for="budget">Budget range</label><select id="budget" name="budget"><option>Not sure yet</option><option>Under $250</option><option>$250-$750</option><option>$750-$1,500</option><option>$1,500-$5,000</option><option>$5,000+</option></select></div>
+            <div class="field"><label for="contact">Preferred contact</label><select id="contact" name="preferred_contact"><option>Email</option><option>Text/message if already connected</option><option>Other</option></select></div>
+            <div class="field"><label for="data">Sensitive data involved?</label><select id="data" name="sensitive_data"><option>Not sure</option><option>No</option><option>Customer data</option><option>Payments</option><option>Logins/accounts</option><option>Email/SMS sending</option><option>Files/uploads</option></select></div>
+
+            <div class="field full"><label for="template_questions">Lane-specific answers</label><textarea id="template_questions" name="lane_specific_answers" placeholder="Choose a consulting lane above and answer the prompts that appear here."></textarea></div>
+            <div class="field full"><label for="problem">Broad project write-anything section</label><textarea id="problem" name="problem" required placeholder="Write anything here: the business idea, the problem, what you tried, what is broken, who the customer is, what you want Tal.OS to build, or what outcome you need."></textarea></div>
+            <div class="field full"><label for="message">Extra context / tools / links</label><textarea id="message" name="message" required placeholder="Describe your offer, current tools, audience, marketing channels, manual tasks, existing website/software, deadlines, or constraints."></textarea></div>
+          </div>
+
+          <button class="btn" type="submit">Send Consulting Request</button>
+          <p class="help" style="margin-top:10px">A confirmation email will be sent after your request is received.</p>
+        </form>
+
+        <div>
+          <h2>Good requests include</h2>
+          <ul class="list">
+            <li>What you sell or want to sell</li>
+            <li>Who the customer is</li>
+            <li>Where leads currently come from</li>
+            <li>What marketing channels you use now</li>
+            <li>What manual step wastes the most time</li>
+            <li>What software/tools you already use</li>
+            <li>What would count as a successful first version</li>
+            <li>For lessons or talks: audience size, age/role, location, format, topic, date, and budget</li>
+            <li>Any security concerns: payments, logins, customer data, email/SMS, or files</li>
+          </ul>
+          <div class="notice" style="margin-top:22px"><strong>Best fit projects:</strong><br />SaaS MVP planning, landing pages, lead funnels, content systems, AI automations, email follow-up, CRM cleanup, internal dashboards, school AI lessons, business AI workshops, public speaking, and practical marketing systems for small businesses.</div>
         </div>
-        <div class="cta">
-            <h2>Need a Custom Website for Your Business?</h2>
-            <p>We build lead-generating websites for auto repair shops, laundromats, restaurants, bars, venues, HVAC, landscaping, cleaning, gyms, salons, and home services.</p>
-            <a href="https://usetalos.com/consulting/">Get Your Free Growth Plan →</a>
-        </div>
-    </div>
-    <footer>
-        <p>TalOS Growth Systems — Websites & Consulting for Local Businesses</p>
-        <p style="margin-top:8px;"><a href="https://usetalos.com">usetalos.com</a> · Auto Repair · Laundromats · Restaurants · Bars · Venues · HVAC · Landscaping · Cleaning · Gyms · Salons · Home Maintenance · Home Repair</p>
-        <p style="margin-top:15px;font-size:0.8rem;">© 2025 TalOS. All rights reserved. Made with ❤️ by Bailey & Talos</p>
-    </footer>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><a class="logo" href="/"><img src="/assets/talos-logo.png" alt="Tal.OS" class="logo-img" /></a><p style="margin-top:12px">AI consulting, SaaS planning, marketing systems, templates, and automation for small businesses.</p></div><div><h4>Products</h4><a href="/store/">Store</a><a href="/templates/">Templates</a><a href="/tools/">Tools Directory</a></div><div><h4>Company</h4><a href="/blog/">Blog</a><a href="/newsletter/">Newsletter</a><a href="/consultation/">Consultation</a><a href="/contact/">Contact</a></div><div><h4>Legal</h4><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/refunds/">Refund Policy</a></div></div><div class="container fine">© 2026 Tal.OS. Designed for businesses that want practical AI systems.</div></footer>
+
+  <script>
+    const laneTemplates = {
+      'SaaS idea validation': {
+        intro: 'Use this when you have a software idea and need to know if it should exist, who it is for, and what the first MVP should include.',
+        prompts: [
+          'What is the software idea in one sentence?',
+          'Who has this problem and how are they solving it today?',
+          'What is the smallest workflow the MVP must complete?',
+          'What would someone pay for and what price feels realistic?',
+          'What should NOT be built in version one?'
+        ]
+      },
+      'SaaS launch systems': {
+        intro: 'Use this when you need the pieces around a launch: landing page, waitlist, offer, payment path, onboarding, feedback, and first dashboard/workflow.',
+        prompts: [
+          'What are you launching and who is the first audience?',
+          'Do you need a landing page, waitlist, checkout, dashboard, or onboarding form?',
+          'What should the customer do after signing up or paying?',
+          'What feedback or usage data do you need to collect first?',
+          'What does a successful first 30 days look like?'
+        ]
+      },
+      'Marketing consulting': {
+        intro: 'Use this when the main problem is getting attention, improving the offer, creating content, or turning traffic into leads.',
+        prompts: [
+          'What do you sell and why should customers care now?',
+          'Who is the target customer and where do they already hang out?',
+          'What content, SEO, email, or social channels are you using today?',
+          'What lead magnet, offer, or campaign do you want to test?',
+          'What result matters most: leads, booked calls, sales, subscribers, or awareness?'
+        ]
+      },
+      'Marketing automation': {
+        intro: 'Use this when leads, follow-ups, CRM updates, newsletters, or content workflows need to happen automatically instead of manually.',
+        prompts: [
+          'Where do leads come from right now?',
+          'What should happen immediately after someone submits a form or buys?',
+          'What tools do you use for email, CRM, calendars, payments, or newsletters?',
+          'Which manual step wastes the most time each week?',
+          'What messages, reminders, or reports should be automated?'
+        ]
+      },
+      'AI workflow consulting': {
+        intro: 'Use this when you want AI to help with research, writing, customer support, operations, SOPs, internal assistants, or repeatable decisions.',
+        prompts: [
+          'What task do you want AI to help with?',
+          'What inputs does the AI need and where do they come from?',
+          'What should the AI produce: draft, summary, decision, email, report, or action list?',
+          'What must a human review before anything is sent or published?',
+          'What data is sensitive or should never be pasted into AI tools?'
+        ]
+      },
+      'Security-aware planning': {
+        intro: 'Use this when the project touches accounts, forms, customer data, email/SMS, payments, files, or public-facing automation.',
+        prompts: [
+          'What sensitive data is involved: logins, payments, customer info, files, emails, or messages?',
+          'Who should be allowed to view, edit, export, or delete data?',
+          'What systems need API keys, OAuth, webhooks, or payment access?',
+          'What should be logged for safety and troubleshooting?',
+          'What would be the worst-case failure and how should it be prevented?'
+        ]
+      },
+      'AI lessons and public speaking': {
+        intro: 'Use this when a school, business, club, library, training center, event, or other place of learning/work wants Bailey to teach, demo, or publicly speak about AI.',
+        prompts: [
+          'What type of organization is requesting this: school, business, nonprofit, club, library, event, or other?',
+          'Who is the audience: students, teachers, employees, leaders, creators, beginners, or mixed group?',
+          'What format do you want: in-person lesson, virtual workshop, keynote talk, Q&A, hands-on training, or short demo?',
+          'What AI topic should be covered: AI basics, safe AI use, prompt writing, business automation, careers, ethics, content creation, or custom topic?',
+          'How many people will attend and what age range or skill level should the lesson be built for?',
+          'What date, time, location, session length, and budget/rate range should Tal.OS know about?',
+          'Do you need slides, handouts, live demos, certificates, recording permission, or follow-up materials?'
+        ]
+      }
+    };
+
+    function setLane(lane) {
+      const data = laneTemplates[lane];
+      if (!data) return;
+      document.querySelectorAll('.lane-card').forEach(card => card.classList.toggle('active', card.dataset.lane === lane));
+      const type = document.getElementById('type');
+      if (type) type.value = lane;
+      const panel = document.getElementById('lane-template');
+      const answers = document.getElementById('template_questions');
+      panel.querySelector('h3').textContent = lane + ' template';
+      panel.querySelector('p').textContent = data.intro;
+      const list = panel.querySelector('.prompt-list');
+      list.replaceChildren();
+      data.prompts.forEach(prompt => {
+        const item = document.createElement('li');
+        item.textContent = prompt;
+        list.appendChild(item);
+      });
+      answers.placeholder = data.prompts.map((prompt, index) => (index + 1) + '. ' + prompt).join('\n');
+      if (!answers.value.trim()) answers.value = data.prompts.map((prompt, index) => (index + 1) + '. ' + prompt + '\nAnswer: ').join('\n\n');
+      document.getElementById('request-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      answers.focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('.lane-card').forEach(card => card.addEventListener('click', () => setLane(card.dataset.lane)));
+  </script>
 <script src="/assets/nav.js"></script>
 </body>
 </html>
