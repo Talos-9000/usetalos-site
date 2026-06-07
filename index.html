@@ -225,7 +225,7 @@
         <p style="color:var(--muted);font-size:14px">30 prompts for nonprofits, proposals, LOIs, and fundraising.</p>
         <div class="price">$19.99</div>
         <span class="tag">nonprofit</span><span class="tag">funding</span>
-        <a href="https://usetalos.gumroad.com/l/grant-writing-prompts-pack" class="buy-btn">Buy Now</a>
+        <a href="https://buy.stripe.com/4gM4gs0b66hrgSbfMEa3u03" class="buy-btn">Buy Now</a>
       </div>
       <div class="store-card animate">
         <h3>🏠 Real Estate Agent Prompts</h3>
@@ -260,7 +260,7 @@
         <p style="color:var(--muted);font-size:14px">40 prompts to win government and enterprise bids. Capture to submission.</p>
         <div class="price">$24.99</div>
         <span class="tag">rfps</span><span class="tag">contracts</span><span class="tag">new</span>
-        <a href="https://buy.stripe.com/cNi6oA0b66hrgSdcAsa3u06" class="buy-btn">Buy Now</a>
+        <a href="https://buy.stripe.com/6oUdR28HC5dn7hBfMEa3u07" class="buy-btn">Buy Now</a>
       </div>
       <div class="store-card animate">
         <h3 style="color:var(--accent)">⭐ Complete AI Business Bundle</h3>
@@ -378,10 +378,10 @@ if (grid) {
         e.stopPropagation();
         card.classList.remove('flipped');
         setTimeout(function() {
-          var confirm = card.querySelector('.flip-confirm');
+          var confirmEl = card.querySelector('.flip-confirm');
           var form = card.querySelector('.flip-back form');
           var backBtn = card.querySelector('.flip-back .back-btn');
-          if (confirm) { confirm.style.display = 'none'; }
+          if (confirmEl) { confirmEl.style.display = 'none'; }
           if (form) { form.style.display = 'block'; }
           if (backBtn) { backBtn.style.display = 'block'; }
         }, 300);
@@ -394,7 +394,7 @@ if (grid) {
       var data = new FormData(form);
       var body = new FormData();
       body.append('_subject', 'New Tal.OS request: ' + svc.title);
-      body.append('_next', 'about:blank');
+      body.append('_next', 'https://usetalos.com/thank-you/?type=consultation');
       body.append('_captcha', 'false');
       data.forEach(function(v, k) { body.append(k, v); });
       try {
@@ -403,8 +403,8 @@ if (grid) {
       form.style.display = 'none';
       var backBtns = card.querySelectorAll('.flip-back .back-btn');
       if (backBtns.length > 0) { backBtns[0].style.display = 'none'; }
-      var confirm = card.querySelector('.flip-confirm');
-      if (confirm) { confirm.style.display = 'block'; }
+      var confirmEl = card.querySelector('.flip-confirm');
+      if (confirmEl) { confirmEl.style.display = 'block'; }
     });
   });
 }
