@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         try{
           const body=new URLSearchParams();
           body.append('_subject','Pencils for Paws submission');
-          body.append('_captcha','false');
+          body.append('_captcha','true');
           body.append('_next','https://usetalos.com/thank-you/?type=consultation');
           new FormData(form).forEach((v,k)=>body.append(k,v));
           await fetch('https://formsubmit.co/talos.mnb@gmail.com',{method:'POST',body});

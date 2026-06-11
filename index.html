@@ -395,7 +395,7 @@ if (grid) {
       var body = new FormData();
       body.append('_subject', 'New Tal.OS request: ' + svc.title);
       body.append('_next', 'https://usetalos.com/thank-you/?type=consultation');
-      body.append('_captcha', 'false');
+      body.append('_captcha', 'true');
       data.forEach(function(v, k) { body.append(k, v); });
       try {
         await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body: body });

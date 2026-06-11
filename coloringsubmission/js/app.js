@@ -24,7 +24,7 @@
 24|          try {
 25|            const body = new URLSearchParams();
 26|            body.append('_subject', 'ColoringSubmission newsletter signup');
-27|            body.append('_captcha', 'false');
+27|            body.append('_captcha', 'true');
 28|            body.append('email', email);
 29|            body.append('_next', 'https://usetalos.com/thank-you/?type=newsletter');
 30|            await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body });
