@@ -4,4 +4,6 @@ playwright-report/
 qa-artifacts/
 .git/
 _headers.git-protection
-audit_sweep.py
+deep_sweep.py
+scripts/
+consulting/*.md
