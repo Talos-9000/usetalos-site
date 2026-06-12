@@ -114,6 +114,7 @@
       <ul class="primary-nav__list">
         <li><a href="/store/">Store</a></li>
         <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/voice-agents/">Voice Agents</a></li>
         <li><a href="/templates/">Templates</a></li>
         <li><a href="/tools/">Tools</a></li>
         <li><a href="/blog/">Blog</a></li>
@@ -395,10 +396,10 @@ if (grid) {
       var body = new FormData();
       body.append('_subject', 'New Tal.OS request: ' + svc.title);
       body.append('_next', 'https://usetalos.com/thank-you/?type=consultation');
-      body.append('_captcha', 'true');
+      body.append('_captcha', 'false');
       data.forEach(function(v, k) { body.append(k, v); });
       try {
-        await fetch('https://formsubmit.co/talos.mnb@gmail.com', { method: 'POST', body: body });
+        await fetch('https://formsubmit.co/bjsmithtechllc@gmail.com', { method: 'POST', body: body });
       } catch(e) {}
       form.style.display = 'none';
       var backBtns = card.querySelectorAll('.flip-back .back-btn');

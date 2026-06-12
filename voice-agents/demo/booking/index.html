@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Booking Demo — Tal.OS</title>
+  <meta name="description" content="Interactive demo showing Tal.OS AI booking appointments automatically via text conversation." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body { background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+    .demo-container { max-width: 480px; width: 100%; margin: 0 auto; }
+    .split-view { display: flex; flex-direction: column; gap: 12px; }
+    @media (min-width: 50em) { .split-view { flex-direction: row; } .split-view > * { flex:1; } }
+    .chat-panel { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .chat-panel-header { background: var(--accent); color: #fff; padding: 14px; display: flex; align-items: center; gap: 10px; }
+    .chat-panel-header .cph-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .chat-panel-header .cph-info { flex:1; }
+    .chat-panel-header .cph-name { font-weight: 600; font-size: 14px; }
+    .chat-panel-header .cph-status { font-size: 11px; opacity: .8; }
+    .chat-messages { padding: 14px; min-height: 340px; max-height: 340px; overflow-y: auto; }
+    .msg { max-width: 85%; margin-bottom: 10px; clear: both; }
+    .msg.ai { float: left; }
+    .msg.customer { float: right; }
+    .msg .bubble { padding: 10px 14px; border-radius: 18px; font-size: 14px; line-height: 1.45; }
+    .msg.ai .bubble { background: var(--accent); color: #fff; border-bottom-left-radius: 4px; }
+    .msg.customer .bubble { background: var(--surface-2); color: var(--text); border-bottom-right-radius: 4px; }
+    .msg .time { font-size: 10px; color: var(--muted); display: block; margin-top: 4px; }
+    .msg.customer .time { text-align: right; }
+
+    .typing-indicator { display: none; float: left; clear: both; padding: 10px 14px; background: var(--surface-2); border-radius: 18px; border-bottom-left-radius: 4px; margin-bottom: 10px; }
+    .typing-indicator.show { display: flex; gap: 4px; }
+    .typing-dot { width: 6px; height: 6px; background: #999; border-radius: 50%; animation: typingBounce 1.2s ease-in-out infinite; }
+    .typing-dot:nth-child(2) { animation-delay:.15s; }
+    .typing-dot:nth-child(3) { animation-delay:.3s; }
+    @keyframes typingBounce { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-6px); } }
+
+    .typing-cursor { display: inline-block; animation: blink .8s step-end infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+
+    /* Calendar panel */
+    .cal-panel { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .cal-header { background: var(--accent); color: #fff; padding: 14px; text-align: center; }
+    .cal-header h3 { margin: 0; font-size: 16px; }
+    .cal-header p { margin: 2px 0 0; font-size: 12px; opacity: .8; }
+    .cal-grid { padding: 14px; }
+    .cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+    .cal-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:13px; border-radius:8px; cursor:default; }
+    .cal-day.today { background: color-mix(in srgb,var(--accent)12%,transparent); color: var(--accent); font-weight:700; }
+    .cal-day.booked { background: var(--accent-3); color:#fff; font-weight:700; position:relative; }
+    .cal-day.booked::after { content:'🔒'; font-size:8px; position:absolute; top:1px; right:1px; }
+    .cal-day.booked-demo { background: var(--accent); color:#fff; font-weight:700; animation: pulse 1s ease-in-out 3; }
+    @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.1); } }
+    .cal-day.empty { visibility:hidden; }
+    .cal-demo-event { display:none; padding: 12px; margin-top: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; }
+    .cal-demo-event.show { display: block; }
+    .cal-demo-event strong { font-size: 14px; }
+    .cal-demo-event p { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+
+    /* Controls */
+    .controls { padding: 14px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .controls .step { font-size: 13px; color: var(--muted); }
+    .controls .next-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    .controls .next-btn:active { transform:scale(.96); }
+    .controls .next-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+    /* Start screen */
+    #screen-start { text-align: center; padding: 60px 20px; }
+    #screen-start .big-icon { font-size: 64px; margin-bottom: 12px; }
+    #screen-start h2 { font-size: 20px; margin: 0 0 8px; }
+    #screen-start p { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+    #screen-start .start-btn { background: var(--accent); color: #fff; border: none; border-radius: 14px; padding: 16px 32px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s; }
+
+    .restart-bar { text-align: center; padding: 16px 0; }
+    .restart-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+    .demo-notice { text-align: center; font-size: 12px; color: var(--muted); margin-top: 16px; background: var(--surface-2); border-radius: 12px; padding: 12px 16px; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="demo-container">
+  <div style="text-align:center;margin-bottom:12px">
+    <a href="/voice-agents/" style="color:var(--accent);text-decoration:none;font-size:14px;font-weight:600">← Back to Voice Agents</a>
+    <h1 style="font-size:18px;margin:6px 0 0">Appointment Booking Demo</h1>
+    <p style="font-size:13px;color:var(--muted);margin:2px 0 0">Watch the AI check availability and book an appointment</p>
+  </div>
+
+  <div id="screen-start">
+    <div class="big-icon">📅</div>
+    <h2>Automated Booking Simulation</h2>
+    <p>See how the AI agent checks a plumber's calendar, suggests available slots, and books the appointment — all through a natural text conversation.</p>
+    <button class="start-btn" onclick="startDemo()">📅 Start Demo</button>
+  </div>
+
+  <div id="screen-demo" class="hidden">
+    <div class="split-view">
+      <!-- Chat -->
+      <div class="chat-panel">
+        <div class="chat-panel-header">
+          <div class="cph-avatar">👤</div>
+          <div class="cph-info">
+            <div class="cph-name">Tom's Plumbing Service</div>
+            <div class="cph-status">● AI Agent Online</div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="typing-indicator" id="typingIndicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <div class="controls">
+          <span class="step" id="stepInfo">Booking...</span>
+          <button class="next-btn" id="nextBtn" onclick="advanceConv()">Next →</button>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="cal-panel">
+        <div class="cal-header">
+          <h3>📅 June 2026</h3>
+          <p id="calStatus">Availability open</p>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div class="cal-days" id="calDays">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+        <div class="cal-demo-event" id="calEvent">
+          <strong>🔧 Plumbing Repair</strong>
+          <p>Tom's Plumbing · Unit 4B emergency<br/>Booked via AI agent</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="restart-bar">
+    <button class="restart-btn" onclick="resetDemo()">🔄 Restart Demo</button>
+  </div>
+
+  <div class="demo-notice">
+    <strong>⚡ Safety Notice:</strong> Pre-scripted animation. No AI running, no data collected, no real bookings. Just a visual demo.
+  </div>
+</div>
+
+<script>
+// ── Conversation data ──
+const BOOKING_CONVO = [
+  { from: 'customer', text: "Hey, I need a plumber. My toilet is overflowing and I can't get it to stop." },
+  { from: 'ai', text: "Oh no, that's no fun! I can help. We have a plumber available as early as tomorrow. When works best for you?" },
+  { from: 'customer', text: "Tomorrow afternoon would be perfect. Around 2pm?" },
+  { from: 'ai', text: "Let me check the calendar... Yes, we have an opening at 2pm tomorrow! That's Thursday, June 18th." },
+  { from: 'customer', text: "That works great. Please book it." },
+  { from: 'ai', text: "You're all set! I've booked Mike for Thursday, June 18th at 2pm. You'll get a confirmation text and a reminder tomorrow morning. Anything else?" },
+  { from: 'customer', text: "That's it, thanks so much!" },
+  { from: 'ai', text: "My pleasure! Mike will see you Thursday at 2pm. Have a great day! 🛠️" }
+];
+
+let convoIdx = 0;
+let demoActive = false;
+let msgArea, typingEl, nextBtn, stepInfo, calEvent, calStatus;
+
+function $(id) { return document.getElementById(id); }
+
+function startDemo() {
+  $('screen-start').classList.add('hidden');
+  $('screen-demo').classList.remove('hidden');
+
+  msgArea = $('chatMessages');
+  typingEl = $('typingIndicator');
+  nextBtn = $('nextBtn');
+  stepInfo = $('stepInfo');
+  calEvent = $('calEvent');
+  calStatus = $('calStatus');
+
+  msgArea.innerHTML = '';
+  convoIdx = 0;
+  demoActive = true;
+  calEvent.classList.remove('show');
+  calStatus.textContent = 'Checking availability...';
+  nextBtn.disabled = false;
+  renderCalendar();
+  advanceConv();
+}
+
+function renderCalendar() {
+  var grid = $('calDays');
+  grid.innerHTML = '';
+  // June 2026 starts on Monday (June 1 = Monday)
+  var firstDay = 1; // Monday
+  var daysInMonth = 30;
+  for (var i = 0; i < firstDay; i++) {
+    var empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    grid.appendChild(empty);
+  }
+  for (var d = 1; d <= daysInMonth; d++) {
+    var day = document.createElement('div');
+    day.className = 'cal-day';
+    day.dataset.day = d;
+    // Today is June 17
+    if (d === 17) day.classList.add('today');
+    // Pre-booked days
+    if (d === 12 || d === 15 || d === 16) {
+      day.classList.add('booked');
+      day.title = 'Booked';
+    }
+    day.textContent = d;
+    grid.appendChild(day);
+  }
+}
+
+function advanceConv() {
+  if (!demoActive || convoIdx >= BOOKING_CONVO.length) {
+    nextBtn.disabled = true;
+    nextBtn.textContent = '✅ Booked!';
+    return;
+  }
+
+  var msg = BOOKING_CONVO[convoIdx];
+  convoIdx++;
+
+  if (msg.from === 'ai') {
+    // Show typing indicator
+    typingEl.classList.add('show');
+    nextBtn.disabled = true;
+
+    var typeDelay = 1200 + Math.random() * 600;
+    setTimeout(function() {
+      typingEl.classList.remove('show');
+      addChatMsg(msg.text, 'ai');
+      nextBtn.disabled = false;
+
+      // If booking confirmation — animate calendar
+      if (msg.text.includes("I've booked")) {
+        calEvent.classList.add('show');
+        calStatus.textContent = '✅ Booked: Jun 18 at 2pm';
+        highlightBookedDay();
+      }
+      if (msg.text.includes("your all set") || msg.text.includes("all set")) {
+        calEvent.classList.add('show');
+        calStatus.textContent = '✅ Booked: Jun 18 at 2pm';
+        highlightBookedDay();
+      }
+    }, typeDelay);
+  } else {
+    addChatMsg(msg.text, 'customer');
+  }
+}
+
+function addChatMsg(text, from) {
+  var wrapper = document.createElement('div');
+  wrapper.className = 'msg ' + from;
+
+  var bubble = document.createElement('div');
+  bubble.className = 'bubble';
+
+  if (from === 'ai') {
+    // Typewriter effect
+    wrapper.appendChild(bubble);
+    msgArea.appendChild(wrapper);
+    msgArea.scrollTop = msgArea.scrollHeight;
+
+    var i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        bubble.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor">|</span>';
+        i++;
+        msgArea.scrollTop = msgArea.scrollHeight;
+        setTimeout(typeChar, 18 + Math.random() * 12);
+      } else {
+        bubble.textContent = text;
+        var ts = document.createElement('span');
+        ts.className = 'time';
+        ts.textContent = getTime();
+        bubble.appendChild(ts);
+        msgArea.scrollTop = msgArea.scrollHeight;
+      }
+    }
+    typeChar();
+  } else {
+    bubble.textContent = text;
+    var ts = document.createElement('span');
+    ts.className = 'time';
+    ts.textContent = getTime();
+    bubble.appendChild(ts);
+    wrapper.appendChild(bubble);
+    msgArea.appendChild(wrapper);
+    msgArea.scrollTop = msgArea.scrollHeight;
+  }
+}
+
+function highlightBookedDay() {
+  var days = $('calDays').querySelectorAll('.cal-day');
+  days.forEach(function(d) {
+    if (parseInt(d.dataset.day) === 18) {
+      d.className = 'cal-day booked-demo';
+    }
+  });
+}
+
+function getTime() {
+  var d = new Date();
+  return d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
+}
+
+function resetDemo() {
+  demoActive = false;
+  convoIdx = 0;
+  $('screen-demo').classList.add('hidden');
+  $('screen-start').classList.remove('hidden');
+  if (msgArea) msgArea.innerHTML = '';
+  if (typingEl) typingEl.classList.remove('show');
+  if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Next →'; }
+  calEvent.classList.remove('show');
+}
+</script>
+
+<script src="/assets/nav.js"></script>
+</body>
+</html>

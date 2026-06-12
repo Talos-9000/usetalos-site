@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missed-Call Text-Back Demo — Tal.OS</title>
+  <meta name="description" content="Interactive demo showing how Tal.OS AI voice agents text missed callers back instantly." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="text/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body { background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+    .demo-container { max-width: 420px; width: 100%; margin: 0 auto; }
+    .phone-frame { background: #000; border-radius: 40px; padding: 12px; box-shadow: 0 25px 60px rgba(0,0,0,.5); position: relative; }
+    .phone-screen { background: #fff; border-radius: 32px; overflow: hidden; min-height: 680px; position: relative; }
+    .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 150px; height: 28px; background: #000; border-radius: 0 0 18px 18px; z-index: 10; }
+    .phone-notch::after { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 60px; height: 6px; background: #1a1a2e; border-radius: 3px; }
+    .status-bar { background: #000; color: #fff; padding: 14px 20px 6px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; position: relative; z-index: 5; }
+    .demo-nav { display: flex; align-items: center; padding: 8px 14px; border-bottom: 1px solid #eee; position: relative; z-index: 5; background: #fff; }
+    .demo-nav .back-link { color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .demo-nav .step-label { flex:1; text-align: center; font-size: 12px; color: #999; }
+
+    /* Missed call screen (step 1) */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    #screen-call .incoming-call { text-align: center; padding: 80px 20px 40px; }
+    #screen-call .caller-avatar { width: 80px; height: 80px; border-radius: 50%; background: #6d28d9; color: #fff; font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    #screen-call h2 { font-size: 22px; margin: 0 0 4px; }
+    #screen-call p { color: #666; font-size: 14px; margin: 0 0 30px; }
+    #screen-call .call-actions { display: flex; gap: 30px; justify-content: center; }
+    #screen-call .call-btn { width: 64px; height: 64px; border-radius: 50%; border: none; font-size: 28px; cursor: pointer; transition: transform .2s; }
+    #screen-call .call-btn:active { transform: scale(.92); }
+    #screen-call .decline { background: #fee2e2; color: #dc2626; }
+    #screen-call .accept { background: #d1fae5; color: #059669; }
+
+    /* Text conversation view */
+    #screen-chat { background: #f0f2f5; min-height: 680px; }
+    .chat-header { background: #fff; padding: 10px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #ddd; }
+    .chat-header .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 14px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .chat-header .chat-name { font-weight: 600; font-size: 14px; }
+    .chat-header .chat-status { font-size: 11px; color: #059669; }
+    .chat-messages { padding: 14px; overflow-y: auto; max-height: 520px; min-height: 520px; }
+    .msg { max-width: 80%; margin-bottom: 10px; padding: 10px 14px; border-radius: 18px; font-size: 14px; line-height: 1.45; animation: msgIn .3s ease-out; }
+    @keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .msg.ai { background: var(--accent); color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; float: left; clear: both; }
+    .msg.customer { background: #e4e6eb; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; float: right; clear: both; }
+    .msg .typing-cursor { display: inline-block; animation: blink .8s step-end infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+    .msg .time-stamp { font-size: 10px; color: rgba(255,255,255,.6); display: block; margin-top: 4px; text-align: right; }
+    .msg.customer .time-stamp { color: #999; }
+    .chat-input-area { display: none; padding: 10px 14px; background: #fff; border-top: 1px solid #ddd; align-items: center; gap: 8px; }
+    .chat-input-area.show { display: flex; }
+    .chat-input-area input { flex:1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 24px; font-size: 14px; outline: none; }
+    .chat-input-area input:focus { border-color: var(--accent); }
+    .chat-input-area .send-msg { width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--accent); color: #fff; font-size: 16px; cursor: pointer; }
+
+    /* Typing indicator */
+    .typing-indicator { display: none; float: left; clear: both; padding: 10px 14px; background: #e4e6eb; border-radius: 18px; border-bottom-left-radius: 4px; margin-bottom: 10px; max-width: 80%; }
+    .typing-indicator.show { display: flex; gap: 4px; }
+    .typing-dot { width: 7px; height: 7px; background: #999; border-radius: 50%; animation: typingBounce 1.2s ease-in-out infinite; }
+    .typing-dot:nth-child(2) { animation-delay: .15s; }
+    .typing-dot:nth-child(3) { animation-delay: .3s; }
+    @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+    /* Restart button */
+    .restart-bar { text-align: center; padding: 16px 0; }
+    .restart-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    .restart-btn:hover { opacity: .9; }
+
+    .demo-notice { text-align: center; font-size: 12px; color: var(--muted); margin-top: 16px; background: var(--surface-2); border-radius: 12px; padding: 12px 16px; }
+    .demo-notice strong { color: var(--accent); }
+
+    /* Start overlay */
+    #screen-start { text-align: center; padding: 80px 20px; }
+    #screen-start .big-icon { font-size: 64px; margin-bottom: 16px; }
+    #screen-start h2 { font-size: 20px; margin: 0 0 8px; }
+    #screen-start p { color: #666; font-size: 14px; margin: 0 0 24px; }
+    #screen-start .start-btn { background: var(--accent); color: #fff; border: none; border-radius: 14px; padding: 16px 32px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    #screen-start .start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px color-mix(in srgb,var(--accent)30%,transparent); }
+
+    /* Missed call notification */
+    .missed-notif { display: none; text-align: center; padding: 60px 20px; background: #f0f2f5; min-height: 680px; }
+    .missed-notif.show { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .missed-notif .notif-icon { width: 64px; height: 64px; border-radius: 50%; background: #fee2e2; color: #dc2626; font-size: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .missed-notif h3 { font-size: 18px; margin: 0 0 4px; }
+    .missed-notif p { color: #666; font-size: 14px; margin: 0; }
+    .missed-notif .sms-pop { margin-top: 30px; background: var(--accent); color: #fff; padding: 14px 24px; border-radius: 24px; font-size: 14px; animation: fadeUp .5s ease-out .8s both; cursor: pointer; transition: transform .2s; }
+    .missed-notif .sms-pop:active { transform: scale(.96); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="demo-container">
+  <!-- Demo header -->
+  <div style="text-align:center;margin-bottom:12px">
+    <a href="/voice-agents/" style="color:var(--accent);text-decoration:none;font-size:14px;font-weight:600">← Back to Voice Agents</a>
+    <h1 style="font-size:18px;margin:6px 0 0">Missed-Call Text-Back Demo</h1>
+    <p style="font-size:13px;color:var(--muted);margin:2px 0 0">Watch the AI respond in real-time</p>
+  </div>
+
+  <!-- Phone frame -->
+  <div class="phone-frame">
+    <div class="phone-screen" id="phoneScreen">
+      <div class="status-bar" style="background:var(--bg);color:var(--text)">
+        <span>9:41</span>
+        <span>📶 🔋</span>
+      </div>
+      <div class="phone-notch"></div>
+
+      <!-- Start Screen -->
+      <div class="screen active" id="screen-start">
+        <div class="big-icon">📱</div>
+        <h2>See it in action</h2>
+        <p>Tap "Start Demo" to simulate a real customer calling your business. Watch the AI agent text them back, answer questions, and book a service.</p>
+        <button class="start-btn" onclick="startCall()">📞 Start Demo</button>
+      </div>
+
+      <!-- Incoming Call Screen -->
+      <div class="screen" id="screen-call">
+        <div class="incoming-call">
+          <div class="caller-avatar">👤</div>
+          <h2>Mike's Plumbing</h2>
+          <p>Incoming call from (555) 234-8901</p>
+          <div class="call-actions">
+            <button class="call-btn decline" onclick="missCall()">📵</button>
+            <button class="call-btn accept" onclick="missCall()">✅</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Missed Call Notification -->
+      <div class="missed-notif" id="missedNotif">
+        <div class="notif-icon">📵</div>
+        <h3>Missed Call</h3>
+        <p>(555) 234-8901 · just now</p>
+        <div class="sms-pop" onclick="showChat()">
+          💬 AI Agent: "Hey! Thanks for calling Mike's Plumbing. How can I help?"
+        </div>
+      </div>
+
+      <!-- Chat Screen -->
+      <div id="screen-chat" class="screen" style="min-height:680px;background:#f0f2f5">
+        <div class="chat-header">
+          <div class="chat-avatar">👤</div>
+          <div>
+            <div class="chat-name">(555) 234-8901</div>
+            <div class="chat-status">● AI Agent Active</div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="typing-indicator" id="typingIndicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <div class="chat-input-area" id="chatInputArea">
+          <input type="text" id="chatInput" placeholder="Type a message..." disabled />
+          <button class="send-msg" disabled>➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="restart-bar">
+    <button class="restart-btn" onclick="resetDemo()">🔄 Restart Demo</button>
+  </div>
+
+  <div class="demo-notice">
+    <strong>⚡ Safety Notice:</strong> This is a fully pre-scripted animation. No AI running, no data collected, no real phone numbers used. Just a visual demo.
+  </div>
+</div>
+
+<script>
+// ── Scripted conversation data ──
+const CONVO = [
+  { from: 'ai', text: "Hey! Thanks for calling Mike's Plumbing. I'm the AI assistant. How can I help you today?", delay: 800 },
+  { from: 'customer', text: "Hey, my sink is leaking bad. Can you guys come take a look?", delay: 1200 },
+  { from: 'ai', text: "I can definitely help with that! We offer emergency plumbing services. Can I ask a few quick questions?", delay: 1000 },
+  { from: 'customer', text: "Yeah go for it", delay: 800 },
+  { from: 'ai', text: "Great! Is this a residential or commercial property?", delay: 800 },
+  { from: 'customer', text: "Residential — house in the Northside area", delay: 1000 },
+  { from: 'ai', text: "Got it. Our plumber can be there within 2 hours. There's a $65 trip fee, then $85/hour after that. Does that work for you?", delay: 1400 },
+  { from: 'customer', text: "Yeah that's fine. Can you come today?", delay: 1000 },
+  { from: 'ai', text: "Absolutely! I have an opening at 2pm today. Would that work?", delay: 1000 },
+  { from: 'customer', text: "2pm works perfect", delay: 800 },
+  { from: 'ai', text: "Perfect! I've booked you for today at 2pm. You'll get a confirmation text shortly. Is there anything else I can help with?", delay: 1400 },
+  { from: 'customer', text: "Nope that's it, thanks!", delay: 800 },
+  { from: 'ai', text: "You're welcome! Someone from Mike's Plumbing will see you at 2pm. Have a great day! 👍", delay: 1000 }
+];
+
+let convoIdx = 0;
+let isTyping = false;
+let chatActive = false;
+let msgContainer, typingEl, inputArea, chatInput;
+
+function $(id) { return document.getElementById(id); }
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  var el = $(id);
+  if (el) el.classList.add('active');
+}
+
+function startCall() {
+  showScreen('screen-call');
+}
+
+function missCall() {
+  showScreen('screen-call'); // keep hidden but show notif
+  $('screen-call').classList.remove('active');
+  $('missedNotif').classList.add('show');
+}
+
+function showChat() {
+  $('missedNotif').classList.remove('show');
+  $('screen-chat').classList.add('active');
+  msgContainer = $('chatMessages');
+  typingEl = $('typingIndicator');
+  inputArea = $('chatInputArea');
+  chatInput = $('chatInput');
+  msgContainer.innerHTML = '';
+  convoIdx = 0;
+  chatActive = true;
+  playNext();
+}
+
+function playNext() {
+  if (!chatActive || convoIdx >= CONVO.length) {
+    if (inputArea) inputArea.classList.add('show');
+    return;
+  }
+  var msg = CONVO[convoIdx];
+  var delay = msg.delay || 1000;
+
+  convoIdx++;
+
+  // Show typing indicator if it's an AI message
+  if (msg.from === 'ai') {
+    typingEl.classList.add('show');
+    setTimeout(function() {
+      typingEl.classList.remove('show');
+      addMessage(msg.text, 'ai');
+      setTimeout(playNext, 400);
+    }, Math.min(1000, delay));
+  } else {
+    // Customer message — simple delay
+    setTimeout(function() {
+      addMessage(msg.text, 'customer');
+      setTimeout(playNext, 400);
+    }, delay);
+  }
+}
+
+function addMessage(text, from) {
+  var div = document.createElement('div');
+  div.className = 'msg ' + from;
+
+  if (from === 'ai') {
+    // Typewriter effect for AI messages
+    var span = document.createElement('span');
+    div.appendChild(span);
+    msgContainer.appendChild(div);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    var i = 0;
+    function typeChar() {
+      if (i < text.length) {
+        span.textContent = text.substring(0, i + 1);
+        // Add blinking cursor at the end
+        var cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        cursor.textContent = '|';
+        span.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor">|</span>';
+        i++;
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+        var speed = 20 + Math.random() * 15;
+        setTimeout(typeChar, speed);
+      } else {
+        span.textContent = text;
+        var ts = document.createElement('span');
+        ts.className = 'time-stamp';
+        ts.textContent = getTime();
+        div.appendChild(ts);
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+      }
+    }
+    typeChar();
+  } else {
+    // Customer messages appear instantly
+    div.innerHTML = text + '<span class="time-stamp">' + getTime() + '</span>';
+    msgContainer.appendChild(div);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+  }
+}
+
+function getTime() {
+  var d = new Date();
+  var h = d.getHours();
+  var m = String(d.getMinutes()).padStart(2, '0');
+  return h + ':' + m;
+}
+
+function resetDemo() {
+  chatActive = false;
+  convoIdx = 0;
+  if (msgContainer) msgContainer.innerHTML = '';
+  if (typingEl) typingEl.classList.remove('show');
+  if (inputArea) inputArea.classList.remove('show');
+  $('screen-chat').classList.remove('active');
+  $('missedNotif').classList.remove('show');
+  showScreen('screen-start');
+}
+</script>
+
+<script src="/assets/nav.js"></script>
+</body>
+</html>

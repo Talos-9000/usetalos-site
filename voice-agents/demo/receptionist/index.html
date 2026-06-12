@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Receptionist Demo — Tal.OS</title>
+  <meta name="description" content="Interactive demo showing Tal.OS AI receptionist answering calls, routing, and taking messages." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body { background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+    .demo-container { max-width: 520px; width: 100%; margin: 0 auto; }
+
+    .call-display { background: var(--card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); }
+    .call-header { background: var(--accent); color: #fff; padding: 20px; text-align: center; }
+    .call-header .caller-avatar { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 8px; }
+    .call-header h2 { margin: 0; font-size: 18px; }
+    .call-header p { margin: 4px 0 0; font-size: 13px; opacity: .8; }
+    .call-header .call-status { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 100px; background: rgba(255,255,255,.2); font-size: 12px; }
+    .call-header .call-status.connect { background: #10b981; }
+
+    .call-body { padding: 20px; }
+    .transcript { max-height: 420px; overflow-y: auto; }
+    .transcript-item { display: flex; gap: 10px; margin-bottom: 16px; opacity: 0; animation: fadeSlide .35s ease-out forwards; }
+    @keyframes fadeSlide { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .transcript-item .speaker-icon { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .transcript-item .speaker-icon.ai { background: color-mix(in srgb,var(--accent)12%,transparent); color: var(--accent); }
+    .transcript-item .speaker-icon.customer { background: #dbeafe; color: #2563eb; }
+    .transcript-item .bubble { flex:1; }
+    .transcript-item .bubble .speaker-name { font-weight: 700; font-size: 13px; margin-bottom: 2px; }
+    .transcript-item .bubble .speaker-name.ai { color: var(--accent); }
+    .transcript-item .bubble .speaker-name.customer { color: #2563eb; }
+    .transcript-item .bubble .text { font-size: 14px; line-height: 1.5; color: var(--text); }
+    .transcript-item .bubble .text .typing-cursor { display: inline-block; animation: blink .8s step-end infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+
+    /* Next button */
+    .controls { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .controls .step-info { font-size: 13px; color: var(--muted); }
+    .controls .next-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    .controls .next-btn:active { transform: scale(.96); }
+    .controls .next-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+    /* Start screen */
+    #screen-start { text-align: center; padding: 60px 20px; }
+    #screen-start .big-icon { font-size: 64px; margin-bottom: 12px; }
+    #screen-start h2 { font-size: 20px; margin: 0 0 8px; }
+    #screen-start p { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+    #screen-start .start-btn { background: var(--accent); color: #fff; border: none; border-radius: 14px; padding: 16px 32px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s; }
+    #screen-start .start-btn:hover { transform: translateY(-2px); }
+
+    /* Summary */
+    .call-summary { display: none; padding: 20px; border-top: 1px solid var(--border); background: var(--surface-2); }
+    .call-summary.show { display: block; }
+    .call-summary h4 { margin: 0 0 8px; font-size: 15px; }
+    .call-summary .row { display: flex; gap: 8px; padding: 4px 0; font-size: 13px; }
+    .call-summary .row .label { color: var(--muted); min-width: 80px; }
+
+    .restart-bar { text-align: center; padding: 16px 0; }
+    .restart-btn { background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 12px 24px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .restart-btn:hover { opacity: .9; }
+
+    .demo-notice { text-align: center; font-size: 12px; color: var(--muted); margin-top: 16px; background: var(--surface-2); border-radius: 12px; padding: 12px 16px; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="demo-container">
+  <div style="text-align:center;margin-bottom:12px">
+    <a href="/voice-agents/" style="color:var(--accent);text-decoration:none;font-size:14px;font-weight:600">← Back to Voice Agents</a>
+    <h1 style="font-size:18px;margin:6px 0 0">AI Receptionist Demo</h1>
+    <p style="font-size:13px;color:var(--muted);margin:2px 0 0">Step through a live call handled by the AI</p>
+  </div>
+
+  <div class="call-display">
+    <!-- Start -->
+    <div id="screen-start">
+      <div class="big-icon">🎧</div>
+      <h2>Incoming Call Simulation</h2>
+      <p>See how the AI receptionist answers, handles questions, and takes detailed messages. Click through each step of the conversation.</p>
+      <button class="start-btn" onclick="startDemo()">🎧 Start Call</button>
+    </div>
+
+    <!-- Call View -->
+    <div id="screen-call" class="hidden">
+      <div class="call-header">
+        <div class="caller-avatar">👤</div>
+        <h2>Sarah from Oakwood Apartments</h2>
+        <p>(555) 345-6789</p>
+        <div class="call-status connect" id="callStatus">● Connected · AI Receptionist</div>
+      </div>
+      <div class="call-body">
+        <div class="transcript" id="transcript"></div>
+      </div>
+      <div class="controls">
+        <span class="step-info" id="stepInfo">Step 1 of 8</span>
+        <button class="next-btn" id="nextBtn" onclick="nextStep()">Next →</button>
+      </div>
+      <div class="call-summary" id="callSummary">
+        <h4>📋 Call Summary</h4>
+        <div class="row"><span class="label">Customer:</span><span>Sarah Johnson</span></div>
+        <div class="row"><span class="label">Company:</span><span>Oakwood Apartments</span></div>
+        <div class="row"><span class="label">Reason:</span><span>Emergency — burst pipe in unit 4B, water flooding into unit below</span></div>
+        <div class="row"><span class="label">Callback:</span><span>ASAP — marked urgent</span></div>
+        <div class="row"><span class="label">Contact:</span><span>(555) 345-6789</span></div>
+        <div class="row" style="margin-top:8px;color:var(--accent-3);font-weight:600">✅ Message delivered to dispatcher</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="restart-bar">
+    <button class="restart-btn" onclick="resetDemo()">🔄 Restart Demo</button>
+  </div>
+
+  <div class="demo-notice">
+    <strong>⚡ Safety Notice:</strong> Pre-scripted animation only. No AI running, no data collected. Just a visual walkthrough.
+  </div>
+</div>
+
+<script>
+// ── Scripted call transcript ──
+const CALL_STEPS = [
+  { speaker: 'ai', name: 'AI Receptionist', text: "Thank you for calling Oakwood Apartments Maintenance. This is the AI assistant speaking. How can I help you today?" },
+  { speaker: 'customer', name: 'Sarah', text: "Oh thank god someone answered. There's a burst pipe in unit 4B — water is pouring into the unit below. This is an emergency!" },
+  { speaker: 'ai', name: 'AI Receptionist', text: "I understand this is urgent. Let me get your information and alert the on-call plumber immediately. Can I start with your name, please?" },
+  { speaker: 'customer', name: 'Sarah', text: "Sarah Johnson, I'm the property manager. The pipe burst in the bathroom wall." },
+  { speaker: 'ai', name: 'AI Receptionist', text: "Thank you, Sarah. I'm notifying the emergency plumber now. Is the water shut-off valve accessible, and have you been able to turn it off?" },
+  { speaker: 'customer', name: 'Sarah', text: "Yes, I shut off the main valve. The water has stopped but there's already damage. I need someone here ASAP." },
+  { speaker: 'ai', name: 'AI Receptionist', text: "Understood. I've flagged this as an emergency and the plumber is being dispatched now. They'll be there within 30 minutes. I've sent you a text with the confirmation and the plumber's ETA. Anything else I can help with?" },
+  { speaker: 'customer', name: 'Sarah', text: "No, just send whoever's closest. Thanks for the quick help." },
+  { speaker: 'ai', name: 'AI Receptionist', text: "You're welcome, Sarah. The plumber is on the way. A full summary of this call has been sent to management. Stay safe! 👍" }
+];
+
+let stepIdx = 0;
+let demoActive = false;
+let transcriptEl, nextBtn, stepInfo, callSummary;
+
+function $(id) { return document.getElementById(id); }
+
+function startDemo() {
+  $('screen-start').classList.add('hidden');
+  $('screen-call').classList.remove('hidden');
+
+  transcriptEl = $('transcript');
+  nextBtn = $('nextBtn');
+  stepInfo = $('stepInfo');
+  callSummary = $('callSummary');
+
+  transcriptEl.innerHTML = '';
+  stepIdx = 0;
+  demoActive = true;
+  callSummary.classList.remove('show');
+  nextBtn.disabled = false;
+  showStep();
+}
+
+function showStep() {
+  if (!demoActive) return;
+  var msg = CALL_STEPS[stepIdx];
+  if (!msg) return;
+
+  var item = document.createElement('div');
+  item.className = 'transcript-item';
+
+  var icon = document.createElement('div');
+  icon.className = 'speaker-icon ' + msg.speaker;
+  icon.textContent = msg.speaker === 'ai' ? '🤖' : '👤';
+
+  var bubble = document.createElement('div');
+  bubble.className = 'bubble';
+
+  var name = document.createElement('div');
+  name.className = 'speaker-name ' + msg.speaker;
+  name.textContent = msg.name;
+
+  var text = document.createElement('div');
+  text.className = 'text';
+
+  bubble.appendChild(name);
+  bubble.appendChild(text);
+  item.appendChild(icon);
+  item.appendChild(bubble);
+  transcriptEl.appendChild(item);
+
+  // Typewriter effect
+  var i = 0;
+  var speed = 18 + Math.random() * 12;
+  function typeIt() {
+    if (i < msg.text.length) {
+      text.innerHTML = msg.text.substring(0, i + 1) + '<span class="typing-cursor">|</span>';
+      i++;
+      transcriptEl.scrollTop = transcriptEl.scrollHeight;
+      setTimeout(typeIt, speed);
+    } else {
+      text.textContent = msg.text;
+      transcriptEl.scrollTop = transcriptEl.scrollHeight;
+    }
+  }
+  typeIt();
+
+  stepInfo.textContent = 'Step ' + (stepIdx + 1) + ' of ' + CALL_STEPS.length;
+
+  if (stepIdx >= CALL_STEPS.length - 1) {
+    nextBtn.textContent = '📋 View Summary';
+  }
+}
+
+function nextStep() {
+  stepIdx++;
+  if (stepIdx >= CALL_STEPS.length) {
+    // Show summary
+    nextBtn.classList.add('hidden');
+    stepInfo.classList.add('hidden');
+    callSummary.classList.add('show');
+    return;
+  }
+  showStep();
+}
+
+function resetDemo() {
+  demoActive = false;
+  stepIdx = 0;
+  $('screen-call').classList.add('hidden');
+  $('screen-start').classList.remove('hidden');
+  nextBtn.textContent = 'Next →';
+  nextBtn.classList.remove('hidden');
+  stepInfo.classList.remove('hidden');
+  callSummary.classList.remove('show');
+  if (transcriptEl) transcriptEl.innerHTML = '';
+}
+</script>
+
+<script src="/assets/nav.js"></script>
+</body>
+</html>

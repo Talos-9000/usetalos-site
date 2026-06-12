@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Voice Agents — Tal.OS</title>
+  <meta name="description" content="AI voice agents that answer your business calls, text missed callers back, and book appointments automatically. See how it works with our interactive demos." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    .va-hero { background: var(--hero); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,90px) var(--gutter) clamp(36px,6vw,64px); }
+    .va-hero h1 { max-width: 780px; margin: 0 auto 14px; }
+    .va-hero h1 span { color: var(--accent); }
+    .va-hero p { max-width: 600px; margin: 0 auto 22px; color: var(--muted); }
+    .section-inner { max-width: var(--container-max); margin: 0 auto; padding: clamp(32px,6vw,62px) var(--gutter); }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: color-mix(in srgb,var(--accent)12%,transparent); border: 1px solid color-mix(in srgb,var(--accent)30%,transparent); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 900; margin-bottom: 14px; }
+    .section-title { margin-bottom: 10px; }
+    .section-sub { max-width: 680px; margin-bottom: 26px; }
+
+    /* Demo card grid */
+    .demo-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 48em) { .demo-grid { grid-template-columns: repeat(3, 1fr); } }
+    .demo-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; transition: all .25s; display: flex; flex-direction: column; }
+    .demo-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .demo-card .d-icon { font-size: 44px; margin-bottom: 14px; }
+    .demo-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+    .demo-card p { color: var(--muted); font-size: 14px; line-height: 1.55; flex:1; }
+    .demo-card .tags { margin: 12px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .demo-card .tag { background: var(--surface-2); color: var(--muted); padding: 4px 10px; border-radius: 100px; font-size: 12px; }
+    .demo-card .demo-btn { display: inline-block; margin-top: 16px; padding: 12px 24px; background: var(--accent); color: #fff; border-radius: 12px; font-weight: 700; font-size: 14px; text-decoration: none; text-align: center; transition: all .2s; }
+    .demo-card .demo-btn:hover { opacity: .9; transform: translateY(-1px); }
+
+    /* Pricing tiers */
+    .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 48em) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: relative; }
+    .pricing-card.popular { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow); }
+    .pricing-card .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; }
+    .pricing-card h3 { font-size: 18px; margin-bottom: 4px; }
+    .pricing-card .price { font-size: 32px; font-weight: 800; color: var(--accent); margin: 10px 0; }
+    .pricing-card .price span { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .pricing-card ul { list-style: none; padding: 0; margin: 16px 0; }
+    .pricing-card li { padding: 6px 0; font-size: 14px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .pricing-card li::before { content: "✓"; color: var(--accent-3); font-weight: 700; }
+    .pricing-card .cta-btn { display: block; text-align: center; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 14px; text-decoration: none; margin-top: 12px; background: var(--accent); color: #fff; transition: all .2s; }
+    .pricing-card .cta-btn:hover { opacity: .9; }
+
+    /* How it works steps */
+    .steps { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 800px; margin: 0 auto; counter-reset: step; }
+    @media (min-width: 48em) { .steps { grid-template-columns: 1fr 1fr; } }
+    .step { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { flex-shrink: 0; width: 40px; height: 40px; background: color-mix(in srgb,var(--accent)12%,transparent); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; }
+    .step h4 { margin: 0 0 4px; font-size: 16px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .industries { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .industries span { background: var(--surface-2); padding: 8px 16px; border-radius: 100px; font-size: 14px; }
+
+    .cta-section { background: color-mix(in srgb,var(--accent)85%,#1e1b4b); color: #fff; border-radius: 20px; padding: 48px 28px; text-align: center; }
+    .cta-section h2 { color: #fff; font-size: clamp(1.4rem,4vw,1.8rem); margin-bottom: 12px; }
+    .cta-section p { color: #c0c8d4; max-width: 600px; margin: 0 auto 20px; }
+    .cta-section .btn { display: inline-block; padding: 14px 28px; background: #fff; color: var(--accent); border-radius: 12px; font-weight: 700; text-decoration: none; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .animate { animation: fadeUp .6s ease-out both; }
+    .animate:nth-child(2) { animation-delay:.1s; }
+    .animate:nth-child(3) { animation-delay:.2s; }
+    .animate:nth-child(4) { animation-delay:.3s; }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32" />
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/voice-agents/" class="active">Voice Agents</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<!-- HERO -->
+<div class="va-hero">
+  <h1>AI voice agents that <span>answer your calls</span></h1>
+  <p>Never miss a customer call again. Our AI answers instantly, texts missed callers back, books appointments, and handles FAQs — so you don't have to.</p>
+  <div class="btns" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+    <a href="#try-demo" class="btn-primary" style="background:var(--accent);color:white;border-radius:12px;padding:14px 24px;font-weight:900;text-decoration:none">Try Interactive Demo</a>
+    <a href="#pricing" class="btn-outline" style="border:1px solid var(--border);border-radius:12px;padding:14px 24px;font-weight:700;text-decoration:none;color:var(--text)">See Pricing</a>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Three seconds after a missed call, your AI agent texts back</h2>
+    <p class="section-sub">The magic happens fast. Here's the full flow.</p>
+    <div class="steps">
+      <div class="step animate">
+        <div class="step-num">1</div>
+        <div><h4>Customer calls your business</h4><p>If you're busy or miss it — no problem. The system detects the missed call instantly.</p></div>
+      </div>
+      <div class="step animate">
+        <div class="step-num">2</div>
+        <div><h4>AI texts back in seconds</h4><p>The caller gets a friendly text from your AI agent. "Hey! Thanks for calling. How can I help?"</p></div>
+      </div>
+      <div class="step animate">
+        <div class="step-num">3</div>
+        <div><h4>Natural conversation</h4><p>The AI answers FAQs, schedules appointments, and takes messages — just like a real person.</p></div>
+      </div>
+      <div class="step animate">
+        <div class="step-num">4</div>
+        <div><h4>You get notified</h4><p>Every conversation summary lands in your inbox. Forward leads to your calendar. Zero effort.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE DEMOS -->
+<section id="try-demo" style="background:var(--surface-2)">
+  <div class="section-inner">
+    <div class="section-label">Try It Yourself</div>
+    <h2 class="section-title">See the AI voice agent in action</h2>
+    <p class="section-sub">Click any demo below. These are fully animated simulations — no AI running, no data collected, just you seeing exactly how it works.</p>
+    <div class="demo-grid">
+      <div class="demo-card animate">
+        <div class="d-icon">📱</div>
+        <h3>Missed-Call Text-Back</h3>
+        <p>Watch a missed call turn into a text conversation in seconds. See how the AI answers questions, offers pricing, and books a service.</p>
+        <div class="tags"><span class="tag">text</span><span class="tag">missed call</span><span class="tag">FAQs</span></div>
+        <a href="/voice-agents/demo/missed-call/" class="demo-btn">Try Demo →</a>
+      </div>
+      <div class="demo-card animate">
+        <div class="d-icon">🎧</div>
+        <h3>AI Receptionist</h3>
+        <p>Step through a live phone call scenario. The AI receptionist answers, routes the call, and takes a detailed message.</p>
+        <div class="tags"><span class="tag">voice</span><span class="tag">routing</span><span class="tag">messages</span></div>
+        <a href="/voice-agents/demo/receptionist/" class="demo-btn">Try Demo →</a>
+      </div>
+      <div class="demo-card animate">
+        <div class="d-icon">📅</div>
+        <h3>Appointment Booking</h3>
+        <p>See the AI check availability, suggest a time, and book an appointment. The calendar fills in automatically.</p>
+        <div class="tags"><span class="tag">booking</span><span class="tag">calendar</span><span class="tag">scheduling</span></div>
+        <a href="/voice-agents/demo/booking/" class="demo-btn">Try Demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Plans for every business</h2>
+    <p class="section-sub">No long contracts. Cancel anytime. Every plan includes setup, training, and support.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card animate">
+        <h3>Starter</h3>
+        <div class="price">$500<span>/mo</span></div>
+        <ul>
+          <li>1 AI voice agent</li>
+          <li>Missed-call text-back</li>
+          <li>FAQ & Q&amp;A handling</li>
+          <li>SMS only (no live voice)</li>
+          <li>500 texts/month</li>
+          <li>Dashboard & reports</li>
+        </ul>
+        <a href="/consultation/" class="cta-btn">Get Started</a>
+      </div>
+      <div class="pricing-card popular animate">
+        <div class="badge">Most Popular</div>
+        <h3>Pro</h3>
+        <div class="price">$1,000<span>/mo</span></div>
+        <ul>
+          <li>1 AI voice agent</li>
+          <li>Missed-call text-back</li>
+          <li>Full AI receptionist (voice + text)</li>
+          <li>Appointment booking</li>
+          <li>2,000 interactions/month</li>
+          <li>Custom knowledge base</li>
+          <li>Call forwarding & routing</li>
+          <li>Weekly summary reports</li>
+        </ul>
+        <a href="/consultation/" class="cta-btn">Get Started</a>
+      </div>
+      <div class="pricing-card animate">
+        <h3>Enterprise</h3>
+        <div class="price">$2,000<span>/mo</span></div>
+        <ul>
+          <li>Up to 3 AI voice agents</li>
+          <li>Missed-call text-back</li>
+          <li>Full AI receptionist</li>
+          <li>Appointment booking</li>
+          <li>Unlimited interactions</li>
+          <li>Custom integrations</li>
+          <li>Dedicated account manager</li>
+          <li>Priority support (24/7)</li>
+        </ul>
+        <a href="/consultation/" class="cta-btn">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section style="background:var(--surface-2)">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label" style="justify-content:center">Who This Works For</div>
+    <h2 class="section-title">Perfect for field-service businesses</h2>
+    <p class="section-sub" style="margin:0 auto 20px">Any business that gets 10+ calls a day and can't answer them all.</p>
+    <div class="industries">
+      <span>Plumbers</span> <span>HVAC</span> <span>Electricians</span> <span>Landscapers</span>
+      <span>Pool Service</span> <span>Tree Care</span> <span>Roofers</span> <span>Painters</span>
+      <span>Contractors</span> <span>Handymen</span> <span>Pest Control</span> <span>Cleaning</span>
+      <span>Salons</span> <span>Gyms</span> <span>Auto Repair</span> <span>Laundromats</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner" style="max-width:700px">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Does this use real phone numbers?</summary><p style="margin-top:8px;color:var(--muted)">Yes. Your business gets a dedicated phone number. The AI answers calls, texts missed callers, and routes urgent calls to you.</p></details>
+    <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">What if the AI can't answer a question?</summary><p style="margin-top:8px;color:var(--muted)">The AI transfers the call or sends you a detailed message. You set the rules — no AI handles anything outside your comfort zone.</p></details>
+    <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Do customers know they're talking to AI?</summary><p style="margin-top:8px;color:var(--muted)">Yes — the AI introduces itself as an AI assistant. Transparency builds trust and sets expectations.</p></details>
+    <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">How fast is the text-back?</summary><p style="margin-top:8px;color:var(--muted)">Typically 2-5 seconds after a missed call. Fast enough that most customers haven't even left your voicemail yet.</p></details>
+    <details style="margin-bottom:8px;padding:12px 0;border-bottom:1px solid var(--border)"><summary style="font-weight:700;cursor:pointer">Can I try before committing?</summary><p style="margin-top:8px;color:var(--muted)">Absolutely. Use the interactive demos above to see exactly how it works. No sign-up needed. When you're ready, book a quick call and we'll set up a live trial with your actual business info.</p></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0">
+  <div class="section-inner">
+    <div class="cta-section">
+      <h2>Ready to stop missing calls?</h2>
+      <p>Let's set up a live demo with your actual business info. No commitment — just seeing what's possible.</p>
+      <a href="/consultation/" class="btn">Book a Free Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid" style="display:grid;grid-template-columns:1fr;gap:24px;text-align:left;max-width:1100px;margin:0 auto 30px">
+    <div><strong style="color:var(--accent)">Tal.OS</strong><p style="margin-top:6px;font-size:13px">AI voice agents for small businesses.</p></div>
+    <div><strong>Products</strong><br><a href="/store/">Store</a><br><a href="/voice-agents/">Voice Agents</a><br><a href="/templates/">Templates</a></div>
+    <div><strong>Company</strong><br><a href="/blog/">Blog</a><br><a href="/newsletter/">Newsletter</a><br><a href="/contact/">Contact</a></div>
+    <div><strong>Legal</strong><br><a href="/privacy/">Privacy</a><br><a href="/terms/">Terms</a><br><a href="/refunds/">Refunds</a></div>
+  </div>
+  <p>&copy; 2026 Tal.OS — AI voice agents and business automation.</p>
+</footer>
+
+<script>
+// Intersection Observer for animations
+document.addEventListener('DOMContentLoaded', function() {
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.animate').forEach(function(el) {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  }
+});
+</script>
+<script src="/assets/nav.js"></script>
+</body>
+</html>
