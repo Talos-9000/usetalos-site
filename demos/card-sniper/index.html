@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Sniper Bot Demo — Tal.OS</title>
+  <meta name="description" content="Interactive demo showing how the Tal.OS Card Sniper Bot finds and snipes trading card deals on eBay and TCGPlayer automatically." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body { background: linear-gradient(135deg, #0a0a12, #111122); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .demo-container { max-width: 800px; width: 100%; }
+
+    /* Status bar */
+    .status-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px 16px 0 0; font-size: 13px; color: #888; }
+    .status-bar .bot-name { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #8b5cf6; }
+    .status-bar .bot-name .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+    .status-bar .live-badge { background: rgba(16,185,129,.15); color: #10b981; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+
+    /* Main card */
+    .card-frame { background: rgba(20,20,30,.8); border: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(20px); border-radius: 0 0 20px 20px; padding: 32px; min-height: 500px; }
+
+    /* Screens */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* Step indicators */
+    .steps { display: flex; gap: 8px; margin-bottom: 28px; justify-content: center; }
+    .step-dot { width: 10px; height: 10px; border-radius: 50%; background: #333; transition: all .3s; }
+    .step-dot.active { background: #8b5cf6; box-shadow: 0 0 12px rgba(139,92,246,.6); }
+    .step-dot.done { background: #10b981; }
+
+    /* Screen 1: Setup */
+    .setup-form { max-width: 480px; margin: 0 auto; }
+    .setup-form h2 { font-size: 22px; font-weight: 800; margin: 0 0 6px; color: #fff; }
+    .setup-form p { color: #888; font-size: 14px; margin: 0 0 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: #ccc; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; color: #fff; font-size: 15px; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #8b5cf6; background: rgba(139,92,246,.08); }
+    .form-group select option { background: #1a1a2e; color: #fff; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    .btn-start { width: 100%; padding: 14px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: all .2s; min-height: 50px; }
+    .btn-start:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(139,92,246,.35); }
+
+    /* Screen 2: Scanning */
+    .scan-view { text-align: center; padding: 30px 0; }
+    .scan-view .market-icon { font-size: 48px; margin-bottom: 20px; }
+    .scan-view h2 { font-size: 24px; font-weight: 800; color: #fff; margin: 0 0 8px; }
+    .scan-view .criteria-display { color: #888; font-size: 14px; margin: 0 0 30px; }
+    .scan-view .criteria-display span { color: #8b5cf6; font-weight: 700; }
+
+    /* Scanner animation */
+    .scanner { position: relative; width: 100%; max-width: 400px; height: 80px; margin: 0 auto 30px; overflow: hidden; border-radius: 12px; }
+    .scanner-track { position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(139,92,246,.3), rgba(139,92,246,.6), rgba(139,92,246,.3), transparent); animation: scan 2s ease-in-out infinite; border-radius: 12px; }
+    @keyframes scan { 0% { left: -100%; } 100% { left: 100%; } }
+    .scanner-bar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid rgba(139,92,246,.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 13px; }
+
+    /* Listing card found */
+    .found-card { display: none; background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3); border-radius: 14px; padding: 20px; margin: 20px auto 0; max-width: 380px; }
+    .found-card.show { display: block; animation: fadeIn .5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .found-card .card-row { display: flex; align-items: center; gap: 14px; }
+    .found-card .card-icon { font-size: 36px; }
+    .found-card .card-info { flex: 1; text-align: left; }
+    .found-card .card-info h4 { margin: 0; font-size: 16px; color: #fff; }
+    .found-card .card-info .details { color: #888; font-size: 13px; margin-top: 2px; }
+    .found-card .card-info .price-row { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .found-card .card-info .price-old { text-decoration: line-through; color: #666; font-size: 13px; }
+    .found-card .card-info .price-new { color: #10b981; font-weight: 800; font-size: 18px; }
+    .found-card .card-info .savings { color: #10b981; font-size: 12px; font-weight: 600; background: rgba(16,185,129,.15); padding: 2px 8px; border-radius: 100px; }
+    .btn-snipe { width: 100%; padding: 12px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 14px; transition: all .2s; min-height: 48px; }
+    .btn-snipe:hover { transform: translateY(-1px); box-shadow: 0 10px 25px rgba(16,185,129,.3); }
+
+    /* Screen 3: Success */
+    .success-view { text-align: center; padding: 20px 0; }
+    .success-view .big-check { width: 80px; height: 80px; border-radius: 50%; background: rgba(16,185,129,.15); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px; color: #10b981; animation: scaleIn .5s ease-out; }
+    @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+    .success-view h2 { font-size: 26px; font-weight: 800; color: #fff; margin: 0 0 6px; }
+    .success-view .sub { color: #888; font-size: 15px; margin: 0 0 24px; }
+
+    .result-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 24px; max-width: 400px; margin: 0 auto; text-align: left; }
+    .result-card .r-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .result-card .r-row:last-child { border: 0; }
+    .result-card .r-label { color: #888; font-size: 14px; }
+    .result-card .r-value { color: #fff; font-weight: 700; }
+    .result-card .r-value.green { color: #10b981; }
+    .result-card .r-value.gold { color: #f59e0b; }
+
+    .btn-buy { display: inline-block; margin-top: 24px; padding: 14px 32px; background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all .2s; }
+    .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(139,92,246,.4); }
+    .btn-restart { display: inline-block; margin-top: 10px; padding: 10px 24px; background: transparent; color: #888; border: 1px solid rgba(255,255,255,.12); border-radius: 10px; font-size: 14px; cursor: pointer; text-decoration: none; margin-left: 8px; transition: all .2s; }
+    .btn-restart:hover { border-color: #555; color: #fff; }
+
+    /* Demo label */
+    .demo-label { text-align: center; margin-top: 16px; color: #555; font-size: 12px; }
+    .demo-label a { color: #666; text-decoration: none; }
+    .demo-label a:hover { color: #8b5cf6; }
+  </style>
+</head>
+<body>
+
+<div class="demo-container">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <div class="bot-name">
+      <span class="dot"></span>
+      Card Sniper Bot
+    </div>
+    <span>🧩 Pokémon TCG · eBay · TCGPlayer</span>
+    <span class="live-badge">⚡ Simulated Demo</span>
+  </div>
+
+  <div class="card-frame">
+    <!-- Step dots -->
+    <div class="steps">
+      <span class="step-dot active" data-step="1"></span>
+      <span class="step-dot" data-step="2"></span>
+      <span class="step-dot" data-step="3"></span>
+      <span class="step-dot" data-step="4"></span>
+    </div>
+
+    <!-- SCREEN 1: Configure Sniper -->
+    <div id="screen-setup" class="screen active">
+      <div class="setup-form">
+        <h2>🎯 Set Your Sniping Criteria</h2>
+        <p>Tell the bot what card you're hunting — it'll scan eBay and TCGPlayer automatically until it finds a deal.</p>
+
+        <div class="form-group">
+          <label>Card Name</label>
+          <input type="text" id="cardName" value="Charizard ex SIR 151" placeholder="e.g. Charizard ex SIR 151" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Max Price</label>
+            <input type="text" id="maxPrice" value="$75" />
+          </div>
+          <div class="form-group">
+            <label>Condition</label>
+            <select id="condition">
+              <option>Near Mint</option>
+              <option>Lightly Played</option>
+              <option>Moderately Played</option>
+              <option>Heavily Played</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Marketplace</label>
+          <select id="marketplace">
+            <option>eBay + TCGPlayer (Both)</option>
+            <option>eBay Only</option>
+            <option>TCGPlayer Only</option>
+          </select>
+        </div>
+
+        <button class="btn-start" onclick="startScanning()">🔍 Start Sniping</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: Scanning -->
+    <div id="screen-scanning" class="screen">
+      <div class="scan-view">
+        <div class="market-icon">🔍</div>
+        <h2>Scanning Markets</h2>
+        <p class="criteria-display">Looking for <span id="scanCard">Charizard ex SIR 151</span> · Max <span id="scanPrice">$75</span> · <span id="scanCondition">Near Mint</span></p>
+
+        <div class="scanner">
+          <div class="scanner-bar">Scanning eBay & TCGPlayer listings...</div>
+          <div class="scanner-track"></div>
+        </div>
+
+        <!-- Found card (appears after delay) -->
+        <div class="found-card" id="foundCard">
+          <div class="card-row">
+            <div class="card-icon">🔥</div>
+            <div class="card-info">
+              <h4>Charizard ex SIR 151</h4>
+              <div class="details">eBay · Near Mint · Listed 2h ago</div>
+              <div class="price-row">
+                <span class="price-old">$64.99</span>
+                <span class="price-new">$52.00</span>
+                <span class="savings">Save $12.99</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-snipe" onclick="snipeCard()">⚡ Snipe This Card — $52.00</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Sniping Animation -->
+    <div id="screen-sniping" class="screen">
+      <div class="scan-view">
+        <div class="market-icon" style="font-size:60px;">⚡</div>
+        <h2>Sniping Card...</h2>
+        <p class="criteria-display" style="color:#f59e0b;">Auto-purchasing <span id="snipeCard">Charizard ex SIR 151</span> at $52.00</p>
+        <div class="scanner">
+          <div class="scanner-bar" style="border-color:rgba(245,158,11,.3);">Completing purchase on eBay...</div>
+          <div class="scanner-track" style="background:linear-gradient(90deg,transparent,rgba(245,158,11,.3),rgba(245,158,11,.6),rgba(245,158,11,.3),transparent);"></div>
+        </div>
+        <div class="found-card" id="snipeResult" style="border-color:rgba(16,185,129,.4);">
+          <div class="card-row">
+            <div class="card-icon">✅</div>
+            <div class="card-info">
+              <h4 id="resultCardName" style="color:#10b981;">Purchase Complete!</h4>
+              <div class="details" id="resultDetails">Order confirmed · Delivery 5-7 days</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: Success Summary -->
+    <div id="screen-success" class="screen">
+      <div class="success-view">
+        <div class="big-check">✅</div>
+        <h2>Card Sniped Successfully!</h2>
+        <p class="sub">The bot found and purchased your card while you were away.</p>
+
+        <div class="result-card">
+          <div class="r-row">
+            <span class="r-label">Card</span>
+            <span class="r-value" id="finalCard">Charizard ex SIR 151</span>
+          </div>
+          <div class="r-row">
+            <span class="r-label">Market Price</span>
+            <span class="r-value" style="text-decoration:line-through;color:#666;">$64.99</span>
+          </div>
+          <div class="r-row">
+            <span class="r-label">You Paid</span>
+            <span class="r-value green">$52.00</span>
+          </div>
+          <div class="r-row">
+            <span class="r-label">YOU SAVED</span>
+            <span class="r-value gold">$12.99 (20%) 🎉</span>
+          </div>
+          <div class="r-row">
+            <span class="r-label">Marketplace</span>
+            <span class="r-value">eBay BIN</span>
+          </div>
+          <div class="r-row">
+            <span class="r-label">Time Elapsed</span>
+            <span class="r-value">4 min 23 sec</span>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;">
+          <a class="btn-buy" href="/store/">⚡ Get Card Sniper Bot — $39/mo</a>
+          <button class="btn-restart" onclick="resetDemo()">↻ New Search</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-label">
+      ⚡ Simulated interactive demo · <a href="/demos/">Back to all demos</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Demo data — all pre-scripted, zero real API calls
+const sniperDemo = {
+  cardName: 'Charizard ex SIR 151',
+  marketPrice: 64.99,
+  snipePrice: 52.00,
+  savings: 12.99,
+  condition: 'Near Mint',
+  marketplace: 'eBay BIN',
+  delivery: '5-7 days',
+  timeElapsed: '4 min 23 sec'
+};
+
+function updateSteps(step) {
+  document.querySelectorAll('.step-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i + 1 < step) dot.classList.add('done');
+    if (i + 1 === step) dot.classList.add('active');
+  });
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Step 1 → Step 2: Start scanning
+function startScanning() {
+  const card = document.getElementById('cardName').value || sniperDemo.cardName;
+  const price = document.getElementById('maxPrice').value || '$75';
+  const cond = document.getElementById('condition').value || sniperDemo.condition;
+  sniperDemo.cardName = card;
+  sniperDemo.condition = cond;
+  sniperDemo.snipePrice = parseFloat(price.replace(/[^0-9.]/g, '')) || sniperDemo.snipePrice;
+  sniperDemo.savings = (sniperDemo.marketPrice - sniperDemo.snipePrice).toFixed(2);
+
+  document.getElementById('scanCard').textContent = sniperDemo.cardName;
+  document.getElementById('scanPrice').textContent = '$' + sniperDemo.snipePrice;
+  document.getElementById('scanCondition').textContent = sniperDemo.condition;
+
+  showScreen('screen-scanning');
+  updateSteps(2);
+
+  // Auto-find card after 3 seconds
+  setTimeout(() => {
+    document.getElementById('foundCard').classList.add('show');
+  }, 3000);
+}
+
+// Step 2 → Step 3: Snipe the card
+function snipeCard() {
+  document.getElementById('snipeCard').textContent = sniperDemo.cardName;
+  showScreen('screen-sniping');
+  updateSteps(3);
+
+  document.getElementById('snipeResult').classList.add('show');
+  document.getElementById('resultCardName').textContent = '✅ ' + sniperDemo.cardName + ' — Sniped!';
+  document.getElementById('resultDetails').textContent = 'Order confirmed · ' + sniperDemo.delivery;
+
+  // Auto-proceed to success after 2.5 seconds
+  setTimeout(() => {
+    showSuccess();
+  }, 2500);
+}
+
+// Step 3 → Step 4: Success
+function showSuccess() {
+  document.getElementById('finalCard').textContent = sniperDemo.cardName;
+  showScreen('screen-success');
+  updateSteps(4);
+}
+
+// Reset
+function resetDemo() {
+  sniperDemo.snipePrice = 52.00;
+  sniperDemo.savings = 12.99;
+  document.getElementById('foundCard').classList.remove('show');
+  document.getElementById('snipeResult').classList.remove('show');
+  showScreen('screen-setup');
+  updateSteps(1);
+}
+</script>
+
+<script src="/assets/nav.js"></script>
+</body>
+</html>

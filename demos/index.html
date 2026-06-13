@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Demos — Tal.OS</title>
+  <meta name="description" content="See how Tal.OS AI tools work with interactive animated demos. Try Card Sniper, AI Voice Agents, and more — all 100% animated, no live AI, zero risk." />
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <style>
+    .d-hero { background: var(--hero); border-bottom: 1px solid var(--border); text-align: center; padding: clamp(48px,8vw,90px) var(--gutter) clamp(36px,6vw,64px); }
+    .d-hero h1 { max-width: 720px; margin: 0 auto 14px; }
+    .d-hero h1 span { color: var(--accent); }
+    .d-hero p { max-width: 580px; margin: 0 auto 22px; color: var(--muted); }
+
+    .section-inner { max-width: var(--container-max); margin: 0 auto; padding: clamp(32px,6vw,62px) var(--gutter); }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); background: color-mix(in srgb,var(--accent)12%,transparent); border: 1px solid color-mix(in srgb,var(--accent)30%,transparent); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 900; margin-bottom: 14px; }
+    .section-title { margin-bottom: 10px; }
+    .section-sub { max-width: 680px; margin-bottom: 26px; }
+
+    /* Demo card grid */
+    .demo-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 48em) { .demo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64em) { .demo-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .demo-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 28px; transition: all .25s; display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+    }
+    .demo-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+    .demo-card .ribbon { position: absolute; top: 12px; right: -28px; background: var(--accent); color: #fff; padding: 4px 36px; font-size: 11px; font-weight: 700; transform: rotate(45deg); }
+    .demo-card .d-icon { font-size: 40px; margin-bottom: 14px; }
+    .demo-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+    .demo-card .d-preview { width: 100%; height: 160px; border-radius: 12px; margin: 12px 0; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 48px; border: 1px solid var(--border); overflow: hidden; }
+    .demo-card .d-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .demo-card .d-desc { color: var(--muted); font-size: 14px; line-height: 1.55; flex: 1; }
+    .demo-card .d-tags { margin: 12px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .demo-card .tag { background: var(--surface-2); color: var(--muted); padding: 4px 10px; border-radius: 100px; font-size: 12px; }
+    .demo-card .tag.accent { background: color-mix(in srgb,var(--accent)12%,transparent); color: var(--accent); }
+    .demo-card .tag.green { background: color-mix(in srgb,var(--accent-3)12%,transparent); color: var(--accent-3); }
+    .demo-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+    .demo-card .demo-btn { display: inline-block; padding: 10px 22px; background: var(--accent); color: #fff; border-radius: 12px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all .2s; }
+    .demo-card .demo-btn:hover { opacity: .9; transform: translateY(-1px); }
+    .demo-card .demo-badge { font-size: 12px; color: var(--muted); }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 60px var(--gutter); border-top: 1px solid var(--border); }
+    .cta-section h2 { margin-bottom: 10px; }
+    .cta-section p { max-width: 500px; margin: 0 auto 20px; color: var(--muted); }
+    .cta-section .cta-btn { display: inline-block; padding: 14px 28px; background: var(--accent); color: #fff; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; transition: all .2s; }
+    .cta-section .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 35px color-mix(in srgb,var(--accent)25%,transparent); }
+
+    /* Multi-step showcase */
+    .showcase-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-top: 32px; }
+    .showcase-card .sc-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .showcase-card .sc-header .sc-icon { font-size: 36px; }
+    .showcase-card .sc-header h3 { margin: 0; font-size: 20px; }
+    .steps-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 48em) { .steps-list { grid-template-columns: repeat(2, 1fr); } }
+    .step-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px; background: var(--surface-2); border-radius: 12px; }
+    .step-item .s-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .step-item .s-text h4 { margin: 0 0 2px; font-size: 14px; }
+    .step-item .s-text p { margin: 0; font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="/">
+      <img src="/assets/talos-logo.png" alt="Tal.OS" width="120" height="32" />
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="/store/">Store</a></li>
+        <li><a href="/personal-ai/">Personal AI</a></li>
+        <li><a href="/voice-agents/">Voice Agents</a></li>
+        <li><a href="/demos/" class="active">Demos</a></li>
+        <li><a href="/templates/">Templates</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/newsletter/">Newsletter</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a class="btn" href="/consultation/">Get Help</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<!-- HERO -->
+<section class="d-hero">
+  <h1>See AI in Action — <span>Try the Demos</span></h1>
+  <p>No sign-up, no commitment, no live AI running. Every demo is a pre-animated walkthrough showing exactly how the tool works. Click, watch, and decide if it fits.</p>
+</section>
+
+<!-- DEMO CARDS -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">Interactive Demos</div>
+    <h2 class="section-title">Pick a demo to try</h2>
+    <p class="section-sub">All demos are 100% animated simulations — no real purchases, no API calls, nothing running live. Just a realistic walkthrough of what the tool does.</p>
+
+    <div class="demo-grid">
+
+      <!-- Card Sniper Bot -->
+      <div class="demo-card">
+        <div class="ribbon">NEW</div>
+        <div class="d-icon">⚡</div>
+        <h3>Card Sniper Bot</h3>
+        <div class="d-preview">🃏</div>
+        <div class="d-desc">
+          Set your card criteria and watch the bot scan eBay + TCGPlayer automatically. It finds deals below market value and snipes them — all while you sleep. Shows real savings, live market prices, and auto-purchase flow.
+        </div>
+        <div class="d-tags">
+          <span class="tag accent">new</span>
+          <span class="tag">Pokémon</span>
+          <span class="tag green">eBay</span>
+          <span class="tag">TCGPlayer</span>
+          <span class="tag">auto-purchase</span>
+        </div>
+        <div class="demo-row">
+          <a class="demo-btn" href="/demos/card-sniper/">Try Demo →</a>
+          <span class="demo-badge">~2 min | $39/mo</span>
+        </div>
+      </div>
+
+      <!-- Missed-Call Text-Back -->
+      <div class="demo-card">
+        <div class="d-icon">📱</div>
+        <h3>Missed-Call Text-Back</h3>
+        <div class="d-preview">📞</div>
+        <div class="d-desc">
+          Customer misses your business call? The AI instantly sends a text. Watch the full conversation play out — automated replies, FAQ answers, and booking requests handled without a human lifting a finger.
+        </div>
+        <div class="d-tags">
+          <span class="tag accent">popular</span>
+          <span class="tag">SMS</span>
+          <span class="tag">calls</span>
+          <span class="tag">24/7</span>
+        </div>
+        <div class="demo-row">
+          <a class="demo-btn" href="/voice-agents/demo/missed-call/">Try Demo →</a>
+          <span class="demo-badge">~1 min | $49/mo</span>
+        </div>
+      </div>
+
+      <!-- AI Receptionist -->
+      <div class="demo-card">
+        <div class="d-icon">🎧</div>
+        <h3>AI Receptionist</h3>
+        <div class="d-preview">🏢</div>
+        <div class="d-desc">
+          Watch an AI receptionist answer an incoming business call, handle a customer request, take a message, and route it to the right person. No voicemail, no missed opportunities.
+        </div>
+        <div class="d-tags">
+          <span class="tag">call-handling</span>
+          <span class="tag">routing</span>
+          <span class="tag">service</span>
+        </div>
+        <div class="demo-row">
+          <a class="demo-btn" href="/voice-agents/demo/receptionist/">Try Demo →</a>
+          <span class="demo-badge">~1 min | $49/mo</span>
+        </div>
+      </div>
+
+      <!-- Appointment Booking -->
+      <div class="demo-card">
+        <div class="d-icon">📅</div>
+        <h3>Appointment Booking</h3>
+        <div class="d-preview">🗓️</div>
+        <div class="d-desc">
+          See how the AI books appointments from a conversation. Customer asks for a time, AI checks availability, books it, and the appointment appears on a live-updating calendar — all automatically.
+        </div>
+        <div class="d-tags">
+          <span class="tag">booking</span>
+          <span class="tag">calendar</span>
+          <span class="tag">automation</span>
+        </div>
+        <div class="demo-row">
+          <a class="demo-btn" href="/voice-agents/demo/booking/">Try Demo →</a>
+          <span class="demo-badge">~1 min | $49/mo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--surface-2)">
+  <div class="section-inner">
+    <div class="section-label">How the Demos Work</div>
+    <h2 class="section-title">No live AI. No risk. Just walkthrough.</h2>
+    <p class="section-sub">Every demo is a pre-scripted, client-side animation. Zero API calls, zero data collected, zero security concerns. Just click and watch.</p>
+
+    <div class="showcase-card">
+      <div class="sc-header">
+        <div class="sc-icon">🛡️</div>
+        <h3>What's running behind the scenes?</h3>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <span class="s-num">✅</span>
+          <div class="s-text"><h4>Pre-scripted animation</h4><p>Every action is hardcoded HTML/CSS/JS — just like a product video you can click through.</p></div>
+        </div>
+        <div class="step-item">
+          <span class="s-num">❌</span>
+          <div class="s-text"><h4>No real API calls</h4><p>Zero network requests. No eBay, no Twilio, no Stripe — nothing live.</p></div>
+        </div>
+        <div class="step-item">
+          <span class="s-num">❌</span>
+          <div class="s-text"><h4>No data collection</h4><p>No forms submit anywhere. No cookies, no tracking on demo pages.</p></div>
+        </div>
+        <div class="step-item">
+          <span class="s-num">❌</span>
+          <div class="s-text"><h4>No real purchases</h4><p>Card Sniper doesn't actually buy anything. The prices and savings are examples.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready for the real thing?</h2>
+  <p>Every demo is a real product you can buy. Pick a plan, activate your tool, and use it on your own business or collection.</p>
+  <a class="cta-btn" href="/store/">Browse Products →</a>
+</section>
+
+<script src="/assets/nav.js"></script>
+</body>
+</html>
